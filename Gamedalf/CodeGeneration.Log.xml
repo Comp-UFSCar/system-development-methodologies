@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///D:/PROGRAMS/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="High" Text="Code generation or text transformation started." />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="Name = ClassTemplate" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="ProjectPath = ..\GamedalfLib\GamedalfLib.csproj" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="TemplateFilePath = D:\PROGRAMS\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Diagnostic" Text="ResolvedTemplateFilePath = D:\PROGRAMS\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-08-30T23:50:20" Importance="Medium" Text="Gamedalf's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'Gamedalf::Player' -  (Class) " />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Medium" Text="Project Added: D:\Repositories\Gamedalf\GamedalfLib\GamedalfLib.csproj" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Medium" Text="'Gamedalf::Player' -  (Class) : success (file created) - D:\Repositories\Gamedalf\GamedalfLib\GeneratedCode\Player.cs" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="Name = StructTemplate" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="ProjectPath = ..\GamedalfLib\GamedalfLib.csproj" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="TemplateFilePath = D:\PROGRAMS\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="ResolvedTemplateFilePath = D:\PROGRAMS\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Medium" Text="Gamedalf's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'Gamedalf::Player' -  (Class) " />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="Diagnostic" Text="'Gamedalf::Player' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-08-30T23:50:24" Importance="High" Text="Code generation complete. Errors: 0. Warnings: 0." />
+</Log>
