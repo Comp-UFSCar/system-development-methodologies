@@ -35,6 +35,129 @@
               LastKnownLocation="Gamedalf.uml" />
           </generalization>
         </generalsInternal>
+        <targetEnds>
+          <association
+            Id="eae15db9-3b2e-43d1-86aa-2be6437013bf"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a79b88c9-35fa-467e-a0af-2aae56f04483"
+              LastKnownName="Playing"
+              LastKnownLocation="Gamedalf.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7f5dbf88-70ce-4793-b9a1-4df18f549380"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="47431acf-ecdb-4fdd-9335-27e1177edfed"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="84948b13-4b19-4033-bad7-43e8eab4c766"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="156feef9-fdb9-4660-9e40-7144fe5a7b30"
+              LastKnownName="Creditcard"
+              LastKnownLocation="Gamedalf.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7f44179c-6685-4bb8-afad-d13d857fb127"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7330c476-e4c3-4578-8e67-59334cf2bf74"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="836d7aa1-2c47-467f-a5e2-83e610509f1f"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="26bc126b-312c-4d53-994a-4a70d137d595"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="917968b4-bdeb-4bd1-9cef-8a16d3d7be62"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3c4c2a97-4ea2-4383-9fd6-3ba11b274fc8"
+              LastKnownName="Evaluation"
+              LastKnownLocation="Gamedalf.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6bf78a66-3a17-4f5e-862f-7b1bb9cf9cec"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1a7e7bd7-bd84-47b6-b402-4dfcae4b13ff"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -217,8 +340,8 @@
           <association
             Id="9bbe7eba-8d39-4685-ab33-e7e083d78da1"
             isDerived="false"
-            sourceEndRoleName="Employee"
-            targetEndRoleName="Game"
+            sourceEndRoleName=""
+            targetEndRoleName=""
             isLeaf="false"
             name="Validades"
             isAbstract="false">
@@ -230,7 +353,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="5741cf67-3f6c-4431-99ce-517c9d76fcc9"
-                  name="Employee"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -242,7 +364,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="3a068248-151d-41b5-9431-daeadcbba90d"
-                  name="Game"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -303,8 +424,8 @@
           <association
             Id="7ffa27d9-4650-45e3-97fb-854f99ce0be5"
             isDerived="false"
-            sourceEndRoleName="Game"
-            targetEndRoleName="Developer"
+            sourceEndRoleName=""
+            targetEndRoleName=""
             isLeaf="false"
             name="Registers"
             isAbstract="false">
@@ -316,7 +437,6 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="769f3fb7-8aaa-4833-807e-0df1ebb8b79f"
-                  name="Game"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -341,7 +461,78 @@
               <associationHasOwnedEnds>
                 <memberEnd
                   Id="a5b81b6b-b996-4a57-b4f9-748c9f2ece11"
-                  name="Developer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="9285d785-e1be-405b-96ff-99462ec6da17"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a79b88c9-35fa-467e-a0af-2aae56f04483"
+              LastKnownName="Playing"
+              LastKnownLocation="Gamedalf.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="62bbb533-2c7a-4ba3-8770-8df257b78510"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="56aa2c7c-8c82-4cd0-b5a8-365a2c3b6c8d"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2f317b2b-b297-48f9-ae3a-a00921d96035"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="3c4c2a97-4ea2-4383-9fd6-3ba11b274fc8"
+              LastKnownName="Evaluation"
+              LastKnownLocation="Gamedalf.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="67d5a7cb-abba-467c-8a11-96d848649221"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="12324d35-3eeb-4c32-bf91-d38e63a69016"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -364,10 +555,320 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="5aff0098-76c5-40a7-9c39-bdeac2a03386"
+            name="Price"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5de408d-3cee-4dc4-af4e-1c746159320d"
+                LastKnownName="decimal"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="947be763-b1e6-4f33-9540-6c4416fecf24"
+            name="Description"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ece1b997-9372-475f-8acb-85245ef6f815"
+                LastKnownName="string"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a79b88c9-35fa-467e-a0af-2aae56f04483"
+        name="Playing"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="62a3cc0b-189b-4ba3-b9ac-fac0cc3e5021"
+            name="TimePlayed"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="7a5dfd6d-4ae3-4464-8e6e-4f3f98d853dd"
+                LastKnownName="TimeSpan"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="bc39604a-2294-46b7-a50b-908fdda874f5"
+            name="Expended"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f5de408d-3cee-4dc4-af4e-1c746159320d"
+                LastKnownName="decimal"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="22416f05-4bbe-499f-950e-5b9d4bbb1c28"
+        name="Game"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0f045156-20c3-477c-af3e-e7a385c77d1a"
+        name="CreditsPurchase"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="1c388591-61a0-48b8-97d4-f745a7f99cba"
+            isSubstitutable="false">
+            <classMoniker
+              Id="9078519b-4ab9-42c0-8b06-09bff6f7ca3b"
+              LastKnownName="TimeStampedEntity"
+              LastKnownLocation="Gamedalf.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="0875e888-b46d-4fee-8227-fae5f08a1156"
+            name="Credits"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
             isComposite="false" />
           <property
-            Id="be5b5d65-e555-4884-a7b1-35a69e56197f"
+            Id="ef594023-c2fc-4d6c-b102-be2d072236c6"
+            name="DateValidated"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="9816e431-3571-4ebb-9ca6-e4a3c285feb9"
+            name="Validate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="156feef9-fdb9-4660-9e40-7144fe5a7b30"
+        name="Creditcard"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="3c5756e2-d290-4b14-be2a-0320f61ac221"
+            isSubstitutable="false">
+            <classMoniker
+              Id="9078519b-4ab9-42c0-8b06-09bff6f7ca3b"
+              LastKnownName="TimeStampedEntity"
+              LastKnownLocation="Gamedalf.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="db486a92-3ede-4696-98fe-482559f3eb62"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="0f045156-20c3-477c-af3e-e7a385c77d1a"
+              LastKnownName="CreditsPurchase"
+              LastKnownLocation="Gamedalf.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3ddfe764-b622-45f2-bf04-6f8f671a0971"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cd61c9e6-e616-4e02-80f8-99715f349c55"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="be1ca2b9-9755-4283-be02-cfea033d5e5f"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="622b554e-20b1-4b5d-8b26-8ed3a417b787"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="42a9dba4-0ee8-443a-9fcf-6884b5917efd"
+            name="Number"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="086b94b6-4e47-4de3-a268-f500c365e42b"
+            name="Code"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="349f2258-cba3-4ff8-b210-d4316ec1e597"
+            name="Name"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="740e83ca-d7a7-4065-88e1-7d89fa9c362b"
+            name="Validate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false" />
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f5de408d-3cee-4dc4-af4e-1c746159320d"
+        name="decimal" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="7a5dfd6d-4ae3-4464-8e6e-4f3f98d853dd"
+        name="TimeSpan" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ece1b997-9372-475f-8acb-85245ef6f815"
+        name="string" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="3c4c2a97-4ea2-4383-9fd6-3ba11b274fc8"
+        name="Evaluation"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="19a9dfa6-43c2-4611-8024-a53719c530da"
             name="Score"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <enumerationMoniker
+                Id="0f7384cd-f5b6-4235-96b4-25ddd5442935"
+                LastKnownName="Score"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1b37f9ca-4ea3-4355-b3fc-0e883be48753"
+            name="Review"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -378,6 +879,13 @@
             isComposite="false" />
         </ownedAttributesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <enumeration
+        Id="0f7384cd-f5b6-4235-96b4-25ddd5442935"
+        name="Score"
+        isAbstract="false"
+        isLeaf="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
