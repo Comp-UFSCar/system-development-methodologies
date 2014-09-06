@@ -21,6 +21,16 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd Id="c23edb97-6945-4fab-b0d7-dede9d013580" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="ce80d19f-e26c-4c3b-b76d-fa428194415f" name="Lower" value="*">
+                      <elementDefinition Id="0518108d-3c8d-4e1b-95a7-8dbbc1a9fc47" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="b9eac92c-26ca-4cb5-8a87-0e786760de25" name="Upper" value="*">
+                      <elementDefinition Id="4bd2badc-c0aa-490c-b8c6-8a9a183f1ac7" />
+                    </literalString>
+                  </upperValueInternal>
                   <elementDefinition Id="47431acf-ecdb-4fdd-9335-27e1177edfed" />
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -53,7 +63,7 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="84948b13-4b19-4033-bad7-43e8eab4c766" />
           </association>
-          <association Id="925447b4-300f-4b54-9a8f-8b3e2e2f10d5" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+          <association Id="925447b4-300f-4b54-9a8f-8b3e2e2f10d5" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" name="Creates" isAbstract="false">
             <classMoniker Id="79ad7d3d-9a83-4845-bcf7-219de2e28d32" LastKnownName="Evaluation" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -84,18 +94,27 @@
         <ownedAttributesInternal>
           <property Id="b2d80940-20c1-4859-8c4f-69a8989e3e48" name="UserName" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="2572eebc-cbca-436c-ac5c-4aeb92bb5078" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="8e444f17-844e-4902-8148-143ee292fcdc" LastKnownName="string" />
+            </type_NamedElement>
           </property>
           <property Id="08c2ac6c-9a23-4520-b6f6-418dd0894775" name="Password" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f8ddc456-f0d3-4200-af1e-3603cde17154" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="ad725bcc-e0d0-4061-8dbf-f898f0f85009" LastKnownName="string" />
+            </type_NamedElement>
           </property>
           <property Id="c78286f7-24c8-4f1b-b775-df557a2eb24c" name="Email" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b127e8b0-1bd4-41e9-93a8-a4126662339c" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="a2dc75de-bed7-4768-8236-825ce82e7fc3" LastKnownName="string" />
+            </type_NamedElement>
           </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="1bee142f-da00-4cd2-ad0d-148583259509" name="TimeStampedEntity" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="1bee142f-da00-4cd2-ad0d-148583259509" name="TimeStampedEntity" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="9078519b-4ab9-42c0-8b06-09bff6f7ca3b" />
         <ownedAttributesInternal>
           <property Id="4159160a-10ec-4098-9223-9432b22b795f" name="DateCreated" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -232,6 +251,16 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd Id="524f8ccb-7659-4019-a021-af3697086b93" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="7fd7145a-1f61-4f66-aabf-52b223dd60e3" name="Lower" value="*">
+                      <elementDefinition Id="ed6998ee-3ab5-44df-bd43-96b40807bd3f" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="5d72d6ad-0670-4e19-a433-8bde44cba1b1" name="Upper" value="*">
+                      <elementDefinition Id="5123caf3-0320-451a-852e-e194616425f3" />
+                    </literalString>
+                  </upperValueInternal>
                   <elementDefinition Id="56aa2c7c-8c82-4cd0-b5a8-365a2c3b6c8d" />
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -248,6 +277,16 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd Id="87f34b14-4336-4b86-b341-4977357b5097" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="e09f8fac-1776-429d-9e65-8c732ec72069" name="Lower" value="*">
+                      <elementDefinition Id="d9788631-d18c-4b43-b2aa-bbdec6460a25" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="78d49a64-3dd0-4301-ad37-6a6b35ebeccd" name="Upper" value="*">
+                      <elementDefinition Id="a16a2d5f-5523-4f41-be14-57784e2d5198" />
+                    </literalString>
+                  </upperValueInternal>
                   <elementDefinition Id="12324d35-3eeb-4c32-bf91-d38e63a69016" />
                 </memberEnd>
               </associationHasOwnedEnds>
@@ -287,12 +326,6 @@
               <referencedTypeMoniker Id="a89770a3-b29c-4d02-a800-2be6495d6610" LastKnownName="TimeSpan" />
             </type_NamedElement>
           </property>
-          <property Id="dda1198e-d7d7-4fc5-bfbf-fc915f47d696" name="Expended" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-            <elementDefinition Id="bc39604a-2294-46b7-a50b-908fdda874f5" />
-            <type_NamedElement>
-              <referencedTypeMoniker Id="30574254-5ccc-4437-9ae4-1a4a5efa5adf" LastKnownName="decimal" />
-            </type_NamedElement>
-          </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -306,11 +339,14 @@
           </generalization>
         </generalsInternal>
         <ownedAttributesInternal>
-          <property Id="aabae3b1-9e05-4b32-8b64-8868da11014a" name="Credits" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="aabae3b1-9e05-4b32-8b64-8868da11014a" name="CreditsUsed" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="0875e888-b46d-4fee-8227-fae5f08a1156" />
           </property>
           <property Id="19a7b671-e319-405d-985d-d7eb1f15179a" name="DateValidated" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="ef594023-c2fc-4d6c-b102-be2d072236c6" />
+          </property>
+          <property Id="6c87c1c0-fae2-4640-bc1d-849ae6c07a3d" name="CreditsBought" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="7da3ac2b-823b-4323-a0c3-62265a6d410a" />
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
@@ -376,11 +412,6 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
-      <referencedType Id="30574254-5ccc-4437-9ae4-1a4a5efa5adf" name="decimal" isAbstract="false" isLeaf="false" cachedFullName="decimal">
-        <elementDefinition Id="f5de408d-3cee-4dc4-af4e-1c746159320d" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="a89770a3-b29c-4d02-a800-2be6495d6610" name="TimeSpan" isAbstract="false" isLeaf="false" cachedFullName="TimeSpan">
         <elementDefinition Id="7a5dfd6d-4ae3-4464-8e6e-4f3f98d853dd" />
       </referencedType>
@@ -419,6 +450,21 @@
     <packageHasNamedElement>
       <referencedType Id="160a6933-ee2f-4f06-9394-ec48ea48eefa" name="Score" isAbstract="false" isLeaf="false" cachedFullName="Gamedalf::Score">
         <elementDefinition Id="0f7384cd-f5b6-4235-96b4-25ddd5442935" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a2dc75de-bed7-4768-8236-825ce82e7fc3" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="ece1b997-9372-475f-8acb-85245ef6f815" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="ad725bcc-e0d0-4061-8dbf-f898f0f85009" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="ece1b997-9372-475f-8acb-85245ef6f815" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="8e444f17-844e-4902-8148-143ee292fcdc" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="ece1b997-9372-475f-8acb-85245ef6f815" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

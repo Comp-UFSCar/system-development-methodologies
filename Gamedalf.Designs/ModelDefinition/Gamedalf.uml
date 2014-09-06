@@ -68,7 +68,20 @@
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="0518108d-3c8d-4e1b-95a7-8dbbc1a9fc47"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="4bd2badc-c0aa-490c-b8c6-8a9a183f1ac7"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -127,6 +140,7 @@
             sourceEndRoleName=""
             targetEndRoleName=""
             isLeaf="false"
+            name="Creates"
             isAbstract="false">
             <classMoniker
               Id="3c4c2a97-4ea2-4383-9fd6-3ba11b274fc8"
@@ -204,7 +218,14 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
-            isComposite="false" />
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ece1b997-9372-475f-8acb-85245ef6f815"
+                LastKnownName="string"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
           <property
             Id="f8ddc456-f0d3-4200-af1e-3603cde17154"
             name="Password"
@@ -215,7 +236,14 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
-            isComposite="false" />
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ece1b997-9372-475f-8acb-85245ef6f815"
+                LastKnownName="string"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
           <property
             Id="b127e8b0-1bd4-41e9-93a8-a4126662339c"
             name="Email"
@@ -226,7 +254,14 @@
             isDerived="false"
             isDerivedUnion="false"
             aggregation="None"
-            isComposite="false" />
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="ece1b997-9372-475f-8acb-85245ef6f815"
+                LastKnownName="string"
+                LastKnownLocation="Gamedalf.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -234,7 +269,7 @@
       <class
         Id="9078519b-4ab9-42c0-8b06-09bff6f7ca3b"
         name="TimeStampedEntity"
-        isAbstract="false"
+        isAbstract="true"
         isLeaf="false"
         isActiveClass="false">
         <ownedAttributesInternal>
@@ -503,7 +538,20 @@
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="ed6998ee-3ab5-44df-bd43-96b40807bd3f"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="5123caf3-0320-451a-852e-e194616425f3"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -539,7 +587,20 @@
                   isDerived="false"
                   isDerivedUnion="false"
                   aggregation="None"
-                  isComposite="false" />
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="d9788631-d18c-4b43-b2aa-bbdec6460a25"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="a16a2d5f-5523-4f41-be14-57784e2d5198"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
@@ -628,24 +689,6 @@
                 LastKnownLocation="Gamedalf.uml" />
             </type_NamedElement>
           </property>
-          <property
-            Id="bc39604a-2294-46b7-a50b-908fdda874f5"
-            name="Expended"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="f5de408d-3cee-4dc4-af4e-1c746159320d"
-                LastKnownName="decimal"
-                LastKnownLocation="Gamedalf.uml" />
-            </type_NamedElement>
-          </property>
         </ownedAttributesInternal>
       </class>
     </packageHasNamedElement>
@@ -677,7 +720,7 @@
         <ownedAttributesInternal>
           <property
             Id="0875e888-b46d-4fee-8227-fae5f08a1156"
-            name="Credits"
+            name="CreditsUsed"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -689,6 +732,17 @@
           <property
             Id="ef594023-c2fc-4d6c-b102-be2d072236c6"
             name="DateValidated"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+          <property
+            Id="7da3ac2b-823b-4323-a0c3-62265a6d410a"
+            name="CreditsBought"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
