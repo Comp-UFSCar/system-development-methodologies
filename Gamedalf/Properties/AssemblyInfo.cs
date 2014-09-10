@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Gamedalf.Tests")]
+[assembly: AssemblyTitle("Gamedalf")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Gamedalf.Tests")]
+[assembly: AssemblyProduct("Gamedalf")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ee8d2c47-341b-47f2-9b1c-349a1cbb2770")]
+[assembly: Guid("13f0ca9c-b936-40e4-b2d7-2dd3752af4db")]
 
 // Version information for an assembly consists of the following four values:
 //

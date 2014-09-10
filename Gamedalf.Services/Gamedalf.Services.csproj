@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE20BED5-EAF5-40A9-B699-C2D3918E5D50}</ProjectGuid>
+    <ProjectGuid>{2B34338A-015A-4482-AC63-EE66ECB0AB16}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gamedalf.Core</RootNamespace>
-    <AssemblyName>Gamedalf.Core</AssemblyName>
+    <RootNamespace>Gamedalf.Services</RootNamespace>
+    <AssemblyName>Gamedalf.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -52,11 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="EmployeeService.cs" />
+    <Compile Include="Infrastructure\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gamedalf.Core\Gamedalf.Core.csproj">
+      <Project>{ce20bed5-eaf5-40a9-b699-c2d3918e5d50}</Project>
+      <Name>Gamedalf.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

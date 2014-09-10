@@ -1,4 +1,4 @@
 Gamedalf
 ========
 
-Project for Systems Development Methodologies class at UFSCar
+Project for Systems Development Methodologies class at UFSCar.
