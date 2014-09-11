@@ -17,5 +17,7 @@ namespace Gamedalf.Core.Data
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Gamedalf.Core.Models.Employee> Employees { get; set; }
     }
 }

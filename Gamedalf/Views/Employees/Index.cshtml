@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Gamedalf.Core.Models.Employee>
+
+@{
+    ViewBag.Title = "Employees";
+    ViewBag.Lead  = "aaaaaaaaaaaaall of them.";
+}
+@Html.Partial("_Title")
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.Partial("_List", Model)
