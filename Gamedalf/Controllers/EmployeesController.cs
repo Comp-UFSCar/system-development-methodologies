@@ -6,6 +6,8 @@ using Gamedalf.ViewModels;
 using Gamedalf.Services;
 using PagedList;
 using System.Data.SqlClient;
+using System;
+using System.Data.Entity.Infrastructure;
 
 namespace Gamedalf.Controllers
 {
@@ -70,13 +72,14 @@ namespace Gamedalf.Controllers
                     UserName = employee.Email,
                     SSN = employee.SSN
                 };
+
                 try
                 {
                     var result = await UserManager.CreateAsync(newest, employee.Password);
                 }
-                catch (SqlException)
+                catch (DbUpdateException)
                 {
-                    ViewBag.msg = "This SSN number already exists";
+                    ModelState.AddModelError("SSN", "The SSN inserted has already been taken.");
                     return View(employee);
                 }
                 
@@ -124,7 +127,16 @@ namespace Gamedalf.Controllers
                 modified.PhoneNumber = employee.PhoneNumber;
                 modified.SSN         = employee.SSN;
 
-                await employees.Update(modified);
+                try
+                {
+                    await employees.Update(modified);
+                }
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("SSN", "The SSN inserted has already been taken.");
+                    return View(employee);
+                }
+                
                 return RedirectToAction("Index");
             }
             return View(employee);
