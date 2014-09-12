@@ -5,6 +5,7 @@ using Gamedalf.Core.Models;
 using Gamedalf.ViewModels;
 using Gamedalf.Services;
 using PagedList;
+using System.Data.SqlClient;
 
 namespace Gamedalf.Controllers
 {
@@ -69,8 +70,16 @@ namespace Gamedalf.Controllers
                     UserName = employee.Email,
                     SSN = employee.SSN
                 };
-
-                var result = await UserManager.CreateAsync(newest, employee.Password);
+                try
+                {
+                    var result = await UserManager.CreateAsync(newest, employee.Password);
+                }
+                catch (SqlException)
+                {
+                    ViewBag.msg = "This SSN number already exists";
+                    return View(employee);
+                }
+                
                 return RedirectToAction("Index");
             }
 
