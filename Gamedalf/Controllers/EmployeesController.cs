@@ -68,9 +68,9 @@ namespace Gamedalf.Controllers
             {
                 var newest = new Employee
                 {
-                    Email = employee.Email,
+                    Email    = employee.Email,
                     UserName = employee.Email,
-                    SSN = employee.SSN
+                    SSN      = employee.SSN
                 };
 
                 try

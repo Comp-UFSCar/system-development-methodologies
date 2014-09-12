@@ -48,7 +48,7 @@ namespace Gamedalf.Tests.Services
             var result = await employees.Search(null);
 
             Assert.AreEqual(4, result.Count);
-        }
+        }   
 
         [TestMethod]
         public async Task SearchWithQuery()

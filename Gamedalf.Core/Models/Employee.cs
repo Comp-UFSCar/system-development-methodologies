@@ -9,8 +9,10 @@ namespace Gamedalf.Core.Models
     public class Employee : ApplicationUser, IDateTrackable
     {
         [Required]
+        [MinLength(5)]
+        [MaxLength(20)]
         [Index(IsUnique = true)] 
-        public int SSN { get; set; }
+        public string SSN { get; set; }
 
         [ScaffoldColumn(false)]
         public DateTime DateCreated { get; set; }

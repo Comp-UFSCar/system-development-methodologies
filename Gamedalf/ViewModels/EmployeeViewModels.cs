@@ -18,13 +18,15 @@ namespace Gamedalf.ViewModels
 
         [Required]
         [Display(Name = "Social security number")]
-        public int SSN { get; set; }
+        [StringLength(20, MinimumLength=5)]
+        public string SSN { get; set; }
     }
 
     public class EmployeeRegisterViewModel : RegisterViewModel
     {
         [Required]
         [Display(Name = "Social security number")]
-        public int SSN { get; set; }
+        [StringLength(20, MinimumLength = 5)]
+        public string SSN { get; set; }
     }
 }
