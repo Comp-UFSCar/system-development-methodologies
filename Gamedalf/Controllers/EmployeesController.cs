@@ -11,6 +11,7 @@ using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
 using Gamedalf.ViewModels;
 using Gamedalf.Services;
+using PagedList;
 
 namespace Gamedalf.Controllers
 {
@@ -26,9 +27,19 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Employees
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string q = null, int page = 1, int size = 10)
         {
-            return View(await employees.All());
+            ViewBag.q = q;
+
+            var list = (await employees.Search(q))
+                .ToPagedList(page, size);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_List", list);
+            }
+
+            return View(list);
         }
 
         // GET: Employees/Details/5

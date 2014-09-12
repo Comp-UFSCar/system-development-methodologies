@@ -4,15 +4,17 @@ namespace Gamedalf.Core.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Gamedalf.Core.Data;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Gamedalf.Core.Data.ApplicationDbContext>
+
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Gamedalf.Core.Data.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

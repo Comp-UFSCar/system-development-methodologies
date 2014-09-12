@@ -1,13 +1,33 @@
-﻿@model IEnumerable<Gamedalf.Core.Models.Employee>
+﻿@model IEnumerable<Employee>
 
 @{
     ViewBag.Title = "Employees";
     ViewBag.Lead  = "aaaaaaaaaaaaall of them.";
 }
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/ajax/search.js")
+}
+
 @Html.Partial("_Title")
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="row">
+    <div class="col-md-6">
+        @Html.Partial("_Search", "/Employees")
+    </div>
+    @if (true)
+    {
+        <div class="col-md-6 text-right">
+            <a href="@Url.Action("Create")" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>
+                Create
+            </a>
+        </div>
+    }
+</div>
 
-@Html.Partial("_List", Model)
+<br />
+
+<div id="list-search">
+    @Html.Partial("_List", Model)
+</div>
