@@ -52,6 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrastructure\IDateCreatedTrackable.cs" />
+    <Compile Include="Infrastructure\IDateTrackable.cs" />
+    <Compile Include="Infrastructure\IDateTracker.cs" />
+    <Compile Include="Infrastructure\IDateUpdatedTrackable.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Employee.cs" />
