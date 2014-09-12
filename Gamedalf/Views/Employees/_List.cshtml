@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Employee>
 
+@Html.Partial("_PagedListPager", Model)
+
 <table class="table">
     <thead>
         <tr>

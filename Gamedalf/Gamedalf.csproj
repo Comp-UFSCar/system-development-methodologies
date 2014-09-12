@@ -279,6 +279,7 @@
     <Content Include="Views\Employees\_List.cshtml" />
     <Content Include="Views\Employees\_Item.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Shared\_PagedListPager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
