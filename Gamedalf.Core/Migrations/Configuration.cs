@@ -5,6 +5,11 @@ namespace Gamedalf.Core.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Gamedalf.Core.Data;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Gamedalf.Core.Models;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
@@ -14,20 +19,36 @@ namespace Gamedalf.Core.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ApplicationDbContext context)
+        protected async Task Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var roles = await SeedRoles(context);
+        }
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+        private async Task<ICollection<IdentityRole>> SeedRoles(ApplicationDbContext context)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (!roleManager.RoleExists("admin"))
+            {
+                roleManager.Create(new IdentityRole("admin"));
+            }
+
+            if (!roleManager.RoleExists("employee"))
+            {
+                roleManager.Create(new IdentityRole("employee"));
+            }
+
+            if (!roleManager.RoleExists("player"))
+            {
+                roleManager.Create(new IdentityRole("player"));
+            }
+
+            if (!roleManager.RoleExists("developer"))
+            {
+                roleManager.Create(new IdentityRole("developer"));
+            }
+
+            return await roleManager.Roles.Where(r => r.Id == "1").ToListAsync();
         }
     }
 }
