@@ -115,14 +115,12 @@ namespace Gamedalf.Controllers
         {
             if (ModelState.IsValid)
             {
-                var modified = new Employee
-                {
-                    Id          = employee.Id,
-                    Email       = employee.Email,
-                    UserName    = employee.Email,
-                    PhoneNumber = employee.PhoneNumber,
-                    SSN         = employee.SSN,
-                };
+                var modified = await employees.Find(employee.Id);
+
+                modified.Email       = employee.Email;
+                modified.UserName    = employee.Email;
+                modified.PhoneNumber = employee.PhoneNumber;
+                modified.SSN         = employee.SSN;
 
                 await employees.Update(modified);
                 return RedirectToAction("Index");

@@ -3,11 +3,6 @@ using Gamedalf.Core.Models;
 using System.ComponentModel.DataAnnotations;
 namespace Gamedalf.ViewModels
 {
-    //public class EmployeeIndexViewModel : IndexViewModel
-    //{
-    //    public string SSN { get; set; }
-    //}
-
     public class EmployeeEditViewModel
     {
         public string Id { get; set; }
