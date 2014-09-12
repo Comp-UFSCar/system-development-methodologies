@@ -19,12 +19,12 @@ namespace Gamedalf.Core.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-        protected async Task Seed(ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            var roles = await SeedRoles(context);
+            var roles = SeedRoles(context);
         }
 
-        private async Task<ICollection<IdentityRole>> SeedRoles(ApplicationDbContext context)
+        private ICollection<IdentityRole> SeedRoles(ApplicationDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
@@ -48,7 +48,7 @@ namespace Gamedalf.Core.Migrations
                 roleManager.Create(new IdentityRole("developer"));
             }
 
-            return await roleManager.Roles.Where(r => r.Id == "1").ToListAsync();
+            return roleManager.Roles.Where(r => r.Id == "1").ToList();
         }
     }
 }

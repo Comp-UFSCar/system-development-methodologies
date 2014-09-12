@@ -8,6 +8,7 @@ using PagedList;
 using System.Data.SqlClient;
 using System;
 using System.Data.Entity.Infrastructure;
+using Gamedalf.Core.Infrastructure;
 
 namespace Gamedalf.Controllers
 {
@@ -75,7 +76,8 @@ namespace Gamedalf.Controllers
 
                 try
                 {
-                    var result = await UserManager.CreateAsync(newest, employee.Password);
+                    await UserManager.CreateAsync(newest, employee.Password);
+                    await UserManager.AddToRoleAsync(newest.Id, "employee");
                 }
                 catch (DbUpdateException)
                 {
