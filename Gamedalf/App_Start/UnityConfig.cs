@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Gamedalf.Core.Models;
 using System.Data.Entity;
 using Gamedalf.Core.Data;
+using Gamedalf.Controllers;
 
 namespace Gamedalf.App_Start
 {
@@ -45,6 +46,7 @@ namespace Gamedalf.App_Start
             container.RegisterType(typeof(IUserStore<>), typeof(UserStore<>));
             container.RegisterType<IdentityUser, ApplicationUser>(new ContainerControlledLifetimeManager());
             container.RegisterType<DbContext, ApplicationDbContext>(new PerRequestLifetimeManager());
+            container.RegisterType<AccountController>(new InjectionConstructor());
         }
     }
 }
