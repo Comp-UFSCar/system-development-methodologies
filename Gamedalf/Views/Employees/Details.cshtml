@@ -1,7 +1,8 @@
 ﻿@model Employee
 
 @{
-    
+    ViewBag.Title = Model.Email;
+    ViewBag.Lead  = "Employee's profile";
 }
 @Html.Partial("_Title")
 @Html.Partial("_Item", Model)

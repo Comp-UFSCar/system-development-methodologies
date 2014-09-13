@@ -14,14 +14,14 @@
             </small>
         </h1>
     </div>
-
     <div class="col-md-6">
+        <br />
         <ul class="nav nav-pills pull-right">
             @if (Request.IsAuthenticated)
             {
                 <li><a href="/">Home</a></li>
                 <li>
-                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    @Html.ActionLink("Hello, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                 </li>
                 <li>
                     <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>

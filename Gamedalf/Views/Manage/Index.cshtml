@@ -1,14 +1,12 @@
-﻿@model Gamedalf.ViewModels.IndexViewModel
+﻿@model IndexViewModel
 @{
     ViewBag.Title = "Manage";
 }
 
-<h2>@ViewBag.Title.</h2>
+@Html.Partial("_Title")
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
