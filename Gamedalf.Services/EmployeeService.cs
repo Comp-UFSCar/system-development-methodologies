@@ -13,7 +13,7 @@ namespace Gamedalf.Services
     {
         public EmployeeService(ApplicationDbContext db) : base(db) { }
 
-        public async Task<ICollection<Employee>> Search(string q)
+        public virtual async Task<ICollection<Employee>> Search(string q)
         {
             if (String.IsNullOrEmpty(q))
             {

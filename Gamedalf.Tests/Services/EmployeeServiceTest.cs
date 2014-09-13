@@ -2,6 +2,7 @@
 using Gamedalf.Core.Models;
 using Gamedalf.Services;
 using Gamedalf.Tests.Infrastructure;
+using Gamedalf.Tests.Testdata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -20,13 +21,7 @@ namespace Gamedalf.Tests.Services
         [TestInitialize]
         public void Setup()
         {
-            var data = new List<Employee>
-            {
-                new Employee { Id = "employee1", Email = "ld492@drexel.edu" },
-                new Employee { Id = "employee2", Email = "maria@db.com" },
-                new Employee { Id = "employee3", Email = "johnhall@provider.co" },
-                new Employee { Id = "employee4", Email = "email@mail.com" },
-            }.AsQueryable();
+            var data = new EmployeesTestData().Data.AsQueryable();
 
             var set = new Mock<DbSet<Employee>>() { CallBase = true };
             set.As<IDbAsyncEnumerable<Employee>>().Setup(m => m.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<Employee>(data.GetEnumerator()));
@@ -48,16 +43,16 @@ namespace Gamedalf.Tests.Services
             var result = await employees.Search(null);
 
             Assert.AreEqual(4, result.Count);
-        } 
+        }
 
         [TestMethod]
         public async Task SearchWithQuery()
         {
             var employees = new EmployeeService(context.Object);
 
-            var result = await employees.Search("co");
+            var result = await employees.Search("maria@db.net");
 
-            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(1, result.Count);
         }
     }
 }
