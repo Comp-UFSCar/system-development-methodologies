@@ -1,13 +1,7 @@
 ﻿@model Employee
 
 @{
-    ViewBag.Title = Model.Email;
-    ViewBag.Lead = "Profile";
+    
 }
 @Html.Partial("_Title")
 @Html.Partial("_Item", Model)
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
