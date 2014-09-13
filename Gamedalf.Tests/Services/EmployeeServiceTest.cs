@@ -5,7 +5,6 @@ using Gamedalf.Tests.Infrastructure;
 using Gamedalf.Tests.Testdata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
