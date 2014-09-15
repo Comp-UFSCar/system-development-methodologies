@@ -58,9 +58,11 @@
     <Compile Include="Infrastructure\IDateUpdatedTrackable.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\EmployeesSeedData.cs" />
+    <Compile Include="Migrations\PlayersSeedData.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

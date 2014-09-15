@@ -1,21 +1,6 @@
-﻿<br />
-<div class="row">
-    <div class="col-sm-2">
-        <center>
-            <img src="@Url.Content("~/Images/profile-picure.min.jpg")" alt="Profile picture" class="img-circle img-responsive">
-        </center>
-    </div>
-    <div class="col-sm-10 text-left">
-        <br />
-        <h1>
-            Lucas David
-            <br />
-            <small>
-                I'm awesome but I like cookies too.
-            </small>
-        </h1>
-    </div>
-</div>
+﻿@model Player
+
+@Html.Partial("_Profile", Model)
 
 <div class="row">
     <div class="col-md-6">

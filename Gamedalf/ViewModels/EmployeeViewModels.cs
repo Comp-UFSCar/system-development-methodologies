@@ -1,6 +1,6 @@
-﻿
-using Gamedalf.Core.Models;
+﻿using Gamedalf.Core.Models;
 using System.ComponentModel.DataAnnotations;
+
 namespace Gamedalf.ViewModels
 {
     public class EmployeeEditViewModel

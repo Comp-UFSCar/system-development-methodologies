@@ -6,10 +6,8 @@
 {
     @Html.Partial("_Profile", employee)
     
-    <br />
-    <div class="btn-group col-sm-offset-1">
+    <div class="btn-group col-sm-offset-4">
         @Html.ActionLink("Edit", "Edit", new { id = employee.Id }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Details", "Details", new { id = employee.Id }, new { @class = "btn btn-default" })
         @Html.ActionLink("Delete", "Delete", new { id = employee.Id }, new { @class = "btn btn-default" })
     </div>
     <br /><br /><br />

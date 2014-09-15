@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Player>
+
+@Html.Partial("_PagedListPager", Model)
+
+@foreach (var player in Model)
+{
+    @Html.Partial("_Profile", player)
+    <br /><br /><br />
+}

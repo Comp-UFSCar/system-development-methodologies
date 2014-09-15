@@ -1,4 +1,4 @@
-﻿@model Employee
+﻿@model Player
 
 <div class="row">
     <div class="col-sm-4">
@@ -8,10 +8,10 @@
     </div>
     <div class="col-sm-8">
         <h2>
-            <a href="@Url.Action("Details", new { Id = Model.Id })">
+            <a href="@Url.Action("Details", new { id = Model.Id })">
                 @Html.DisplayFor(m => Model.Email)
             </a>
-            <small>Employee</small>
+            <small>Player</small>
         </h2>
         <p>
             @Html.DisplayFor(m => Model.Email)
@@ -25,7 +25,8 @@
             }
         </p>
         <p>
-            @Html.DisplayFor(m => Model.SSN)
+            @Html.DisplayNameFor(m => Model.DateBirth):
+            @Html.DisplayFor(m => Model.DateBirth)
         </p>
         @if (!String.IsNullOrEmpty(Model.PhoneNumber))
         {
