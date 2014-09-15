@@ -1,12 +1,12 @@
 ﻿@model Employee
 
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-sm-4">
         <center>
             <img src="@Url.Content("~/Images/profile-picure.min.jpg")" alt="Profile picture" class="img-circle img-responsive">
         </center>
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-8">
         <h2>
             @Html.DisplayFor(m => Model.Email)
             <small>Employee</small>
@@ -39,21 +39,5 @@
                 }
             </p>
         }
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = Model.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <h3>
-            Games validated by me
-        </h3>
-        .... .. .. <br />
-        .... .. .. <br />
-        .... .. .. <br />
-        .... .. .. <br />
     </div>
 </div>

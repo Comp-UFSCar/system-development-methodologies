@@ -5,4 +5,8 @@
     ViewBag.Lead  = "Employee's profile";
 }
 @Html.Partial("_Title")
-@Html.Partial("_Item", Model)
+@Html.Partial("_ExtendedProfile", Model)
+
+<div class="text-right">
+    <a href="@Url.Action("Index")" class="btn btn-default">Back</a>
+</div>

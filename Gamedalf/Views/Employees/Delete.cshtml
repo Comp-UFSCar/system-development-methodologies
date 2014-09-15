@@ -6,14 +6,12 @@
 }
 
 @Html.Partial("_Title")
-@Html.Partial("_Item", Model)
+@Html.Partial("_Profile", Model)
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-default" />
-        @Html.ActionLink("Back to List", "Index")
-    </div>
-}
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_Confirm", "Confirm deletion")
+    }
+</div>

@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Employees";
-    ViewBag.Lead  = "aaaaaaaaaaaaall of them.";
+    ViewBag.Lead = "aaaaaaaaaaaaall of them.";
 }
 
 @section scripts {
@@ -10,21 +10,7 @@
 }
 
 @Html.Partial("_Title")
-
-<div class="row">
-    <div class="col-md-6">
-        @Html.Partial("_Search", "/Employees")
-    </div>
-    @if (true)
-    {
-        <div class="col-md-6 text-right">
-            <a href="@Url.Action("Create")" class="btn btn-success">
-                <span class="glyphicon glyphicon-plus"></span>
-                Create
-            </a>
-        </div>
-    }
-</div>
+@Html.Partial("_SearchWithCreate", "/Employees")
 
 <div id="list-search">
     @Html.Partial("_List", Model)
