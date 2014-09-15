@@ -1,7 +1,5 @@
 namespace Gamedalf.Core.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Gamedalf.Core.Data;
@@ -9,8 +7,6 @@ namespace Gamedalf.Core.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Gamedalf.Core.Models;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
-
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
