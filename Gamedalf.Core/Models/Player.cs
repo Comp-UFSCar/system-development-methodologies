@@ -4,9 +4,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gamedalf.Core.Models
 {
-    class Player : ApplicationUser, IDateTrackable
+    public class Player : ApplicationUser, IDateTrackable
     {
         [Required]
+        [Display(Name = "Birth date")]
         public DateTime DateBirth { get; set; }
+
+        [ScaffoldColumn(false)]
+        public DateTime DateCreated { get; set; }
+
+        [ScaffoldColumn(false)]
+        public DateTime? DateUpdated { get; set; }
     }
 }
