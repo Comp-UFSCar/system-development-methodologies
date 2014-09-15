@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Gamedalf.Services
 {
-    public class EmployeeService : Service<Employee>
+    public class PlayerService : Service<Player>
     {
-        public EmployeeService(ApplicationDbContext db) : base(db) { }
+        public PlayerService(ApplicationDbContext db) : base(db) { }
 
-        public virtual async Task<ICollection<Employee>> Search(string q)
+        public virtual async Task<ICollection<Player>> Search(string q)
         {
             if (String.IsNullOrEmpty(q))
             {
                 return await All();
             }
 
-            return await db.Employees
+            return await db.Players
                 .Where(e => e.Email.Contains(q))
                 .OrderBy(e => e.Email)
                 .ToListAsync();
