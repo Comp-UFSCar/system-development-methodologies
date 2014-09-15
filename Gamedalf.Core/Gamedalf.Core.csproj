@@ -57,6 +57,7 @@
     <Compile Include="Infrastructure\IDateTracker.cs" />
     <Compile Include="Infrastructure\IDateUpdatedTrackable.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\EmployeesSeedData.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />

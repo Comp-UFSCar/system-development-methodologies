@@ -22,17 +22,20 @@ namespace Gamedalf.Tests.Testdata
                 new Employee
                 {
                     Id       = "employee2",
-                    Email    = "maria@db.net"
+                    Email    = "maria@db.net",
+                    UserName = "maria@db.net",
                 },
                 new Employee
                 {
                     Id       = "employee3",
-                    Email    = "johnhall@provider.com"
+                    Email    = "johnhall@provider.com",
+                    UserName = "johnhall@provider.com"
                 },
                 new Employee
                 {
                     Id       = "employee4",
-                    Email    = "email@mail.com"
+                    Email    = "email@mail.com",
+                    UserName = "email@mail.com"
                 }
             };
         }
