@@ -48,6 +48,6 @@ namespace Gamedalf.Core.Data
         }
 
         public virtual DbSet<Employee> Employees { get; set; }
-
+        public virtual DbSet<Player>   Players { get; set; }
     }
 }

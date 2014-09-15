@@ -17,8 +17,9 @@ namespace Gamedalf.Core.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            var roles = SeedRoles(context);
+            var roles     = SeedRoles(context);
             var employees = SeedEmployees(context);
+            var players   = SeedPlayers(context);
         }
 
         private ICollection<IdentityRole> SeedRoles(ApplicationDbContext context)
@@ -63,6 +64,27 @@ namespace Gamedalf.Core.Migrations
                 if (result.Succeeded)
                 {
                     manager.AddToRole(employee.Id, "employee");
+                }
+            }
+
+            return data;
+        }
+        
+        private ICollection<Player> SeedPlayers(ApplicationDbContext context)
+        {
+            var store = new UserStore<ApplicationUser>(context);
+            var manager = new UserManager<ApplicationUser>(store);
+
+            // retrieve employee initial data
+            var data = new PlayersSeedData().Data;
+
+            foreach (Player player in data)
+            {
+                var result = manager.Create(player, "password");
+
+                if (result.Succeeded)
+                {
+                    manager.AddToRole(player.Id, "player");
                 }
             }
 
