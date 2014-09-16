@@ -7,6 +7,9 @@ using Gamedalf.Core.Models;
 using System.Data.Entity;
 using Gamedalf.Core.Data;
 using Gamedalf.Controllers;
+using Microsoft.Owin.Security;
+using Gamedalf.Services;
+using Microsoft.Owin;
 
 namespace Gamedalf.App_Start
 {
@@ -41,12 +44,16 @@ namespace Gamedalf.App_Start
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterType(typeof(UserManager<>), new InjectionConstructor(typeof(IUserStore<>)));
-            container.RegisterType<IUser>(new InjectionFactory(c => c.Resolve<IUser>()));
-            container.RegisterType(typeof(IUserStore<>), typeof(UserStore<>));
-            container.RegisterType<IdentityUser, ApplicationUser>(new ContainerControlledLifetimeManager());
             container.RegisterType<DbContext, ApplicationDbContext>(new PerRequestLifetimeManager());
+            container.RegisterType<UserManager<ApplicationUser>>(new PerRequestLifetimeManager());
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new PerRequestLifetimeManager());
+
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<PlayersController>(
+                new InjectionConstructor(
+                    typeof(ApplicationUserManager),
+                    typeof(PlayerService)
+                ));
         }
     }
 }

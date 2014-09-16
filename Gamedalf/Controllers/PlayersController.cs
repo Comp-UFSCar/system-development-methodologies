@@ -1,20 +1,45 @@
 ﻿using Gamedalf.Core.Models;
 using Gamedalf.Services;
+using Gamedalf.ViewModels;
 using PagedList;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Security.Claims;
+using System.Web;
 
 namespace Gamedalf.Controllers
 {
     public class PlayersController : Controller
     {
         private readonly PlayerService            players;
-        private readonly ApplicationUserManager   UserManager;
-
-        public PlayersController(ApplicationUserManager _userManager, PlayerService _players)
+        private readonly ApplicationUserManager UserManager;
+        private ApplicationSignInManager _signInManager;
+        public ApplicationSignInManager SignInManager
         {
-            UserManager   = _userManager;
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set { _signInManager = value; }
+        }
+
+        public PlayersController(ApplicationUserManager userManager, PlayerService _players)
+        {
+            UserManager = userManager;
+            players = _players;
+        }
+
+        public PlayersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, PlayerService _players)
+        {
+            UserManager   = userManager;
+            SignInManager = signInManager;
             players       = _players;
         }
 
@@ -47,6 +72,53 @@ namespace Gamedalf.Controllers
                 return HttpNotFound();
             }
             return View(player);
+        }
+
+        //
+        // GET: Players/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(PlayerRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new Player { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "player");
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
 
         protected override void Dispose(bool disposing)
