@@ -6,9 +6,8 @@ namespace Gamedalf.Core.Models
 {
     public class Player : ApplicationUser, IDateTrackable
     {
-        [Required]
         [Display(Name = "Birth date")]
-        public DateTime DateBirth { get; set; }
+        public DateTime? DateBirth { get; set; }
 
         [ScaffoldColumn(false)]
         public DateTime DateCreated { get; set; }

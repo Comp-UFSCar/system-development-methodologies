@@ -64,6 +64,7 @@ namespace Gamedalf.Core.Migrations
                 if (result.Succeeded)
                 {
                     manager.AddToRole(employee.Id, "employee");
+                    manager.AddToRole(employee.Id, "admin");
                 }
             }
 

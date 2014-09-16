@@ -1,8 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Login Failure";
+    ViewBag.Title = "Oh no!";
+    ViewBag.Lead = "Login Failure";
 }
 
-<hgroup>
-    <h2>@ViewBag.Title.</h2>
-    <h3 class="text-danger">Unsuccessful login with service.</h3>
-</hgroup>
+@Html.Partial("_Title")
+
+<h2 class="text-danger">Unsuccessful login with service.</h2>
+<p>
+    Something went wrong while we were trying to get your information from a external login service. Why don't you
+    try to go to the @Html.ActionLink("home page", "Index", "Home") or the @Html.ActionLink("login page", "Login", "Account")
+    and use a different one?
+</p>
+<p>
+    If you thing this is an problem with our website, please contact us.
+</p>
+<p class="text-right">
+    <a href="/" class="btn btn-default">Go back to Home</a>
+</p>

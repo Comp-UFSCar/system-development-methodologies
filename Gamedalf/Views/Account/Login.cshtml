@@ -11,7 +11,7 @@
     <div class="col-md-6">
         <section id="loginForm">
             <h2>
-                Login
+                Login with a local account
                 <small>so you can play our amazing games!</small>
             </h2>
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
@@ -39,8 +39,6 @@
                 </div>
 
                 <div class="text-right">
-                    <a href="@Url.Action("Register")">Not register?</a>
-
                     <input type="submit" value="Login" class="btn btn-primary" />
                 </div>
 
@@ -51,15 +49,18 @@
             }
         </section>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-6">
+        @Html.Partial("_RegisterPartial", new RegisterViewModel())
+    </div>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

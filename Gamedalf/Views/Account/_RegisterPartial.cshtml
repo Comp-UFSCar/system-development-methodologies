@@ -1,15 +1,13 @@
-﻿@model ResetPasswordViewModel
-@{
-    ViewBag.Title = "Reset your password";
-}
+﻿@model RegisterViewModel
 
-@Html.Partial("_Title")
-
-@using (Html.BeginForm("ResetPassword", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+<h2>
+    Register a local account
+</h2>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Code)
+
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "control-label" })
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
@@ -23,9 +21,5 @@
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
     </div>
 
-    @Html.Partial("_Confirm", "Reset")
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Html.Partial("_Confirm", "Register")
 }

@@ -11,7 +11,7 @@ namespace Gamedalf.Core.Models
         [Required]
         [MinLength(5)]
         [MaxLength(20)]
-        [Index(IsUnique = true)]
+        // [Index(IsUnique = true)]
         public string SSN { get; set; }
 
         [ScaffoldColumn(false)]
