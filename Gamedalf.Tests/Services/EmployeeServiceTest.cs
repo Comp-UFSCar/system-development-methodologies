@@ -35,7 +35,7 @@ namespace Gamedalf.Tests.Services
         }
 
         [TestMethod]
-        public async Task SearchWithoutQuery()
+        public async Task EmployeeServiceSearchWithoutQuery()
         {
             var employees = new EmployeeService(context.Object);
 
@@ -45,7 +45,7 @@ namespace Gamedalf.Tests.Services
         }
 
         [TestMethod]
-        public async Task SearchWithQuery()
+        public async Task EmployeeServiceSearchWithQuery()
         {
             var employees = new EmployeeService(context.Object);
 
