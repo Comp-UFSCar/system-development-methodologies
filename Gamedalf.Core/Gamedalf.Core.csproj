@@ -60,6 +60,7 @@
     <Compile Include="Migrations\EmployeesSeedData.cs" />
     <Compile Include="Migrations\PlayersSeedData.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Developer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Models\Player.cs" />
