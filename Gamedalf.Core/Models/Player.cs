@@ -14,5 +14,7 @@ namespace Gamedalf.Core.Models
 
         [ScaffoldColumn(false)]
         public DateTime? DateUpdated { get; set; }
+
+        //public virtual ICollection<Playing> Playing { get; set; }
     }
 }
