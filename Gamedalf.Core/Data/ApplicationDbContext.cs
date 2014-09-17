@@ -47,7 +47,8 @@ namespace Gamedalf.Core.Data
             return base.SaveChangesAsync();
         }
 
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Player>   Players { get; set; }
+        public virtual DbSet<Employee>  Employees  { get; set; }
+        public virtual DbSet<Player>    Players    { get; set; }
+        public virtual DbSet<Developer> Developers { get; set; }
     }
 }
