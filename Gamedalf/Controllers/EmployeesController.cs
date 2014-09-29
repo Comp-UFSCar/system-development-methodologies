@@ -78,14 +78,12 @@ namespace Gamedalf.Controllers
                 {
                     await UserManager.CreateAsync(newest, employee.Password);
                     await UserManager.AddToRoleAsync(newest.Id, "employee");
+                    return RedirectToAction("Index");
                 }
                 catch (DbUpdateException)
                 {
                     ModelState.AddModelError("SSN", "The SSN inserted has already been taken.");
-                    return View(employee);
                 }
-                
-                return RedirectToAction("Index");
             }
 
             return View(employee);
@@ -132,14 +130,12 @@ namespace Gamedalf.Controllers
                 try
                 {
                     await employees.Update(modified);
+                    return RedirectToAction("Index");
                 }
                 catch (DbUpdateException)
                 {
                     ModelState.AddModelError("SSN", "The SSN inserted has already been taken.");
-                    return View(employee);
                 }
-                
-                return RedirectToAction("Index");
             }
             return View(employee);
         }
