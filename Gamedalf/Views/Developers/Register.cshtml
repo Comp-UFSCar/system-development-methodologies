@@ -1,0 +1,23 @@
+﻿@model DeveloperRegisterViewModel
+
+@{
+    ViewBag.Title = "You're about to become a developer!";
+    ViewBag.Lead  = "This is so exciting!";
+}
+
+@Html.Partial("_Title")
+
+@using (Html.BeginForm("Register", "Developers", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.AcceptTerms)
+            @Html.DisplayNameFor(m => m.AcceptTerms)
+        </label>
+    </div>
+    @Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
+
+    @Html.Partial("_Confirm", "Become a developer!")
+}
