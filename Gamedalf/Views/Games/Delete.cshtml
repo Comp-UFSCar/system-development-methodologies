@@ -1,0 +1,17 @@
+﻿@model Game
+
+@{
+    ViewBag.Title = "Careful!";
+    ViewBag.Lead = "you are about to delete " + Model.Title + ".";
+}
+
+@Html.Partial("_Title")
+@Html.Partial("_Item", Model)
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_Confirm", "Confirm")
+    }
+</div>

@@ -1,0 +1,20 @@
+﻿@model Game
+
+<div class="row">
+    <div class="col-sm-4">
+        <center>
+            <img src="@Url.Content("~/Images/game-picture.min.jpg")" alt="Game picture" class="img-circle img-responsive">
+        </center>
+    </div>
+    <div class="col-sm-8">
+        <h2>
+            <a href="@Url.Action("Details", new { Id = Model.Id })">
+                @Html.DisplayFor(m => Model.Title)
+            </a>
+            <small>Game</small>
+        </h2>
+        <p>
+            @Html.DisplayFor(m => Model.Description)
+        </p>
+    </div>
+</div>

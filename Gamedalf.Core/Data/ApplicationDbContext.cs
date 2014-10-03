@@ -50,5 +50,7 @@ namespace Gamedalf.Core.Data
         public virtual DbSet<Employee>  Employees  { get; set; }
         public virtual DbSet<Player>    Players    { get; set; }
         public virtual DbSet<Developer> Developers { get; set; }
+
+        public System.Data.Entity.DbSet<Gamedalf.Core.Models.Game> Games { get; set; }
     }
 }

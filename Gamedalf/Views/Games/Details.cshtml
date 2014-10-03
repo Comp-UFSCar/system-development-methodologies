@@ -1,0 +1,13 @@
+﻿@model Game
+
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Lead = "Game";
+}
+@Html.Partial("_Title")
+@Html.Partial("_ExtendedItem", Model)
+
+<div class="text-right">
+    <a href="@Url.Action("Index")" class="btn btn-default">Back</a>
+</div>
+

@@ -1,4 +1,5 @@
 ﻿using Gamedalf.Core.Infrastructure;
+using System.Collections.Generic;
 
 namespace Gamedalf.Core.Models
 {
