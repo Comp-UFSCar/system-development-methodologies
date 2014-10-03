@@ -131,7 +131,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Services\EmployeeServiceTest.cs" />
+    <Compile Include="Services\DeveloperServiceTest.cs" />
     <Compile Include="Services\PlayerServiceTest.cs" />
+    <Compile Include="Testdata\DevelopersTestData.cs" />
     <Compile Include="Testdata\EmployeesTestData.cs" />
     <Compile Include="Infrastructure\ITestData.cs" />
     <Compile Include="Testdata\PlayersTestData.cs" />
