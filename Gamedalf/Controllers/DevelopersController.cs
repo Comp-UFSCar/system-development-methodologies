@@ -79,15 +79,19 @@ namespace Gamedalf.Controllers
 
         //
         // GET: Developers/Register
+        [Authorize(Roles = "player")]
         public ActionResult Register()
         {
-            return View();
+            return View(new DeveloperRegisterViewModel
+            {
+                AcceptTerms = false
+            });
         }
 
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles="player")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(DeveloperRegisterViewModel model)
         {
@@ -96,9 +100,10 @@ namespace Gamedalf.Controllers
                 return View(model);
             }
 
-            var player    = await players.Find(model.Id);
-            var developer = await developers.Register(player);
-            var result    = await UserManager.AddToRoleAsync(developer.Id, "developer");
+            var player    = await players.Find(User.Identity.GetUserId());
+            var developer = await developers.Convert(player);
+            var result    = await UserManager.AddToRoleAsync(developer.Id, "player");
+                result    = await UserManager.AddToRoleAsync(developer.Id, "developer");
 
             return RedirectToAction("Index", "Home");
         }
