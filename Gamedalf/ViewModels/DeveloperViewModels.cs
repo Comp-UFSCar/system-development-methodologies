@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Gamedalf.Core.Attributes;
 
 namespace Gamedalf.ViewModels
 {
     public class DeveloperRegisterViewModel
     {
-        [Required]
-        public string Id { get; set; }
-
-        [Required]
+        [EnforceTrue]
         public bool AcceptTerms { get; set; }
     }
 }
