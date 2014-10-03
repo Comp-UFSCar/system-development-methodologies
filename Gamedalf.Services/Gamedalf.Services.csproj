@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeveloperService.cs" />
+    <Compile Include="GameService.cs" />
     <Compile Include="PlayerService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="Infrastructure\Service.cs" />
