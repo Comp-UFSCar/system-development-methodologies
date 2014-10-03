@@ -4,6 +4,6 @@ namespace Gamedalf.Core.Models
 {
     public class Developer : Player
     {
-        //public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<Game> Games { get; set; }
     }
 }

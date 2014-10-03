@@ -64,6 +64,7 @@
     <Compile Include="Models\Developer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

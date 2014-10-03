@@ -136,6 +136,7 @@
     <Compile Include="Testdata\DevelopersTestData.cs" />
     <Compile Include="Testdata\EmployeesTestData.cs" />
     <Compile Include="Infrastructure\ITestData.cs" />
+    <Compile Include="Testdata\GamesTestData.cs" />
     <Compile Include="Testdata\PlayersTestData.cs" />
   </ItemGroup>
   <ItemGroup>
