@@ -5,6 +5,15 @@
 
 @Html.Partial("_Title")
 
+@if (User.IsInRole("player") && !User.IsInRole("developer"))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="@Url.Action("Register", "Developers")" class="btn btn-lg btn-primary">Become a developer</a>
+        </div>
+    </div>
+}
+
 @for (int i = 0; i < 8; i++)
 {
     <div class="row">
