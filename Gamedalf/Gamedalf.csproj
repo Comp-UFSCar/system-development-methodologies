@@ -327,6 +327,8 @@
     <Content Include="Views\Games\_Item.cshtml" />
     <Content Include="Views\Games\_List.cshtml" />
     <Content Include="Views\Games\_ExtendedItem.cshtml" />
+    <Content Include="Views\Developers\Index.cshtml" />
+    <Content Include="Views\Developers\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Gamedalf.Core.Data;
-using Gamedalf.Core.Models;
+﻿using Gamedalf.Core.Models;
 using Gamedalf.Services;
-using PagedList;
 using Gamedalf.ViewModels;
 using Microsoft.AspNet.Identity;
+using PagedList;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Gamedalf.Controllers
 {
@@ -56,6 +49,7 @@ namespace Gamedalf.Controllers
             return View(game);
         }
 
+        [Authorize(Roles = "developer,admin")]
         // GET: Games/Create
         public ActionResult Create()
         {
@@ -65,7 +59,7 @@ namespace Gamedalf.Controllers
         // POST: Games/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles="developer")]
+        [Authorize(Roles = "developer,admin")]
         public async Task<ActionResult> Create(GameCreateViewModel model)
         {
             if (ModelState.IsValid)
@@ -86,6 +80,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Games/Edit/5
+        [Authorize(Roles = "developer,employee,admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,6 +92,12 @@ namespace Gamedalf.Controllers
             {
                 return HttpNotFound();
             }
+            if (game.DeveloperId != User.Identity.GetUserId()
+                && !User.IsInRole("employee") && !User.IsInRole("admin"))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
             return View(new GameEditViewModel
             {
                 Id          = game.Id,
@@ -108,11 +109,18 @@ namespace Gamedalf.Controllers
         // POST: Games/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "developer,employee,admin")]
         public async Task<ActionResult> Edit(GameEditViewModel model)
         {
             if (ModelState.IsValid)
             {
                 Game game = await games.Find(model.Id);
+
+                if (game.DeveloperId != User.Identity.GetUserId()
+                && !User.IsInRole("employee") && !User.IsInRole("admin"))
+                {
+                    return new HttpUnauthorizedResult();
+                }
 
                 game.Title       = model.Title;
                 game.Description = model.Description;
@@ -125,6 +133,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Games/Delete/5
+        [Authorize(Roles="employee,admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,6 +151,7 @@ namespace Gamedalf.Controllers
         // POST: Games/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "employee,admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             await games.Delete(id);
