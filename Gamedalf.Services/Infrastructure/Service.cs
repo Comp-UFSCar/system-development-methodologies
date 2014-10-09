@@ -1,47 +1,49 @@
-﻿using Gamedalf.Core.Data;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
+using Gamedalf.Core.Data;
+using System.Collections;
 
-namespace Gamedalf.Services
+namespace Gamedalf.Services.Infrastructure
 {
     public abstract class Service<TEntity>
         where TEntity : class
     {
         #region Protected Fields
-        protected readonly ApplicationDbContext db;
+        protected readonly ApplicationDbContext Db;
         #endregion Protected Fields
 
         #region Constructor
-        protected Service(ApplicationDbContext _db)
+        protected Service(ApplicationDbContext db)
         {
-            db = _db;
+            Db = db;
         }
         #endregion Constructor
 
         public virtual async Task<ICollection<TEntity>> All()
         {
-            return await db.Set<TEntity>().ToListAsync();
+            return await Db.Set<TEntity>().ToListAsync();
         }
         public virtual async Task<TEntity> Find(params object[] keyValues)
         {
-            return await db.Set<TEntity>().FindAsync(keyValues);
+            return await Db.Set<TEntity>().FindAsync(keyValues);
         }
         public virtual async Task<TEntity> Add(TEntity entity)
         {
-            db.Set<TEntity>().Add(entity);
-            await db.SaveChangesAsync();
+            Db.Set<TEntity>().Add(entity);
+            await Db.SaveChangesAsync();
             return entity;
         }
         public virtual async Task<int> AddRange(IEnumerable<TEntity> entities)
         {
-            db.Set<TEntity>().AddRange(entities);
-            return await db.SaveChangesAsync();
+            Db.Set<TEntity>().AddRange(entities);
+            return await Db.SaveChangesAsync();
         }
         public virtual async Task<int> Update(TEntity entity)
         {
-            db.Entry(entity).State = EntityState.Modified;
-            return await db.SaveChangesAsync();
+            Db.Entry(entity).State = EntityState.Modified;
+            return await Db.SaveChangesAsync();
         }
         public virtual async Task<int> Delete(params object[] keyValues)
         {
@@ -50,12 +52,13 @@ namespace Gamedalf.Services
         }
         public virtual async Task<int> Delete(TEntity entity)
         {
-            db.Set<TEntity>().Remove(entity);
-            return await db.SaveChangesAsync();
+            Db.Set<TEntity>().Remove(entity);
+            return await Db.SaveChangesAsync();
         }
+
         public void Dispose()
         {
-            db.Dispose();
+            Db.Dispose();
         }
     }
 }
