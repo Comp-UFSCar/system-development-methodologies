@@ -1,5 +1,9 @@
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+
 namespace Gamedalf.Core.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using Gamedalf.Core.Data;
@@ -7,6 +11,7 @@ namespace Gamedalf.Core.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Gamedalf.Core.Models;
     using System.Collections.Generic;
+    using System.Data.Common;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -17,9 +22,12 @@ namespace Gamedalf.Core.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            var roles     = SeedRoles(context);
+            var roles = SeedRoles(context);
             var employees = SeedEmployees(context);
-            var players   = SeedPlayers(context);
+            var players = SeedPlayers(context);
+            var developers = SeedDevelopers(context);
+            var games = SeedGames(context, developers);
+            var playings = SeedPlayings(context, players, games);
         }
 
         private ICollection<IdentityRole> SeedRoles(ApplicationDbContext context)
@@ -70,7 +78,7 @@ namespace Gamedalf.Core.Migrations
 
             return data;
         }
-        
+
         private ICollection<Player> SeedPlayers(ApplicationDbContext context)
         {
             var store = new UserStore<ApplicationUser>(context);
@@ -90,6 +98,66 @@ namespace Gamedalf.Core.Migrations
             }
 
             return data;
+        }
+
+        private ICollection<Developer> SeedDevelopers(ApplicationDbContext context)
+        {
+            var store = new UserStore<ApplicationUser>(context);
+            var manager = new UserManager<ApplicationUser>(store);
+
+            // retrieve employee initial data
+            var data = new DevelopersSeedData().Data;
+
+            foreach (Player developer in data)
+            {
+                var result = manager.Create(developer, "password");
+
+                if (result.Succeeded)
+                {
+                    manager.AddToRole(developer.Id, "developer");
+                }
+            }
+
+            return data;
+        }
+
+        private ICollection<Game> SeedGames(ApplicationDbContext context, ICollection<Developer> developers)
+        {
+            var data = new GamesSeedData().Data;
+
+            foreach (var game in data)
+            {
+                game.DeveloperId = developers.First().Id;
+            }
+
+            var result = context.Games.AddRange(data);
+
+            return data;
+        }
+
+        private object SeedPlayings(ApplicationDbContext context, ICollection<Player> players, ICollection<Game> games)
+        {
+            var random   = new Random();
+            var playings = new List<Playing>();
+
+            foreach (var player in players)
+            {
+                foreach (var game in games)
+                {
+                    ulong timePlayed = (ulong)random.Next(100);
+                    playings.Add(new Playing
+                    {
+                        PlayerId = player.Id,
+                        GameId = game.Id,
+                        TimePlayed = timePlayed,
+                        DateCreated = DateTime.Today
+                    });
+                }
+            }
+
+            context.Playings.AddRange(playings);
+
+            return playings;
         }
     }
 }
