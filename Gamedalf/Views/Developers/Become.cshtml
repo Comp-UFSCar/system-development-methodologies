@@ -1,0 +1,85 @@
+﻿@model DeveloperRegisterViewModel
+@{
+    ViewBag.Title = "Become a developer";
+}
+@section scripts {
+    @Scripts.Render("~/Scripts/app/elements/BtnSkipFalse.js")
+}
+
+<h2>
+    You're about to become a developer!
+    <small>This is so exciting!</small>
+</h2>
+
+<h3>
+    First, let me give you a little information about what is to be a developer.
+    <small>If you think this is boring, click here to <a class="btn-skip-false" href="#">skip();</a></small>
+</h3>
+<div id="div-skip-false" style="display: none">
+    <hr />
+    <div id="btn-skip-false-result" class="row">
+
+        <div class="col-md-2">
+            <img src="@Url.Content("~/Images/admin-profile-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+        </div>
+        <div class="col-md-10">
+            <h3>0. Lololol just kidding! :-)</h3>
+            <p>
+                Look, before you hate me, know that this is really <strong>important</strong>!
+                You have to scroll down and see all the information to make sure this is what you really want.
+            </p>
+            <p>
+                This operation is also <strong>uninversible</strong>, and although nothing will be really lost, you won't be able to sign posts as <strong>player</strong>.
+            </p>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-sm-10">
+        <h3>1. Convert your user account to an developer</h3>
+        Pricess Kenny represents all developers in Gamedalf. Developers can upload games and share them with the entire community!
+    </div>
+    <div class="col-sm-2">
+        <img src="@Url.Content("~/Images/developer-profile-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+    </div>
+</div>
+
+<hr/>
+<div class="row">
+    <div class="col-sm-2">
+        <img src="@Url.Content("~/Images/game-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+    </div>
+    <div class="col-sm-10">
+        <h3>2. Upload games</h3>
+        
+        Upload your game on Gamedalf and wait for the validation of one of your dedicated employees.
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-sm-10">
+        <h3>3. Get the "go" from a employee</h3>
+        Cool! One of the employees has validated the game. It's now visible and it can be downloaded by any user.
+    </div>
+    <div class="col-sm-2">
+        <img src="@Url.Content("~/Images/employee-profile-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+    </div>
+</div>
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.AcceptTerms, new { @class = "btn btn-default" })
+            @Html.DisplayNameFor(m => m.AcceptTerms)
+        </label>
+    </div>
+    @Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
+
+    @Html.Partial("_Confirm", "Become a developer!")
+}
