@@ -18,9 +18,10 @@ namespace Gamedalf.Controllers
 {
     public class PlayersController : Controller
     {
-        private readonly PlayerService            players;
-        private readonly ApplicationUserManager UserManager;
-        private ApplicationSignInManager _signInManager;
+        private readonly PlayerService            _players;
+        private readonly ApplicationUserManager   _userManager;
+        private          ApplicationSignInManager _signInManager;
+
         public ApplicationSignInManager SignInManager
         {
             get
@@ -30,17 +31,17 @@ namespace Gamedalf.Controllers
             private set { _signInManager = value; }
         }
 
-        public PlayersController(ApplicationUserManager userManager, PlayerService _players)
+        public PlayersController(ApplicationUserManager userManager, PlayerService players)
         {
-            UserManager = userManager;
-            players = _players;
+            _userManager = userManager;
+            _players = players;
         }
 
-        public PlayersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, PlayerService _players)
+        public PlayersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, PlayerService players)
         {
-            UserManager   = userManager;
             SignInManager = signInManager;
-            players       = _players;
+            _userManager  = userManager;
+            _players      = players;
         }
 
         // GET: Players
@@ -48,7 +49,7 @@ namespace Gamedalf.Controllers
         {
             ViewBag.q = q;
 
-            var list = (await players.Search(q))
+            var list = (await _players.Search(q))
                 .ToPagedList(page, size);
 
             if (Request.IsAjaxRequest())
@@ -66,7 +67,7 @@ namespace Gamedalf.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = await players.Find(id);
+            Player player = await _players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -92,10 +93,10 @@ namespace Gamedalf.Controllers
             if (ModelState.IsValid)
             {
                 var user = new Player { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "player");
+                    await _userManager.AddToRoleAsync(user.Id, "player");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -125,7 +126,7 @@ namespace Gamedalf.Controllers
         {
             if (disposing)
             {
-                players.Dispose();
+                _players.Dispose();
             }
             base.Dispose(disposing);
         }

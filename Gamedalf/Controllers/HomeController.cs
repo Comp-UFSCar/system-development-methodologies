@@ -1,29 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Gamedalf.Services;
+using Gamedalf.ViewModels;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Gamedalf.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly GameService _games;
+
+        public HomeController(GameService games)
         {
-            return View();
+            _games = games;
+        }
+
+        public async Task<ActionResult> Index(int games = 10)
+        {
+            return View(new HomeViewModel
+            {
+                Games = await _games.Recent(games)
+            });
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

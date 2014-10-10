@@ -55,6 +55,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -63,6 +64,7 @@ namespace Gamedalf.Controllers
         // POST: Employees/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Create(EmployeeRegisterViewModel employee)
         {
             if (ModelState.IsValid)
@@ -90,6 +92,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -104,10 +107,10 @@ namespace Gamedalf.Controllers
 
             var viewmodel = new EmployeeEditViewModel
             {
-                Id = employee.Id,
-                Email = employee.Email,
+                Id          = employee.Id,
+                Email       = employee.Email,
                 PhoneNumber = employee.PhoneNumber,
-                SSN = employee.SSN
+                SSN         = employee.SSN
             };
 
             return View(viewmodel);
@@ -116,6 +119,7 @@ namespace Gamedalf.Controllers
         // POST: Employees/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Edit(EmployeeEditViewModel employee)
         {
             if (ModelState.IsValid)
@@ -128,7 +132,7 @@ namespace Gamedalf.Controllers
                 modified.SSN         = employee.SSN;
 
                 try
-                {
+                 {
                     await employees.Update(modified);
                     return RedirectToAction("Index");
                 }
@@ -141,6 +145,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -160,9 +165,10 @@ namespace Gamedalf.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            await employees.Delete(id);
+            await  employees.Delete(id);
             return RedirectToAction("Index");
         }
 

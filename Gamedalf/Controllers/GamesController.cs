@@ -4,6 +4,7 @@ using Gamedalf.ViewModels;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -11,11 +12,11 @@ namespace Gamedalf.Controllers
 {
     public class GamesController : Controller
     {
-        private readonly GameService games;
+        private readonly GameService _games;
 
-        public GamesController(GameService _games)
+        public GamesController(GameService games)
         {
-            games = _games;
+            _games = games;
         }
 
         // GET: Games
@@ -23,7 +24,7 @@ namespace Gamedalf.Controllers
         {
             ViewBag.q = q;
 
-            var list = (await games.Search(q))
+            var list = (await _games.Search(q))
                 .ToPagedList(page, size);
 
             if (Request.IsAjaxRequest())
@@ -41,11 +42,12 @@ namespace Gamedalf.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Game game = await games.Find(id);
+            Game game = await _games.Find(id);
             if (game == null)
             {
                 return HttpNotFound();
-            }
+            }            
+
             return View(game);
         }
 
@@ -72,7 +74,7 @@ namespace Gamedalf.Controllers
                      DeveloperId = User.Identity.GetUserId()
                 };
                 
-                await games.Add(game);
+                await _games.Add(game);
                 return RedirectToAction("Index");
             }
 
@@ -87,7 +89,7 @@ namespace Gamedalf.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Game game = await games.Find(id);
+            Game game = await _games.Find(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -114,7 +116,7 @@ namespace Gamedalf.Controllers
         {
             if (ModelState.IsValid)
             {
-                Game game = await games.Find(model.Id);
+                Game game = await _games.Find(model.Id);
 
                 if (game.DeveloperId != User.Identity.GetUserId()
                 && !User.IsInRole("employee") && !User.IsInRole("admin"))
@@ -125,7 +127,7 @@ namespace Gamedalf.Controllers
                 game.Title       = model.Title;
                 game.Description = model.Description;
 
-                await  games.Update(game);
+                await  _games.Update(game);
                 return RedirectToAction("Index");
             }
 
@@ -140,7 +142,7 @@ namespace Gamedalf.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Game game = await games.Find(id);
+            Game game = await _games.Find(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -154,7 +156,7 @@ namespace Gamedalf.Controllers
         [Authorize(Roles = "employee,admin")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            await games.Delete(id);
+            await _games.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -162,7 +164,7 @@ namespace Gamedalf.Controllers
         {
             if (disposing)
             {
-                games.Dispose();
+                _games.Dispose();
             }
             base.Dispose(disposing);
         }

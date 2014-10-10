@@ -13,9 +13,9 @@ namespace Gamedalf.Controllers
 {
     public class DevelopersController : Controller
     {
-        private readonly DeveloperService         developers;
-        private readonly PlayerService            players;
-        private readonly ApplicationUserManager   UserManager;
+        private readonly DeveloperService         _developers;
+        private readonly PlayerService            _players;
+        private readonly ApplicationUserManager   _userManager;
         private          ApplicationSignInManager _signInManager;
         public ApplicationSignInManager           SignInManager
         {
@@ -26,19 +26,19 @@ namespace Gamedalf.Controllers
             private set { _signInManager = value; }
         }
 
-        public DevelopersController(ApplicationUserManager userManager, DeveloperService _developers, PlayerService _players)
+        public DevelopersController(ApplicationUserManager userManager, DeveloperService developers, PlayerService players)
         {
-            UserManager = userManager;
-            developers  = _developers;
-            players     = _players;
+            _userManager = userManager;
+            _developers  = developers;
+            _players     = players;
         }
 
         public DevelopersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, DeveloperService _developers, PlayerService _players)
         {
-            UserManager   = userManager;
+            _userManager   = userManager;
             SignInManager = signInManager;
-            developers    = _developers;
-            players       = _players;
+            this._developers    = _developers;
+            this._players       = _players;
         }
 
         // GET: Developers
@@ -46,7 +46,7 @@ namespace Gamedalf.Controllers
         {
             ViewBag.q = q;
 
-            var list = (await developers.Search(q))
+            var list = (await _developers.Search(q))
                 .ToPagedList(page, size);
 
             if (Request.IsAjaxRequest())
@@ -64,7 +64,7 @@ namespace Gamedalf.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Developer developer = await developers.Find(id);
+            Developer developer = await _developers.Find(id);
             if (developer == null)
             {
                 return HttpNotFound();
@@ -75,12 +75,9 @@ namespace Gamedalf.Controllers
         //
         // GET: Developers/Register
         [Authorize(Roles = "player")]
-        public ActionResult Register()
+        public ActionResult Become()
         {
-            return View(new DeveloperRegisterViewModel
-            {
-                AcceptTerms = false
-            });
+            return View(new DeveloperRegisterViewModel());
         }
 
         //
@@ -88,17 +85,17 @@ namespace Gamedalf.Controllers
         [HttpPost]
         [Authorize(Roles="player")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(DeveloperRegisterViewModel model)
+        public async Task<ActionResult> Become(DeveloperRegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var player    = await players.Find(User.Identity.GetUserId());
-            var developer = await developers.Convert(player);
-            var result    = await UserManager.AddToRoleAsync(developer.Id, "player");
-                result    = await UserManager.AddToRoleAsync(developer.Id, "developer");
+            var player    = await _players.Find(User.Identity.GetUserId());
+            var developer = await _developers.Convert(player);
+            var result    = await _userManager.AddToRoleAsync(developer.Id, "player");
+                result    = await _userManager.AddToRoleAsync(developer.Id, "developer");
 
             return RedirectToAction("Index", "Home");
         }
@@ -115,7 +112,7 @@ namespace Gamedalf.Controllers
         {
             if (disposing)
             {
-                developers.Dispose();
+                _developers.Dispose();
             }
             base.Dispose(disposing);
         }
