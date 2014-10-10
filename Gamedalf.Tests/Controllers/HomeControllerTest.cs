@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Gamedalf.Controllers;
+using System.Threading.Tasks;
 
 namespace Gamedalf.Tests.Controllers
 {
@@ -8,13 +9,13 @@ namespace Gamedalf.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void HomeIndex()
+        public async Task HomeIndex()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController(null);
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var result = (await controller.Index()) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -24,10 +25,10 @@ namespace Gamedalf.Tests.Controllers
         public void HomeAbout()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController(null);
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
+            var result = controller.About() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
@@ -37,10 +38,10 @@ namespace Gamedalf.Tests.Controllers
         public void HomeContact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var controller = new HomeController(null);
 
             // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            var result = controller.Contact() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
