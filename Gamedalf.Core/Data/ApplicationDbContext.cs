@@ -51,6 +51,6 @@ namespace Gamedalf.Core.Data
         public virtual DbSet<Player>    Players    { get; set; }
         public virtual DbSet<Developer> Developers { get; set; }
         public virtual DbSet<Game> Games { get; set; }
-        public virtual DbSet<Evaluation> Evaluations { get; set; }
+        public virtual DbSet<Playing> Playings { get; set; }
     }
 }

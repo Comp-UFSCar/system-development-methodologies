@@ -1,5 +1,6 @@
 ﻿using Gamedalf.Core.Infrastructure;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Gamedalf.Core.Models
@@ -15,6 +16,6 @@ namespace Gamedalf.Core.Models
         [ScaffoldColumn(false)]
         public DateTime? DateUpdated { get; set; }
 
-        //public virtual ICollection<Playing> Playing { get; set; }
+        public virtual ICollection<Playing> Playing { get; set; }
     }
 }
