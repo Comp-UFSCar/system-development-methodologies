@@ -1,10 +1,11 @@
 ﻿@model ExternalLoginConfirmationViewModel
-@{
-    ViewBag.Title = "Register";
-    ViewBag.Lead = "Associate your " + ViewBag.LoginProvider + " account.";
-}
 
-@Html.Partial("_Title")
+<h2>
+    Register
+    <small>
+        Associate your @ViewBag.LoginProvider account.
+    </small>
+</h2>
 
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {

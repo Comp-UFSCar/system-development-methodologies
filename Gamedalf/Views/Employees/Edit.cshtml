@@ -2,9 +2,7 @@
 
 @{
     ViewBag.Title = Model.Email;
-    ViewBag.Lead = "Editing";
 }
-@Html.Partial("_Title")
 
 @using (Html.BeginForm())
 {
@@ -37,7 +35,7 @@
                 @Html.ValidationMessageFor(model => model.SSN, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @Html.Partial("_Confirm", "Save")
     </div>
+    
+    @Html.Partial("_Confirm", "Save")
 }

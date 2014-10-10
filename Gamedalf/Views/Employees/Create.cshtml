@@ -1,15 +1,24 @@
 ﻿@model EmployeeRegisterViewModel
 
 @{
-    ViewBag.Title = "Create";
-    ViewBag.Lead = "a new employee";
+    ViewBag.Title = "Create a new employee";
 }
-@Html.Partial("_Title")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<h2>
+    You are creating a new employee,
+    <small>
+        in case you didn't know.
+    </small>
+</h2>
+<br/>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="form-horizontal">
         <div class="form-group">
@@ -40,6 +49,7 @@
                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
-        @Html.Partial("_Confirm", "Create")
     </div>
+    
+    @Html.Partial("_Confirm", "Create")
 }

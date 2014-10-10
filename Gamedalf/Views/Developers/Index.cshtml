@@ -1,16 +1,10 @@
 ﻿@model IEnumerable<Developer>
 
-@{
-    ViewBag.Title = "Developers";
-    ViewBag.Lead = "aaaaaaaaaaaaall of them.";
-}
-
 @section scripts {
     @Scripts.Render("~/Scripts/app/ajax/search.js")
 }
 
-@Html.Partial("_Title")
-@Html.Partial("_SearchWithCreate", "/Developers")
+@Html.Partial("_Search", "/Developers")
 
 <div id="list-search">
     @Html.Partial("_List", Model)

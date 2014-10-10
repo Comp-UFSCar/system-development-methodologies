@@ -1,12 +1,10 @@
 ﻿@model Employee
 
 <div class="row">
-    <div class="col-sm-4">
-        <center>
-            <img src="@Url.Content("~/Images/profile-picure.min.jpg")" alt="Profile picture" class="img-circle img-responsive">
-        </center>
+    <div class="col-sm-2">
+        <img src="@Url.Content("~/Images/admin-profile-picure.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-10">
         <h2>
             <a href="@Url.Action("Details", new { Id = Model.Id })">
                 @Html.DisplayFor(m => Model.Email)
@@ -24,9 +22,6 @@
                 <span class="label label-default">Email not confirmed</span>
             }
         </p>
-        <p>
-            @Html.DisplayFor(m => Model.SSN)
-        </p>
         @if (!String.IsNullOrEmpty(Model.PhoneNumber))
         {
             <p>
@@ -41,5 +36,8 @@
                 }
             </p>
         }
+        <p>
+            @Html.DisplayFor(m => Model.SSN)
+        </p>
     </div>
 </div>

@@ -3,9 +3,12 @@
 
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-    if (loginProviders.Count() > 0)
+    if (loginProviders.Any())
     {
-        <h2>Or use one of the following services to log in.</h2>
+        <h2>
+            Or use one of the following services to log in.
+            
+        </h2>
 
         using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))
         {

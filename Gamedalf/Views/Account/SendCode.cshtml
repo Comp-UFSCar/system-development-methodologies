@@ -3,8 +3,6 @@
     ViewBag.Title = "Send code";
 }
 
-@Html.Partial("_Title")
-
 @using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()

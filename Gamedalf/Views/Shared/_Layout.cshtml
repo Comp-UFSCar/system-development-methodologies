@@ -3,28 +3,34 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>Gamedalf @(ViewBag.Title != null ? "- " + ViewBag.Title : "")</title>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    
     <div class="container body-content">
+        @Html.Partial("_Title")
         @RenderBody()
-        <br />
-        <footer>
-            <p class="text-right">
-                @Html.ActionLink(  "About",   "About", "Home") |
-                @Html.ActionLink("Contact", "Contact", "Home") |
-
-                <a href="https://github.com/lucasdavid/Gamedalf/blob/master/LICENSE">MIT license</a>
-                &copy; @DateTime.Now.Year - Gamedalf
-            </p>
-        </footer>
     </div>
+    <br /><br />
+    <footer class="container">
+        <p class="text-right">
+            @Html.ActionLink("About", "About", "Home") |
+            @Html.ActionLink("Contact", "Contact", "Home") |
+
+            <a href="https://github.com/lucasdavid/Gamedalf">Github repository</a> |
+            <a href="https://github.com/lucasdavid/Gamedalf/blob/master/LICENSE">MIT license</a>
+            &copy; @DateTime.Now.Year - Gamedalf
+        </p>
+    </footer>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/app/elements/BtnSubmitter.js")
 </body>
 </html>

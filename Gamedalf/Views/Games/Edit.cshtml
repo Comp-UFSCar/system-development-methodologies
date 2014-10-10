@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = Model.Title;
 }
-@Html.Partial("_Title")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 @using (Html.BeginForm())
 {
@@ -28,11 +30,7 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @Html.Partial("_Confirm", "Save")
     </div>
-}
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Html.Partial("_Confirm", "Save")
 }

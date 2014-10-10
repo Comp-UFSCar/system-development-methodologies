@@ -2,10 +2,15 @@
 
 @{
     ViewBag.Title = "Careful!";
-    ViewBag.Lead = "you are about to delete " + Model.Title + ".";
 }
 
-@Html.Partial("_Title")
+<h2>
+    Stop, read and think.
+    <small>
+        You are about to delete <strong>@Model.Title</strong>. This operation is super cereal and it cannot be undone.
+    </small>
+</h2>
+
 @Html.Partial("_Item", Model)
 
 <div class="row">

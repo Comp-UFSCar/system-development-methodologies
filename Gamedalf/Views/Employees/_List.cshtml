@@ -6,9 +6,12 @@
 {
     @Html.Partial("_Profile", employee)
     
-    <div class="btn-group col-sm-offset-4">
-        @Html.ActionLink("Edit", "Edit", new { id = employee.Id }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Delete", "Delete", new { id = employee.Id }, new { @class = "btn btn-default" })
-    </div>
+    if (User.IsInRole("admin"))
+    {
+        <div class="col-sm-offset-2">
+            @Html.ActionLink("Edit", "Edit", new { id = employee.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Delete", "Delete", new { id = employee.Id }, new { @class = "btn btn-danger" })
+        </div>
+    }
     <br /><br /><br />
 }

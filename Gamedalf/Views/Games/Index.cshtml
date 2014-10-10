@@ -1,15 +1,9 @@
 ﻿@model IEnumerable<Game>
 
-@{
-    ViewBag.Title = "Games";
-    ViewBag.Lead = "aaaaaaaaaaaaall of them.";
-}
-
 @section scripts {
     @Scripts.Render("~/Scripts/app/ajax/search.js")
 }
 
-@Html.Partial("_Title")
 @Html.Partial("_SearchWithCreate", "/Games")
 
 <div id="list-search">

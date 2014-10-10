@@ -1,15 +1,10 @@
 ﻿@model PlayerRegisterViewModel
-@{
-    ViewBag.Title = "Register";
-    ViewBag.Lead = "and have access to tons of fun!";
-}
-
-@Html.Partial("_Title")
 
 <div class="row">
     <div class="col-md-6">
         <h2>
             Register a local account
+            <small>and have access to tons of fun!</small>
         </h2>
         @using (Html.BeginForm("Register", "Players", FormMethod.Post))
         {

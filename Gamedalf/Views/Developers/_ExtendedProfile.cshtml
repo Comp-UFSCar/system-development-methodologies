@@ -1,6 +1,25 @@
-﻿@model Player
+﻿@model Developer
 
 @Html.Partial("_Profile", Model)
+
+<h2>
+    <a href="@Url.Action("DevelopedByMe", "Games")">
+        Author 
+    </a>
+</h2>
+<div class="row">
+    <div class="col-md-12">
+        @for (var i = 0; i < 5; i++)
+        {
+            <div class="col-md-2">
+                <h4>Game</h4>
+                <p>
+                    ... .. .....
+                </p>
+            </div>
+        }
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-6">

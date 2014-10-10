@@ -1,12 +1,8 @@
-﻿@{
-    ViewBag.Title = "Email confirmed!";
-    ViewBag.Lead = "Thank you very much for your time.";
-}
-
-@Html.Partial("_Title")
-
-<div>
-    <p>
-        Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
-</div>
+﻿
+<h2>
+    Email confirmed!
+    <small>Thank you very much for your time.</small>
+</h2>
+<p>
+    Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+</p>
