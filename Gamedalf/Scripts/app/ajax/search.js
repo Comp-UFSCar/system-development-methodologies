@@ -7,7 +7,7 @@
         previousValue = undefined,
         timeBeforeSearch = 500;
 
-    function Search() {
+    function search() {
         $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
@@ -20,19 +20,7 @@
         return false;
     }
 
-    function SearchAfter() {
-        if (searchHandler) {
-            clearTimeout(searchHandler);
-            searchHandler = null;
-        }
-
-        if ($q.val() != previousValue) {
-            previousValue = $q.val();
-            searchHandler = setTimeout(Search, timeBeforeSearch);
-        }
-    }
-
-    function GetPage() {
+    function getPage() {
         var $a = $(this);
 
         var options = {
@@ -55,7 +43,7 @@
         $list = $('#list-search');
         $q = $('#q');
 
-        $list.on('click', '.pagedList a', GetPage);
-        $form.submit(Search);
+        $list.on('click', '.pagedList a', getPage);
+        $form.submit(search);
     });
 }());
