@@ -1,5 +1,6 @@
 ﻿using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
+using Gamedalf.Services.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,7 +20,7 @@ namespace Gamedalf.Services
                 return await All();
             }
 
-            return await db.Players
+            return await Db.Players
                 .Where(e => e.Email.Contains(q))
                 .OrderBy(e => e.Email)
                 .ToListAsync();

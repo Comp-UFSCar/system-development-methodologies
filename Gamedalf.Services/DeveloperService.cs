@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Gamedalf.Services.Infrastructure;
 
 namespace Gamedalf.Services
 {
@@ -19,7 +20,7 @@ namespace Gamedalf.Services
                 return await All();
             }
 
-            return await db.Developers
+            return await Db.Developers
                 .Where(e => e.Email.Contains(q))
                 .OrderBy(e => e.Email)
                 .ToListAsync();
@@ -46,7 +47,7 @@ namespace Gamedalf.Services
                 UserName = player.UserName
             };
 
-            db.Players.Remove(player);
+            Db.Players.Remove(player);
             await Add(developer);
 
             return developer;
