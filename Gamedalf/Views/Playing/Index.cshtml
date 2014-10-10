@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Playing>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/ajax/search.js")
+}
+
+@Html.Partial("_Search", "/Playing")
+
+<div id="list-search">
+    @Html.Partial("_List", Model)
+</div>
