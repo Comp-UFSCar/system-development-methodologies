@@ -15,14 +15,20 @@ namespace Gamedalf.Tests.Testdata
                 new Developer 
                 {
                     Id       = "developer1",
-                    Email    = "juan@gmail.com",
-                    UserName = "juan@gmail.com",
+                    Email    = "developer1@test.com",
+                    UserName = "developer1@test.com",
                 },
                 new Developer
                 {
                     Id       = "developer2",
-                    Email    = "guilia@db.net",
-                    UserName = "guilia@db.net",
+                    Email    = "developer2@test.com",
+                    UserName = "developer2@test.com",
+                },
+                new Developer
+                {
+                    Id       = "developer3",
+                    Email    = "developer3@test.com",
+                    UserName = "developer3@test.com",
                 }
             };
         }

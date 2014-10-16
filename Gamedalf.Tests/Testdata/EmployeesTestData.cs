@@ -15,27 +15,23 @@ namespace Gamedalf.Tests.Testdata
                 new Employee 
                 {
                     Id       = "employee1",
-                    Email    = "lucasolivdavid@gmail.com",
-                    UserName = "lucasolivdavid@gmail.com",
-                    SSN      = "101-102-4011"
+                    Email    = "employee1@test.com",
+                    UserName = "employee1@test.com",
+                    SSN      = "111-111-1111"
                 },
                 new Employee
                 {
                     Id       = "employee2",
-                    Email    = "maria@db.net",
-                    UserName = "maria@db.net",
+                    Email    = "employee2@test.com",
+                    UserName = "employee2@test.com",
+                    SSN      = "222-222-2222"
                 },
                 new Employee
                 {
                     Id       = "employee3",
-                    Email    = "johnhall@provider.com",
-                    UserName = "johnhall@provider.com"
-                },
-                new Employee
-                {
-                    Id       = "employee4",
-                    Email    = "email@mail.com",
-                    UserName = "email@mail.com"
+                    Email    = "employee3@test.com",
+                    UserName = "employee3@test.com",
+                    SSN      = "333-333-3333"
                 }
             };
         }

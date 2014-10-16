@@ -16,25 +16,29 @@ namespace Gamedalf.Core.Migrations
                 {
                     Email     = "gollen@g4.edu",
                     UserName  = "gollen@g4.edu",
-                    DateBirth = DateTime.Today
+                    DateBirth = DateTime.Today,
+                    DateCreated = DateTime.Now
                 },
                 new Player
                 {
                     Email     = "player@rmail.com",
                     UserName  = "player@rmail.com",
-                    DateBirth = DateTime.Today
+                    DateBirth = DateTime.Today,
+                    DateCreated = DateTime.Now,
                 },
                 new Player
                 {
                     Email     = "yolanda@y.com",
                     UserName  = "yolanda@y.com",
-                    DateBirth = DateTime.Today
+                    DateBirth = DateTime.Today,
+                    DateCreated = DateTime.Now,
                 },
                 new Player
                 {
                     Email     = "flin@webmail.net",
                     UserName  = "flin@webmail.net",
-                    DateBirth = DateTime.Today
+                    DateBirth = DateTime.Today,
+                    DateCreated = DateTime.Now,
                 },
             };
         }

@@ -114,6 +114,7 @@ namespace Gamedalf.Core.Migrations
 
                 if (result.Succeeded)
                 {
+                    manager.AddToRole(developer.Id, "player");
                     manager.AddToRole(developer.Id, "developer");
                 }
             }
