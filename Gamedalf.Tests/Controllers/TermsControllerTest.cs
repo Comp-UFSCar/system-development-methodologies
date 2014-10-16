@@ -111,11 +111,6 @@ namespace Gamedalf.Tests.Controllers
                 .SetupGet(c => c.User.Identity)
                 .Returns(identity.Object);
 
-            // Defines that a user test is authenticated
-            identity
-                .Setup(c => c.Name)
-                .Returns("test");
-
             // Defines that every call 
             _service
                 .Setup(s => s.Add(It.IsAny<Terms>()))
@@ -210,11 +205,6 @@ namespace Gamedalf.Tests.Controllers
             context
                 .SetupGet(c => c.User.Identity)
                 .Returns(identity.Object);
-
-            // Defines that a user test is authenticated
-            identity
-                .Setup(c => c.Name)
-                .Returns("test");
 
             var controller = new TermsController(_service.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
