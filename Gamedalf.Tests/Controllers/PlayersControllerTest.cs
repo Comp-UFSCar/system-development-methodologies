@@ -2,12 +2,9 @@
 using Gamedalf.Core.Models;
 using Gamedalf.Services;
 using Gamedalf.Tests.Testdata;
-using Gamedalf.ViewModels;
-using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Web.Mvc;
-using Gamedalf.Controllers;
+﻿using Gamedalf.Controllers;
 using Gamedalf.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Web.Mvc;
 
 namespace Gamedalf.Tests.Controllers
 {

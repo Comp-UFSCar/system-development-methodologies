@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Gamedalf.Core.Data;
+﻿using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
 using Gamedalf.Services;
 using Gamedalf.Tests.Infrastructure;

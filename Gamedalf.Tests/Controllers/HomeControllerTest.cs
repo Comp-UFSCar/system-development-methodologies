@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using Gamedalf.Core.Data;
+﻿using Gamedalf.Controllers;
 using Gamedalf.Core.Models;
 using Gamedalf.Services;
 using Gamedalf.Tests.Testdata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Gamedalf.Controllers;
-using System.Threading.Tasks;
 using Moq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Gamedalf.Tests.Controllers
 {
