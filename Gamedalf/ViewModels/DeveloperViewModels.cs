@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Gamedalf.Core.Attributes;
 
 namespace Gamedalf.ViewModels
 {
-    public class DeveloperRegisterViewModel
+    public class DeveloperAcceptTermsViewModel
     {
         [EnforceTrue]
         [Display(Name = "I hereby accept the presented terms")]
