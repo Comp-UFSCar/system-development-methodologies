@@ -1,17 +1,14 @@
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 
 namespace Gamedalf.Core.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
     using Gamedalf.Core.Data;
+    using Gamedalf.Core.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Gamedalf.Core.Models;
+    using System;
     using System.Collections.Generic;
-    using System.Data.Common;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -129,16 +126,19 @@ namespace Gamedalf.Core.Migrations
             foreach (var game in data)
             {
                 game.DeveloperId = developers.First().Id;
-            }
 
-            var result = context.Games.AddRange(data);
+                if (!context.Games.Where(g => g.Title == game.Title).Any())
+                {
+                    context.Games.Add(game);
+                }
+            }
 
             return data;
         }
 
         private object SeedPlayings(ApplicationDbContext context, ICollection<Player> players, ICollection<Game> games)
         {
-            var random   = new Random();
+            var random = new Random();
             var playings = new List<Playing>();
 
             foreach (var player in players)
@@ -146,17 +146,22 @@ namespace Gamedalf.Core.Migrations
                 foreach (var game in games)
                 {
                     ulong timePlayed = (ulong)random.Next(100);
-                    playings.Add(new Playing
+                    var playing = new Playing
                     {
                         PlayerId = player.Id,
                         GameId = game.Id,
                         TimePlayed = timePlayed,
                         DateCreated = DateTime.Today
-                    });
+                    };
+
+                    playings.Add(playing);
+
+                    if (!context.Playings.Where(p => p.GameId == playing.GameId && p.PlayerId == playing.PlayerId).Any())
+                    {
+                        context.Playings.Add(playing);
+                    }
                 }
             }
-
-            context.Playings.AddRange(playings);
 
             return playings;
         }
