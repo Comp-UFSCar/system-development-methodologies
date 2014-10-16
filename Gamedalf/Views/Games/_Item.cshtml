@@ -3,9 +3,9 @@
 @model Game
 
 @{
-    var id        = User.Identity.GetUserId();
+    var id = User.Identity.GetUserId();
     var doIPlayIt = Model.Playings.Any(p => p.PlayerId == id);
-    var average   = Model.Playings.Average(p => p.Score);
+    var average = Model.Playings.Average(p => p.Score);
 }
 
 <div class="row">
@@ -55,10 +55,19 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("Create", "Playing")" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-cloud-download"></span>
-                        Download
-                    </a>
+                    using (Html.BeginForm("Create", "Playing"))
+                    {
+                        @Html.AntiForgeryToken()
+                
+                        @Html.HiddenFor(m => m.Id)
+
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-submitter">
+                                <span class="glyphicon glyphicon-cloud-download"></span>
+                                Download
+                            </a>
+                        </div>
+                    }
                 }
             }
         </p>

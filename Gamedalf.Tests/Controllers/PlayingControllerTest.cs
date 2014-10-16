@@ -59,6 +59,76 @@ namespace Gamedalf.Tests.Controllers
         }
 
         [TestMethod]
+        public async Task PlayingDetails()
+        {
+            var playing = ((List<Playing>) new PlayingTestData().Data)[0];
+            _service
+                .Setup(s => s.Find(It.IsAny<int?>()))
+                .ReturnsAsync(playing);
+
+            var controller = new PlayingController(_service.Object);
+
+            var result = await controller.Details(1);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+            Assert.IsNotNull((result as ViewResult).Model);
+        }
+
+        [TestMethod]
+        public async Task PlayingDetailsNullId()
+        {
+            _service
+                .Setup(s => s.Find(It.IsAny<int?>()))
+                .ReturnsAsync(null);
+
+            var controller = new PlayingController(_service.Object);
+
+            var result = await controller.Details(null);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(HttpStatusCodeResult));
+        }
+
+        [TestMethod]
+        public async Task PlayingDetailsInvalidId()
+        {
+            _service
+                .Setup(s => s.Find(It.IsAny<int?>()))
+                .ReturnsAsync(null);
+
+            var controller = new PlayingController(_service.Object);
+
+            var result = await controller.Details(4);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(HttpNotFoundResult));
+        }
+
+        [TestMethod]
+        public async Task PlayingCreate()
+        {
+            var context = new Mock<HttpContextBase>();
+            var identity = new Mock<IIdentity>();
+            context
+                .SetupGet(c => c.User.Identity)
+                .Returns(identity.Object);
+
+            var gameId = 1;
+            _service
+                .Setup(s => s.Add(It.IsAny<Playing>()))
+                .ReturnsAsync(new Playing { Id = 4 });
+
+            var controller = new PlayingController(_service.Object);
+            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+
+            var result = await controller.Create(gameId);
+
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
+        }
+
+        [TestMethod]
         public async Task PlayingEvaluate()
         {
             var playing = ((List<Playing>)new PlayingTestData().Data)[0];

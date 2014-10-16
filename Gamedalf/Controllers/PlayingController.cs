@@ -35,6 +35,36 @@ namespace Gamedalf.Controllers
             return View(list);
         }
 
+        // GET: Playing/Details/5
+        public async Task<ActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var playing = await _playings.Find(id);
+            if (playing == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(playing);
+        }
+
+        // POST: Playing/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(int id)
+        {
+            var playing  = await _playings.Add(new Playing {
+                GameId   = id,
+                PlayerId = User.Identity.GetUserId()
+            });
+
+            return RedirectToAction("Details", new { id = playing.Id });
+        }
+
         // GET: Playing/Evalute
         public async Task<ActionResult> Evaluate(int? id)
         {
@@ -70,9 +100,9 @@ namespace Gamedalf.Controllers
             {
                 var playing = new Playing
                 {
-                    Id = model.Id,
-                    Review = model.Review,
-                    Score = model.Score
+                    Id      = model.Id,
+                    Review  = model.Review,
+                    Score   = model.Score
                 };
 
                 playing = await _playings.Evaluate(playing);
@@ -81,5 +111,7 @@ namespace Gamedalf.Controllers
 
             return View(model);
         }
+
+        
     }
 }

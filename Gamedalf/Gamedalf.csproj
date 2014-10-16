@@ -372,6 +372,7 @@
     <Content Include="Views\Terms\_List.cshtml" />
     <Content Include="Views\Terms\_Item.cshtml" />
     <Content Include="Views\Terms\_ExtendedItem.cshtml" />
+    <Content Include="Views\Playing\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
