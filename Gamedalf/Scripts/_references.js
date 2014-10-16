@@ -7,5 +7,6 @@
 /// <reference path="respond.js" />
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="app/ajax/search.js" />
+/// <reference path="app/ajax/terms.js" />
 /// <reference path="app/elements/btnskipfalse.js" />
 /// <reference path="app/elements/btnsubmitter.js" />
