@@ -1,0 +1,10 @@
+﻿@model Terms
+
+@Html.Partial("_Item", Model)
+<p>
+    @Model.Content
+</p>
+<p>
+    @Html.ActionLink("Update", "Update", new { id = Model.Id }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
+</p>

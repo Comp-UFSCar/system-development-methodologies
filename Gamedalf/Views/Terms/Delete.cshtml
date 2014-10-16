@@ -1,0 +1,22 @@
+﻿@model Terms
+
+@{
+    ViewBag.Title = "Careful!";
+}
+
+<h2>
+    Stop, read and think.
+    <small>
+        You are about to delete <strong>@Model.Title</strong>. This operation is super cereal and it cannot be undone.
+    </small>
+</h2>
+
+@Html.Partial("_ExtendedItem", Model)
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_Confirm", "Confirm")
+    }
+</div>

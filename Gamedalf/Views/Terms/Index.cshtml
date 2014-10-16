@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Terms>
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/ajax/search.js")
+}
+
+@{
+    ViewBag.Title = "Terms and Conditions";
+}
+
+@Html.Partial("_SearchWithCreate", "/Terms")
+
+<div id="list-search">
+    @Html.Partial("_List", Model)
+</div>

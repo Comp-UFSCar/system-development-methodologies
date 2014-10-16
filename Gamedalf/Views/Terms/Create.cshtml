@@ -1,0 +1,37 @@
+﻿@model TermsCreateViewModel
+
+@{
+    ViewBag.Title = "Create new \"Terms and conditions\"";
+}
+
+<h2>
+    Right, let's do this! Submit the entire "Terms and Conditions" file.
+    <small>
+        Your new "Terms and Conditions" will be accessible through
+        the interface <strong>/api/{Terms title}</strong>.
+    </small>
+</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Content, 20, 10, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_Confirm", "Save")
+}

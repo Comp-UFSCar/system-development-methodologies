@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Terms>
+
+@Html.Partial("_PagedListPager", Model)
+
+@foreach (var game in Model)
+{
+    @Html.Partial("_Item", game)
+    <p>
+        @Html.ActionLink("Update", "Update", new { id = game.Id }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Delete", "Delete", new { id = game.Id }, new { @class = "btn btn-default" })
+    </p>
+    <br /><br /><br />
+}

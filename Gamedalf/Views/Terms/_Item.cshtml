@@ -1,0 +1,13 @@
+﻿@model Terms
+
+<h2>
+    <a href="@Url.Action("Details", new { Model.Id })">
+        @Html.DisplayFor(m => Model.Title)
+    </a>
+    <small>Terms and Conditions</small>
+</h2>
+<p>
+    <a href="@Url.Action("Employees", new { id = Model.EmployeeId })">
+        @Model.Employee.Email</a>,
+    @Html.DisplayFor(m => Model.DateCreated)
+</p>
