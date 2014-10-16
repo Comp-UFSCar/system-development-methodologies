@@ -54,13 +54,9 @@ namespace Gamedalf.Controllers
                 Id = playing.Id,
                 GameTitle = playing.Game.Title,
                 PlayerEmail = playing.Player.Email,
-                Review = playing.Review
+                Review = playing.Review,
+                Score  = (short) (playing.Score ?? 0)
             };
-
-            if (playing.IsEvaluated)
-            {
-                model.Score = (short)playing.Score;
-            }
 
             return View(model);
         }
@@ -80,7 +76,7 @@ namespace Gamedalf.Controllers
                 };
 
                 playing = await _playings.Evaluate(playing);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = playing.Id });
             }
 
             return View(model);

@@ -13,7 +13,7 @@ namespace Gamedalf.Services
     {
         public PlayingService(ApplicationDbContext db) : base(db) { }
 
-        public async Task<Playing> Find(int id)
+        public virtual async Task<Playing> Find(int id)
         {
             return await Db.Playings
                 .Where(p => p.Id == id)
@@ -21,7 +21,7 @@ namespace Gamedalf.Services
                 .FirstAsync();
         }
 
-        public async Task<ICollection<Playing>> Search(string q)
+        public virtual async Task<ICollection<Playing>> Search(string q)
         {
             if (String.IsNullOrEmpty(q))
             {
@@ -39,7 +39,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Playing>> EvaluatedByUser(string id)
+        public virtual async Task<ICollection<Playing>> EvaluatedByUser(string id)
         {
             return await Db.Playings
                 .Where(p =>
@@ -47,7 +47,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Playing>> NotYetEvaluatedByUser(string id)
+        public virtual async Task<ICollection<Playing>> NotYetEvaluatedByUser(string id)
         {
             return await Db.Playings
                 .Where(p =>
@@ -55,7 +55,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Playing>> PlayingDoneByUser(string id, string q)
+        public virtual async Task<ICollection<Playing>> PlayingDoneByUser(string id, string q)
         {
             if (String.IsNullOrEmpty(q))
             {
@@ -77,7 +77,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<Playing> Evaluate(Playing evaluation)
+        public virtual async Task<Playing> Evaluate(Playing evaluation)
         {
             var playing = await base.Find(evaluation.Id);
             

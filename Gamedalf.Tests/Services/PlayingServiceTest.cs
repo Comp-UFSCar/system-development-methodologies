@@ -1,16 +1,14 @@
-﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Gamedalf.Core.Data;
+﻿using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
 using Gamedalf.Services;
 using Gamedalf.Tests.Infrastructure;
 using Gamedalf.Tests.Testdata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gamedalf.Tests.Services
 {
