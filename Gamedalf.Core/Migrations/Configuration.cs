@@ -24,7 +24,7 @@ namespace Gamedalf.Core.Migrations
             var players = SeedPlayers(context);
             var developers = SeedDevelopers(context);
             var games = SeedGames(context, developers);
-            var playings = SeedPlayings(context, players, games);
+            //var playings = SeedPlayings(context, players, games);
         }
 
         private ICollection<IdentityRole> SeedRoles(ApplicationDbContext context)
