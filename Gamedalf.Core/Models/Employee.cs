@@ -6,12 +6,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Gamedalf.Core.Models
 {
+    [Table("Employees")]
     public class Employee : ApplicationUser
     {
         [Required]
         [MinLength(5)]
         [MaxLength(20)]
-        // [Index(IsUnique = true)]
+        [Index(IsUnique = true)]
         public string SSN { get; set; }
 
         public virtual ICollection<Game> Games { get; set; }
