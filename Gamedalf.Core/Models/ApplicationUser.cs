@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Gamedalf.Core.Infrastructure;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Gamedalf.Core.Models
 {
-    public class ApplicationUser : IdentityUser
+    public abstract class ApplicationUser : IdentityUser, IDateTrackable
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -14,5 +17,11 @@ namespace Gamedalf.Core.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        [ScaffoldColumn(false)]
+        public DateTime DateCreated { get; set; }
+
+        [ScaffoldColumn(false)]
+        public DateTime? DateUpdated { get; set; }
     }
 }

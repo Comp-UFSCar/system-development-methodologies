@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Terms.cs" />
     <Compile Include="Attributes\EnforceTrueAttribute.cs" />
     <Compile Include="Infrastructure\IDateCreatedTrackable.cs" />
     <Compile Include="Infrastructure\IDateTrackable.cs" />
