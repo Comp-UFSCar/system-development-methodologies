@@ -1,0 +1,27 @@
+﻿@model DeveloperAcceptTermsViewModel
+@{
+    ViewBag.Title = "Become a developer";
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/ajax/terms.js")
+}
+
+<h2>
+    Read the terms carefully.
+</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.AcceptTerms, new { @class = "btn btn-default" })
+            @Html.DisplayNameFor(m => m.AcceptTerms)
+        </label>
+    </div>
+    @Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
+
+    @Html.Partial("_Confirm", "Become a developer!")
+}

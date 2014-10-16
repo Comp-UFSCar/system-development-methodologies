@@ -1,4 +1,4 @@
-﻿@model DeveloperRegisterViewModel
+﻿@model DeveloperAcceptTermsViewModel
 @{
     ViewBag.Title = "Become a developer";
 }
@@ -23,13 +23,13 @@
             <img src="@Url.Content("~/Images/admin-profile-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
         </div>
         <div class="col-md-10">
-            <h3>0. Lololol just kidding! :-)</h3>
+            <h3>0. Hahahahaha dude you totally fell for it! :-)</h3>
             <p>
                 Look, before you hate me, know that this is really <strong>important</strong>!
                 You have to scroll down and see all the information to make sure this is what you really want.
             </p>
             <p>
-                This operation is also <strong>uninversible</strong>, and although nothing will be really lost, you won't be able to sign posts as <strong>player</strong>.
+                This operation is also <strong>irreversible</strong>, and although nothing will be really lost, you won't be able to sign posts as <strong>player</strong>.
             </p>
         </div>
     </div>
@@ -61,25 +61,16 @@
 <div class="row">
     <div class="col-sm-10">
         <h3>3. Get the "go" from a employee</h3>
-        Cool! One of the employees has validated the game. It's now visible and it can be downloaded by any user.
+        Cool! One of the employees has validated the game. It's now visible and it can now be downloaded by any user.
     </div>
     <div class="col-sm-2">
         <img src="@Url.Content("~/Images/employee-profile-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
     </div>
 </div>
-<hr />
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="checkbox">
-        <label>
-            @Html.CheckBoxFor(m => m.AcceptTerms, new { @class = "btn btn-default" })
-            @Html.DisplayNameFor(m => m.AcceptTerms)
-        </label>
-    </div>
-    @Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
-
-    @Html.Partial("_Confirm", "Become a developer!")
-}
+<div class="text-right">
+    <a href="@Url.Action("Terms", "Developers")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Go to the terms!
+    </a>
+</div>

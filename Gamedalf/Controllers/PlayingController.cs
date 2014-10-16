@@ -24,7 +24,7 @@ namespace Gamedalf.Controllers
         {
             ViewBag.q = q;
 
-            var list = (await _playings.MyPlayings(User.Identity.GetUserId(), q))
+            var list = (await _playings.PlayingDoneByUser(User.Identity.GetUserId(), q))
                 .ToPagedList(page, size);
 
             if (Request.IsAjaxRequest())

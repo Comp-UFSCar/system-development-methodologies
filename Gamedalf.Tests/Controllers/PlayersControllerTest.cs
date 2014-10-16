@@ -18,15 +18,15 @@ namespace Gamedalf.Tests.Controllers
     [TestClass]
     public class PlayersControllerTest
     {
-        private ICollection<Player> data; 
-        private Mock<PlayerService> players;
+        private ICollection<Player> _data; 
+        private Mock<PlayerService> _players;
         
         [TestInitialize]
-        public void setup()
+        public void Setup()
         {
             // retrieving test data
-            data    = new PlayersTestData().Data;
-            players = new Mock<PlayerService>(null);
+            _data    = new PlayersTestData().Data;
+            _players = new Mock<PlayerService>(null);
         }
 
         [TestMethod]
@@ -39,11 +39,11 @@ namespace Gamedalf.Tests.Controllers
                 .SetupGet(x => x.Request)
                 .Returns(request.Object);
 
-            players
+            _players
                 .Setup(e => e.Search(null))
-                .Returns(Task.FromResult(data));
+                .Returns(Task.FromResult(_data));
 
-            var controller = new PlayersController(null, null, players.Object);
+            var controller = new PlayersController(null, null, _players.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             var view   = await controller.Index() as ViewResult;
@@ -55,11 +55,11 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task PlayersDetails()
         {
-            players
+            _players
                 .Setup(e => e.Find("player1"))
-                .Returns(Task.FromResult((data as List<Player>)[0]));
+                .Returns(Task.FromResult((_data as List<Player>)[0]));
 
-            var controller = new PlayersController(null, null, players.Object);
+            var controller = new PlayersController(null, null, _players.Object);
 
             var view   = await controller.Details("player1") as ViewResult;
             var result = view.Model                            as Player;
@@ -70,7 +70,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task PlayersDetailsWithNullId()
         {
-            var controller = new PlayersController(null, null, players.Object);
+            var controller = new PlayersController(null, null, _players.Object);
 
             var view       = await controller.Details(null);
 
@@ -82,11 +82,11 @@ namespace Gamedalf.Tests.Controllers
         {
             Player unexistent = null;
 
-            players
+            _players
                 .Setup(e => e.Find("player42"))
                 .Returns(Task.FromResult(unexistent));
 
-            var controller = new PlayersController(null, null, players.Object);
+            var controller = new PlayersController(null, null, _players.Object);
 
             var view = await controller.Details("player42");
 

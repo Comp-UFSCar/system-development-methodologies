@@ -4,7 +4,7 @@
 {
     <h2>
         Not a member yet?
-        <small>Register for free!</small>
+        <small>Register for free and have access to tons of games!</small>
     </h2>
 
     @Html.AntiForgeryToken()
@@ -21,6 +21,8 @@
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
     </div>
-
-    @Html.Partial("_Confirm", "Register")
+    
+    <div class="form-group text-right">
+        <input type="submit" value="Register" class="btn btn-primary" role="button" />
+    </div>
 }

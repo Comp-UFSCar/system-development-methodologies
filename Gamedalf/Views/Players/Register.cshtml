@@ -1,37 +1,33 @@
 ﻿@model PlayerRegisterViewModel
 
-<div class="row">
-    <div class="col-md-6">
-        <h2>
-            Register a local account
-            <small>and have access to tons of fun!</small>
-        </h2>
-        @using (Html.BeginForm("Register", "Players", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-
-            <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
-
-            @Html.Partial("_Confirm", "Register")
-        }
-    </div>
-    <div class="col-md-6">
-        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-    </div>
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<h2>
+    Register a local account
+    <small>and have access to tons of fun!</small>
+</h2>
+@using (Html.BeginForm("Register", "Players", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.Partial("_Confirm", "Register")
+}
+

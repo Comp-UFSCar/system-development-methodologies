@@ -45,19 +45,16 @@
                     </p>*@
             }
         </section>
-    </div>
-    <div class="col-md-6">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>
     </div>
-</div>
-
-<div class="row">
     <div class="col-md-6">
         @Html.Partial("_RegisterPartial", new PlayerRegisterViewModel())
     </div>
+    
 </div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

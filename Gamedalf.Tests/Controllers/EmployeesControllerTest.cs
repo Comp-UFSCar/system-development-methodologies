@@ -18,15 +18,15 @@ namespace Gamedalf.Tests.Controllers
     [TestClass]
     public class EmployeesControllerTest
     {
-        private ICollection<Employee> data; 
-        private Mock<EmployeeService> employees;
+        private ICollection<Employee> _data; 
+        private Mock<EmployeeService> _employees;
         
         [TestInitialize]
-        public void setup()
+        public void Setup()
         {
             // retrieving test data
-            data      = new EmployeesTestData().Data;
-            employees = new Mock<EmployeeService>(null);
+            _data      = new EmployeesTestData().Data;
+            _employees = new Mock<EmployeeService>(null);
         }
 
         [TestMethod]
@@ -40,38 +40,41 @@ namespace Gamedalf.Tests.Controllers
                 .SetupGet(x => x.Request)
                 .Returns(request.Object);
 
-            employees
+            _employees
                 .Setup(e => e.Search(null))
-                .Returns(Task.FromResult(data));
+                .Returns(Task.FromResult(_data));
 
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             var view   = await controller.Index() as ViewResult;
-            var result = view.Model               as IEnumerable<Employee>;
+            Assert.IsNotNull(view);
 
+            var result = view.Model as IEnumerable<Employee>;
             Assert.IsNotNull(result);
         }
 
         [TestMethod]
         public async Task EmployeesDetails()
         {
-            employees
+            _employees
                 .Setup(e => e.Find("employee1"))
-                .Returns(Task.FromResult((data as List<Employee>)[0]));
+                .Returns(Task.FromResult((_data as List<Employee>)[0]));
 
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
-            var view   = await controller.Details("employee1") as ViewResult;
-            var result = view.Model                            as Employee;
+            var view = await controller.Details("employee1") as ViewResult;
+            Assert.IsNotNull(view);
 
+            var result = view.Model as Employee;
+            Assert.IsNotNull(result);
             Assert.AreEqual("employee1", result.Id);
         }
 
         [TestMethod]
         public async Task EmployeesDetailsWithNullId()
         {
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view       = await controller.Details(null);
 
@@ -81,15 +84,13 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task EmployeesDetailsWithInvalidId()
         {
-            Employee unexistent = null;
+            _employees
+                .Setup(e => e.Find("employee0"))
+                .ReturnsAsync(null);
 
-            employees
-                .Setup(e => e.Find("employee42"))
-                .Returns(Task.FromResult(unexistent));
+            var controller = new EmployeesController(null, _employees.Object);
 
-            var controller = new EmployeesController(null, employees.Object);
-
-            var view = await controller.Details("employee42");
+            var view = await controller.Details("employee0");
 
             Assert.IsInstanceOfType(view, typeof(HttpNotFoundResult));
         }
@@ -97,7 +98,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public void EmployeesCreateGet()
         {
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view       = controller.Create() as ViewResult;
 
@@ -120,13 +121,13 @@ namespace Gamedalf.Tests.Controllers
                 .Setup(u => u.AddToRoleAsync(It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(Task.FromResult(new IdentityResult()));
 
-            var controller = new EmployeesController(userManager.Object, employees.Object);
+            var controller = new EmployeesController(userManager.Object, _employees.Object);
 
             // Valid model that will be inserted
             var viewModel = new EmployeeRegisterViewModel
             {
-                Email = "employee5@mail.com",
-                SSN = "202-401-2101"
+                Email = "employee4@test.com",
+                SSN = "444-444-4444"
             };
 
             var result = await controller.Create(viewModel);
@@ -134,7 +135,7 @@ namespace Gamedalf.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task EmployeesCreateWithRepeatedSSN()
+        public async Task EmployeesCreateWithRepeatedSsn()
         {
             var userStore   = new Mock<IUserStore<ApplicationUser>>();
             var userManager = new Mock<ApplicationUserManager>(userStore.Object);
@@ -144,25 +145,24 @@ namespace Gamedalf.Tests.Controllers
             
             var viewmodel = new EmployeeRegisterViewModel
             {
-                SSN = "101-102-4011"
+                SSN = "111-111-1111"
             };
             
-            var controller = new EmployeesController(userManager.Object, employees.Object);
-
+            var controller = new EmployeesController(userManager.Object, _employees.Object);
             var result     = await controller.Create(viewmodel);
 
             Assert.IsFalse(controller.ModelState.IsValid);
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.IsNotInstanceOfType(result, typeof(RedirectToRouteResult));
             Assert.IsNotNull((result as ViewResult).Model);
         }
 
         [TestMethod]
         public async Task EmployeesEdit()
         {
-            employees
+            _employees
                 .Setup(e => e.Find("employee1"))
-                .Returns(Task.FromResult((data as List<Employee>)[0]));
-            var controller = new EmployeesController(null, employees.Object);
+                .Returns(Task.FromResult((_data as List<Employee>)[0]));
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view   = await controller.Edit("employee1") as ViewResult;
             var result = view.Model                         as EmployeeEditViewModel;
@@ -173,7 +173,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task EmployeesEditWithNullId()
         {
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view       = await controller.Edit(id: null);
 
@@ -183,13 +183,11 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task EmployeesEditWithInvalidId()
         {
-            Employee unexistent = null;
-
-            employees
+            _employees
                 .Setup(e => e.Find("unexistent"))
-                .Returns(Task.FromResult(unexistent));
+                .ReturnsAsync(null);
 
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view = await controller.Edit(id: "unexistent");
 
@@ -199,11 +197,11 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task EmployeesDelete()
         {
-            employees
+            _employees
                 .Setup(e => e.Find("employee1"))
-                .Returns(Task.FromResult((data as List<Employee>)[0]));
+                .Returns(Task.FromResult((_data as List<Employee>)[0]));
 
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view   = await controller.Delete("employee1") as ViewResult;
             var result = view.Model                           as Employee;
@@ -214,7 +212,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task EmployeesDeleteWithNullId()
         {
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view = await controller.Delete(id: null);
 
@@ -224,13 +222,11 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task EmployeesDeleteWithInvalidId()
         {
-            Employee unexistent = null;
-
-            employees
+            _employees
                 .Setup(e => e.Find("unexistent"))
-                .Returns(Task.FromResult(unexistent));
+                .ReturnsAsync(null);
 
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var view = await controller.Edit(id: "unexistent");
 
@@ -239,13 +235,12 @@ namespace Gamedalf.Tests.Controllers
 
         public async Task EmployeesDeleteConfirmed()
         {
-            var success = 1;
-
-            employees
+            // returns integer 1 when e.Delete("employee1") is called
+            _employees
                 .Setup(e => e.Delete("employee1"))
-                .Returns(Task.FromResult(success));
+                .ReturnsAsync(1);
 
-            var controller = new EmployeesController(null, employees.Object);
+            var controller = new EmployeesController(null, _employees.Object);
 
             var result = await controller.DeleteConfirmed("employee1");
 
