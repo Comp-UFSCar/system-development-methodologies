@@ -68,7 +68,7 @@ namespace Gamedalf.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task PlayersDetailsWithNullId()
+        public async Task PlayersDetailsNullId()
         {
             var controller = new PlayersController(null, null, _players.Object);
 
@@ -78,17 +78,15 @@ namespace Gamedalf.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task PlayersDetailsWithInvalidId()
+        public async Task PlayersDetailsNonexistentId()
         {
-            Player unexistent = null;
-
             _players
-                .Setup(e => e.Find("player42"))
-                .Returns(Task.FromResult(unexistent));
+                .Setup(e => e.Find("player4"))
+                .ReturnsAsync(null);
 
             var controller = new PlayersController(null, null, _players.Object);
 
-            var view = await controller.Details("player42");
+            var view = await controller.Details("player4");
 
             Assert.IsInstanceOfType(view, typeof(HttpNotFoundResult));
         }
