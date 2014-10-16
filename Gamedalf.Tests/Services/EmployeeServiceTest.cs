@@ -41,7 +41,7 @@ namespace Gamedalf.Tests.Services
 
             var result = await employees.Search(null);
 
-            Assert.AreEqual(4, result.Count);
+            Assert.AreEqual(3, result.Count);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace Gamedalf.Tests.Services
         {
             var employees = new EmployeeService(context.Object);
 
-            var result = await employees.Search("maria@db.net");
+            var result = await employees.Search("employee1@test.com");
 
             Assert.AreEqual(1, result.Count);
         }

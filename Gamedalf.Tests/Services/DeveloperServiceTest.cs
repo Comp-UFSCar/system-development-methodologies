@@ -1,4 +1,6 @@
-﻿using Gamedalf.Core.Data;
+﻿using System;
+using System.IO;
+using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
 using Gamedalf.Services;
 using Gamedalf.Tests.Infrastructure;
@@ -15,12 +17,12 @@ namespace Gamedalf.Tests.Services
     [TestClass]
     public class DeveloperServiceTest
     {
-        private Mock<ApplicationDbContext> context;
+        private Mock<ApplicationDbContext> _context;
 
         [TestInitialize]
         public void Setup()
         {
-            context = new Mock<ApplicationDbContext>();
+            _context = new Mock<ApplicationDbContext>();
 
             var dataDevelopers = new DevelopersTestData().Data.AsQueryable();
             var dataPlayer     = new PlayersTestData().Data.AsQueryable();
@@ -39,29 +41,29 @@ namespace Gamedalf.Tests.Services
             setPlayer.As<IQueryable<Player>>().Setup(m => m.ElementType).Returns(dataPlayer.ElementType);
             setPlayer.As<IQueryable<Player>>().Setup(m => m.GetEnumerator()).Returns(dataPlayer.GetEnumerator());
 
-            context.Setup(c => c.Set<Developer>()).Returns(setDeveloper.Object);
-            context.Setup(c => c.Developers).Returns(setDeveloper.Object);
+            _context.Setup(c => c.Set<Developer>()).Returns(setDeveloper.Object);
+            _context.Setup(c => c.Developers).Returns(setDeveloper.Object);
 
-            context.Setup(c => c.Set<Player>()).Returns(setPlayer.Object);
-            context.Setup(c => c.Players).Returns(setPlayer.Object);
+            _context.Setup(c => c.Set<Player>()).Returns(setPlayer.Object);
+            _context.Setup(c => c.Players).Returns(setPlayer.Object);
         }
 
         [TestMethod]
         public async Task DeveloperServiceSearchWithoutQuery()
         {
-            var developers = new DeveloperService(context.Object);
+            var developers = new DeveloperService(_context.Object);
 
             var result = await developers.Search(null);
 
-            Assert.AreEqual(2, result.Count);
+            Assert.AreEqual(3, result.Count);
         }
 
         [TestMethod]
         public async Task DeveloperServiceSearchWithQuery()
         {
-            var developers = new DeveloperService(context.Object);
+            var developers = new DeveloperService(_context.Object);
 
-            var result = await developers.Search("guilia@db.net");
+            var result = await developers.Search("developer1@test.com");
 
             Assert.AreEqual(1, result.Count);
         }
@@ -69,9 +71,16 @@ namespace Gamedalf.Tests.Services
         [TestMethod]
         public async Task DeveloperServiceConverter()
         {
-            var developers = new DeveloperService(context.Object);
-            Player player  = context.Object.Players.First();
-            
+            var developers = new DeveloperService(_context.Object);
+            var player     = _context.Object.Players.First();
+
+            _context
+                .Setup(c => c.Players.Remove(It.IsAny<Player>()))
+                .Returns((Player p) => p);
+            _context
+                .Setup(c => c.Set<Developer>().Add(It.IsAny<Developer>()))
+                .Returns((Developer d) => d);
+
             var result     = await developers.Convert(player);
 
             Assert.IsNotNull(result);

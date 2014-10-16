@@ -30,7 +30,8 @@ namespace Gamedalf.Services
 
             return await Db.Playings
                 .Where(p =>
-                       p.Player.Email.Contains(q)
+                       p.Game.Title.Contains(q)
+                    || p.Player.Email.Contains(q)
                     || p.Game.Developer.Email.Contains(q)
                     || p.Game.Employee.Email.Contains(q))
                 .Include(p => p.Game).Include(p => p.Player)
@@ -38,7 +39,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Playing>> EvaluatedByMe(string id)
+        public async Task<ICollection<Playing>> EvaluatedByUser(string id)
         {
             return await Db.Playings
                 .Where(p =>
@@ -46,15 +47,15 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Playing>> NotYetEvaluated(string id)
+        public async Task<ICollection<Playing>> NotYetEvaluatedByUser(string id)
         {
             return await Db.Playings
                 .Where(p =>
-                    p.PlayerId == id && p.ReviewDateCreated != null)
+                    p.PlayerId == id && p.ReviewDateCreated == null)
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Playing>> MyPlayings(string id, string q)
+        public async Task<ICollection<Playing>> PlayingDoneByUser(string id, string q)
         {
             if (String.IsNullOrEmpty(q))
             {
@@ -68,7 +69,9 @@ namespace Gamedalf.Services
                 .Where(p =>
                     p.PlayerId == id
                     && (p.Game.Title.Contains(q)
-                    || p.Game.Developer.Email.Contains(q)))
+                    || p.Player.Email.Contains(q)
+                    || p.Game.Developer.Email.Contains(q)
+                    || p.Game.Employee.Email.Contains(q)))
                 .Include(p => p.Player).Include(p => p.Game)
                 .OrderBy(p => p.Id)
                 .ToListAsync();

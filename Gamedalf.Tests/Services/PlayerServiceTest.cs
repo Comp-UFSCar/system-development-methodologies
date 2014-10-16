@@ -15,7 +15,7 @@ namespace Gamedalf.Tests.Services
     [TestClass]
     public class PlayerServiceTest
     {
-        private Mock<ApplicationDbContext> context;
+        private Mock<ApplicationDbContext> _context;
 
         [TestInitialize]
         public void Setup()
@@ -29,27 +29,27 @@ namespace Gamedalf.Tests.Services
             set.As<IQueryable<Player>>().Setup(m => m.ElementType).Returns(data.ElementType);
             set.As<IQueryable<Player>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            context = new Mock<ApplicationDbContext>();
-            context.Setup(c => c.Set<Player>()).Returns(set.Object);
-            context.Setup(c => c.Players).Returns(set.Object);
+            _context = new Mock<ApplicationDbContext>();
+            _context.Setup(c => c.Set<Player>()).Returns(set.Object);
+            _context.Setup(c => c.Players).Returns(set.Object);
         }
 
         [TestMethod]
         public async Task PlayerServiceSearchWithoutQuery()
         {
-            var players = new PlayerService(context.Object);
+            var players = new PlayerService(_context.Object);
 
             var result = await players.Search(null);
 
-            Assert.AreEqual(4, result.Count);
+            Assert.AreEqual(3, result.Count);
         }
 
         [TestMethod]
         public async Task PlayerServiceSearchWithQuery()
         {
-            var players = new PlayerService(context.Object);
+            var players = new PlayerService(_context.Object);
 
-            var result = await players.Search("maria@db.net");
+            var result = await players.Search("player1@test.com");
 
             Assert.AreEqual(1, result.Count);
         }

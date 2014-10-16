@@ -26,7 +26,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public async Task<ICollection<Game>> Recent(int amount)
+        public virtual async Task<ICollection<Game>> Recent(int amount)
         {
             return await Db.Games
                 .OrderByDescending(g => g.DateCreated)

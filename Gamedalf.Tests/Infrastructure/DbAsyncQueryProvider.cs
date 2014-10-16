@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
@@ -84,7 +85,20 @@ namespace Gamedalf.Tests.Infrastructure
 
         public void Dispose()
         {
+            try
+            {
+                _inner.Reset();
+            }
+            catch (NotSupportedException)
+            {
+                //
+            }
+            catch (NotImplementedException)
+            {
+                //
+            }
             _inner.Dispose();
+
         }
 
         public Task<bool> MoveNextAsync(CancellationToken cancellationToken)
