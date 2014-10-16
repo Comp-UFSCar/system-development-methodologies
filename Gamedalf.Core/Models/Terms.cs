@@ -10,6 +10,8 @@ namespace Gamedalf.Core.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        [MinLength(1), MaxLength(100)]
         public string Title { get; set; }
 
         [ScaffoldColumn(false)]

@@ -13,6 +13,14 @@ namespace Gamedalf.Services
     {
         public TermsService(ApplicationDbContext db) : base(db) { }
 
+        public override async Task<ICollection<Terms>> All()
+        {
+            return await Db.Terms
+                .OrderBy(t => t.Title)
+                .ThenByDescending(t => t.DateCreated)
+                .ToListAsync();
+        }
+
         public virtual async Task<ICollection<Terms>> Search(string q)
         {
             if (String.IsNullOrEmpty(q))

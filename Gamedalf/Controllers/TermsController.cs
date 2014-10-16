@@ -78,7 +78,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Terms/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Update(int? id)
         {
             if (id == null)
             {
@@ -89,19 +89,23 @@ namespace Gamedalf.Controllers
             {
                 return HttpNotFound();
             }
-            return View(terms);
+            return View(new TermsEditViewModel
+            {
+                Id      = terms.Id,
+                Title   = terms.Title,
+                Content = terms.Content
+            });
         }
 
         // POST: Terms/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(TermsEditViewModel model)
+        public async Task<ActionResult> Update(TermsEditViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var terms = await _terms.Find(model.Id);
 
-                terms.Title      = model.Title;
                 terms.Content    = model.Content;
                 terms.EmployeeId = User.Identity.GetUserId();
 
