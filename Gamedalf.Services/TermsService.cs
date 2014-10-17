@@ -52,5 +52,19 @@ namespace Gamedalf.Services
                 .Where(t => t.DateCreated < date)
                 .First();
         }
+
+        public virtual async Task<bool> Exists(int id)
+        {
+            return await Db.Terms
+                .Where(t => t.Id == id)
+                .AnyAsync();
+        }
+
+        public virtual async Task<bool> Exists(string title)
+        {
+            return await Db.Terms
+                .Where(t => t.Title == title)
+                .AnyAsync();
+        }
     }
 }
