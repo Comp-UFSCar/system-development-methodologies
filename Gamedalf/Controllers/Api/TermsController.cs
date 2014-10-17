@@ -11,24 +11,30 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
+using Gamedalf.Services;
 
 namespace Gamedalf.Controllers.Api
 {
     public class TermsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly TermsService _terms;
+
+        public TermsController(TermsService terms)
+        {
+            _terms = terms;
+        }
 
         // GET: api/Terms
-        public IQueryable<Terms> GetTerms()
+        public async Task<ICollection<Terms>> GetTerms()
         {
-            return db.Terms;
+            return await _terms.All();
         }
 
         // GET: api/Terms/5
         [ResponseType(typeof(Terms))]
         public async Task<IHttpActionResult> GetTerms(int id)
         {
-            Terms terms = await db.Terms.FindAsync(id);
+            Terms terms = await _terms.Find(id);
             if (terms == null)
             {
                 return NotFound();
@@ -37,68 +43,14 @@ namespace Gamedalf.Controllers.Api
             return Ok(terms);
         }
 
-        // PUT: api/Terms/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTerms(int id, Terms terms)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != terms.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(terms).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TermsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Terms
         [ResponseType(typeof(Terms))]
-        public async Task<IHttpActionResult> PostTerms(Terms terms)
+        public async Task<IHttpActionResult> GetTerms(string title)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Terms.Add(terms);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = terms.Id }, terms);
-        }
-
-        // DELETE: api/Terms/5
-        [ResponseType(typeof(Terms))]
-        public async Task<IHttpActionResult> DeleteTerms(int id)
-        {
-            Terms terms = await db.Terms.FindAsync(id);
+            var terms = await _terms.Latest(title);
             if (terms == null)
             {
                 return NotFound();
             }
-
-            db.Terms.Remove(terms);
-            await db.SaveChangesAsync();
 
             return Ok(terms);
         }
@@ -107,14 +59,14 @@ namespace Gamedalf.Controllers.Api
         {
             if (disposing)
             {
-                db.Dispose();
+                _terms.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool TermsExists(int id)
+        private async Task<bool> TermsExists(int id)
         {
-            return db.Terms.Count(e => e.Id == id) > 0;
+            return await _terms.Exists(id);
         }
     }
 }
