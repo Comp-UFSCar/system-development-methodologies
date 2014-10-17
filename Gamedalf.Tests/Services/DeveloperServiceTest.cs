@@ -5,6 +5,7 @@ using Gamedalf.Tests.Infrastructure;
 using Gamedalf.Tests.Testdata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -70,18 +71,21 @@ namespace Gamedalf.Tests.Services
         public async Task DeveloperServiceConverter()
         {
             var developers = new DeveloperService(_context.Object);
-            var player     = _context.Object.Players.First();
 
-            _context
-                .Setup(c => c.Players.Remove(It.IsAny<Player>()))
-                .Returns((Player p) => p);
             _context
                 .Setup(c => c.Set<Developer>().Add(It.IsAny<Developer>()))
                 .Returns((Developer d) => d);
 
-            var result     = await developers.Convert(player);
+            var developer = new Developer
+            {
+                Id = "player2",
+                DateConverted = DateTime.Now
+            };
+
+            var result    = await developers.Convert(developer.Id);
 
             Assert.IsNotNull(result);
+            Assert.AreEqual("player2", result.Id);
         }
     }
 }

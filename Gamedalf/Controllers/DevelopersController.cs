@@ -19,31 +19,12 @@ namespace Gamedalf.Controllers
     public class DevelopersController : Controller
     {
         private readonly DeveloperService         _developers;
-        private readonly PlayerService            _players;
         private readonly ApplicationUserManager   _userManager;
-        private          ApplicationSignInManager _signInManager;
-        public ApplicationSignInManager           SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set { _signInManager = value; }
-        }
 
-        public DevelopersController(ApplicationUserManager userManager, DeveloperService developers, PlayerService players)
+        public DevelopersController(ApplicationUserManager userManager, DeveloperService developers)
         {
             _userManager = userManager;
             _developers  = developers;
-            _players     = players;
-        }
-
-        public DevelopersController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, DeveloperService developers, PlayerService _players)
-        {
-            _userManager   = userManager;
-            SignInManager = signInManager;
-            this._developers    = developers;
-            this._players       = _players;
         }
 
         // GET: Developers
@@ -89,7 +70,7 @@ namespace Gamedalf.Controllers
         // GET: Developers/Terms
         public ActionResult Terms()
         {
-            return View(new DeveloperAcceptTermsViewModel
+            return View(new AcceptTermsViewModel
             {
                 AcceptTerms = false,
             });
@@ -100,21 +81,17 @@ namespace Gamedalf.Controllers
         [HttpPost]
         [Authorize(Roles="player")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Become(DeveloperAcceptTermsViewModel model)
+        public async Task<ActionResult> Become(AcceptTermsViewModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            //var player = await _players.Find(User.Identity.GetUserId());
-            //var developer = await _developers.Convert(player);
-            //var result = await _userManager.AddToRoleAsync(developer.Id, "player");
-            //result = await _userManager.AddToRoleAsync(developer.Id, "developer");
+            var developer = await _developers.Convert(User.Identity.GetUserId());
+            var result    = await _userManager.AddToRoleAsync(developer.Id, "developer");
 
-            //return RedirectToAction("Index", "Home");
-
-            throw new NotImplementedException();
+            return RedirectToAction("Details", "Developers", new { id = developer.Id });
         }
 
         private void AddErrors(IdentityResult result)

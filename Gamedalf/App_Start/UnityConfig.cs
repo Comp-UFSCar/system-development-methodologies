@@ -57,8 +57,7 @@ namespace Gamedalf.App_Start
             container.RegisterType<DevelopersController>(
                 new InjectionConstructor(
                     typeof(ApplicationUserManager),
-                    typeof(DeveloperService),
-                    typeof(PlayerService)
+                    typeof(DeveloperService)
                 ));
         }
     }

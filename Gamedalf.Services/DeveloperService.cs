@@ -26,29 +26,15 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public virtual async Task<Developer> Convert(Player player)
+        public virtual async Task<Developer> Convert(string id)
         {
             var developer = new Developer
             {
-                AccessFailedCount = player.AccessFailedCount,
-                DateBirth = player.DateBirth,
-                DateCreated = player.DateCreated,
-                DateUpdated = player.DateUpdated,
-                Email = player.Email,
-                EmailConfirmed = player.EmailConfirmed,
-                Id = player.Id,
-                LockoutEnabled = player.LockoutEnabled,
-                LockoutEndDateUtc = player.LockoutEndDateUtc,
-                PasswordHash = player.PasswordHash,
-                PhoneNumber = player.PhoneNumber,
-                PhoneNumberConfirmed = player.PhoneNumberConfirmed,
-                SecurityStamp = player.SecurityStamp,
-                TwoFactorEnabled = player.TwoFactorEnabled,
-                UserName = player.UserName
+                Id = id,
+                DateConverted = DateTime.Now
             };
 
-            Db.Players.Remove(player);
-            await Add(developer);
+            developer = await Add(developer);
 
             return developer;
         }
