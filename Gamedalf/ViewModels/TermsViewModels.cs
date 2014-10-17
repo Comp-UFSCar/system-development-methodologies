@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Gamedalf.Core.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gamedalf.ViewModels
 {
@@ -22,8 +23,10 @@ namespace Gamedalf.ViewModels
         public string Content { get; set; }
     }
 
-    public class TermsGroupViewModel
+    public class AcceptTermsViewModel
     {
-        //
+        [EnforceTrue]
+        [Display(Name = "I hereby accept the presented terms")]
+        public bool AcceptTerms { get; set; }
     }
 }
