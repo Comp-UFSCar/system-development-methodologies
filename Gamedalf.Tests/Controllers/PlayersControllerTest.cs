@@ -21,7 +21,7 @@ namespace Gamedalf.Tests.Controllers
         [TestInitialize]
         public void Setup()
         {
-            // retrieving test data
+            // retrieving test _data
             _data    = new PlayersTestData().Data;
             _players = new Mock<PlayerService>(null);
         }

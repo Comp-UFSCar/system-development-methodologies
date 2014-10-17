@@ -5,6 +5,8 @@ using Gamedalf.Tests.Infrastructure;
 using Gamedalf.Tests.Testdata;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -16,18 +18,19 @@ namespace Gamedalf.Tests.Services
     public class PlayingServiceTest
     {
         private Mock<ApplicationDbContext> _context;
+        private IQueryable<Playing> _data;
 
         [TestInitialize]
         public void Setup()
         {
-            var data = new PlayingTestData().Data.AsQueryable();
+            _data = new PlayingTestData().Data.AsQueryable();
 
             var set = new Mock<DbSet<Playing>>() { CallBase = true };
-            set.As<IDbAsyncEnumerable<Playing>>().Setup(m => m.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<Playing>(data.GetEnumerator()));
-            set.As<IQueryable<Playing>>().Setup(m => m.Provider).Returns(new TestDbAsyncQueryProvider<Playing>(data.Provider));
-            set.As<IQueryable<Playing>>().Setup(m => m.Expression).Returns(data.Expression);
-            set.As<IQueryable<Playing>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            set.As<IQueryable<Playing>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            set.As<IDbAsyncEnumerable<Playing>>().Setup(m => m.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<Playing>(_data.GetEnumerator()));
+            set.As<IQueryable<Playing>>().Setup(m => m.Provider).Returns(new TestDbAsyncQueryProvider<Playing>(_data.Provider));
+            set.As<IQueryable<Playing>>().Setup(m => m.Expression).Returns(_data.Expression);
+            set.As<IQueryable<Playing>>().Setup(m => m.ElementType).Returns(_data.ElementType);
+            set.As<IQueryable<Playing>>().Setup(m => m.GetEnumerator()).Returns(_data.GetEnumerator());
 
             _context = new Mock<ApplicationDbContext>();
             _context.Setup(c => c.Set<Playing>()).Returns(set.Object);
@@ -154,6 +157,29 @@ namespace Gamedalf.Tests.Services
             var result = await playings.PlayingDoneByUser("player1", "employee1");
 
             Assert.AreEqual(1, result.Count);
+        }
+
+        [TestMethod]
+        public async Task PlayingServiceEvaluate()
+        {
+            _context
+                .Setup(c => c.SaveChangesAsync())
+                .ReturnsAsync(1);
+
+            var service = new PlayingService(_context.Object);
+
+            var evaluation = new Playing
+            {
+                Id = 2,
+                Review = "review1",
+                Score = 1,
+                ReviewDateCreated = DateTime.Now
+            };
+
+            var result = await service.Evaluate(evaluation);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(evaluation.ReviewDateCreated, result.ReviewDateCreated);
         }
     }
 }

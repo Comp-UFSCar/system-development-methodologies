@@ -152,7 +152,7 @@
   <ItemGroup>
     <Compile Include="Controllers\PlayersControllerTest.cs" />
     <Compile Include="Controllers\EmployeesControllerTest.cs" />
-    <Compile Include="Controllers\DeveloperControllerTest.cs" />
+    <Compile Include="Controllers\DevelopersControllerTest.cs" />
     <Compile Include="Controllers\PlayingControllerTest.cs" />
     <Compile Include="Controllers\TermsControllerTest.cs" />
     <Compile Include="Infrastructure\DbAsyncQueryProvider.cs" />

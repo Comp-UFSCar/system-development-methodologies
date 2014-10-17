@@ -24,7 +24,7 @@ namespace Gamedalf.Tests.Controllers
         [TestInitialize]
         public void Setup()
         {
-            // retrieving test data
+            // retrieving test _data
             _data      = new EmployeesTestData().Data;
             _employees = new Mock<EmployeeService>(null);
         }
