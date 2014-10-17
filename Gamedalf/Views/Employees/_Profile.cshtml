@@ -39,5 +39,13 @@
         <p>
             @Html.DisplayFor(m => Model.SSN)
         </p>
+
+        @if (User.IsInRole("admin"))
+        {
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            </p>
+        }
     </div>
 </div>

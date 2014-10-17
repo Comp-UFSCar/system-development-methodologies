@@ -10,19 +10,31 @@
         <p>
             Do you have a <strong>good</strong> game? Want to <strong>share it</strong> with the community or <strong>make some profit</strong> with it?
         </p>
-        <p>
-            @if (User.IsInRole("player"))
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <p>
+                According with our infinitly smart database, we have no idea who you are! In order to registry your games, you must first
+                sign up in the system.
+            </p>
+            <p>
+                <a href="@Url.Action("Register", "Players")" class="btn btn-primary">Sign up</a>
+            </p>
+        }
+        else if (User.IsInRole("player"))
+        {
+            if (User.IsInRole("developer"))
             {
-                if (User.IsInRole("developer"))
-                {
-                    <a href="@Url.Action("Become", "Developers")" class="btn btn-primary">Start a successful game franchise!</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("Become", "Developers")" class="btn btn-primary">Become a developer right now</a>
-                }
+                <p>
+                    <a href="@Url.Action("Become", "Developers")" class="btn btn-primary">Start a successful game and dominate the world!</a>
+                </p>
             }
-        </p>
+            else
+            {
+                <p>
+                    <a href="@Url.Action("Become", "Developers")" class="btn btn-primary">Become a developer right now</a>
+                </p>
+            }
+        }
     </div>
     <div class="col-md-4">
         <img src="@Url.Content("~/Images/change.jpg")" alt="Game picture" class="img-rounded img-responsive">

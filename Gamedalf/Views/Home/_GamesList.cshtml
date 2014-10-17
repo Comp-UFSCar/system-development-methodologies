@@ -7,49 +7,54 @@
 <div class="row">
     @foreach (var game in Model)
     {
-        <div class="col-md-4">
-            <div class="col-sm-4">
-                <img src="@Url.Content("~/Images/game-picture.min.jpg")" alt="Game picture" class="img-rounded img-responsive">
-            </div>
-            <div class="col-sm-8">
-                <h2>
-                    <a href="@Url.Action("Details", "Games", new { Id = game.Id })">
-                        @game.Title
-                    </a>
-                </h2>
-                <p>
-                    @{
-                        var average = game.Playings.Average(p => p.Score);
-                    }
-                    
-                    @if (average != null)
-                    {
-                        <span class="label label-info" title="@average is the average score given by the players.">
-                            @for (var i = 0; i < average; i++)
-                            {
-                                <span class="glyphicon glyphicon-star"></span>
-                            }
-                        </span>
-                        @:&nbsp;
+        <div class="col-md-4 col-sm-6">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="@Url.Content("~/Images/game-picture.min.jpg")" alt="Game picture" class="img-rounded img-responsive">
+                </div>
+                <div class="col-sm-8">
+                    <h2>
+                        <a href="@Url.Action("Details", "Games", new { Id = game.Id })">
+                            @game.Title
+                        </a>
+                    </h2>
+                    <p>
+                        @{
+        var average = game.Playings.Average(p => p.Score);
+                        }
+
+                        @if (average != null)
+                        {
+                            <span class="label label-info" title="@average is the average score given by the players.">
+                                @for (var i = 0; i < average; i++)
+                                {
+                                    <span class="glyphicon glyphicon-star"></span>
+                                }
+                            </span>
+                            @:&nbsp;
                     }
 
-                    @if (game.Playings.Count > 0)
-                    {
-                        if (game.Playings.Count == 1)
+                        @if (game.Playings.Count > 0)
                         {
-                            
-                            <span class="label label-default">
-                                A person is playing!
-                            </span>
+                            if (game.Playings.Count == 1)
+                            {
+
+                                <span class="label label-default">
+                                    A person is playing!
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="label label-default">
+                                    @game.Playings.Count people are playing!
+                                </span>
+                            }
                         }
-                        else
-                        {
-                            <span class="label label-default">
-                                @game.Playings.Count people are playing!
-                            </span>
-                        }
-                    }
-                </p>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <br />
             </div>
         </div>
     }

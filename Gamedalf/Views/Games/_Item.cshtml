@@ -26,51 +26,50 @@
             }
             <span class="label label-default">@Model.Playings.Count are playing this.</span>
         </p>
+
         @if (average != null)
         {
             <p>
                 <span class="label label-default">Average: @average / 5</span>
             </p>
         }
-        <p>
-            @if (User.IsInRole("employee") || Model.DeveloperId == User.Identity.GetUserId())
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })@:&nbsp;@Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
-            }
 
-            @if (!User.Identity.IsAuthenticated)
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <p>
+                <a href="@Url.Action("Login", "Account")">Sign in</a> to play this game!
+            </p>
+        }
+        else
+        {
+            using (Html.BeginForm("Create", "Playing"))
             {
-                <span>
-                    <a href="@Url.Action("Login", "Account")">Sign in</a> to play this game!
-                </span>
-            }
-            else
-            {
-                if (doIPlayIt)
-                {
-                    <a href="#" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-send"></span>
-                        Play
-                    </a>
-                }
-                else
-                {
-                    using (Html.BeginForm("Create", "Playing"))
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(m => m.Id)
+
+                <p>
+                    @if (User.IsInRole("employee") || Model.DeveloperId == User.Identity.GetUserId())
                     {
-                        @Html.AntiForgeryToken()
-                
-                        @Html.HiddenFor(m => m.Id)
-
-                        <div class="btn-group">
-                            <a class="btn btn-primary btn-submitter">
-                                <span class="glyphicon glyphicon-cloud-download"></span>
-                                Download
-                            </a>
-                        </div>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" })@:&nbsp;@Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-default" })
                     }
-                }
-            }
-        </p>
 
+                    @if (doIPlayIt)
+                    {
+                        <a href="#" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-send"></span>
+                            Play
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary btn-submitter">
+                            <span class="glyphicon glyphicon-cloud-download"></span>
+                            Download
+                        </a>
+                    }
+                </p>
+            }
+        }
     </div>
 </div>

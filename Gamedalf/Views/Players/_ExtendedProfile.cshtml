@@ -1,4 +1,5 @@
-﻿@model Player
+﻿@using Microsoft.AspNet.Identity;
+@model Player
 
 @Html.Partial("_Profile", Model)
 
@@ -7,13 +8,18 @@
         <h2>
             <a href="@Url.Action("Index", "Playing")" title="See all games, in deep deep details.">My games</a>
         </h2>
-        
+
         @if (Model.Playing.Count == 0)
         {
-            <span>
-                What!? No games!? Laaaaaaame.
-                Seriously though, just <a href="@Url.Action("Index", "Games")">play some games</a>.
-            </span>
+            <span>What!? No games!? Laaaaaaame.</span>
+            if (Model.Id == User.Identity.GetUserId())
+            {
+                <span>Seriously though, just <a href="@Url.Action("Index", "Games")">play some games</a>.</span>
+            }
+            else
+            {
+                <span>Why don't you <a href="#">suggest</a> some games to @Model.Email?</span>
+            }
         }
 
         @foreach (var playing in Model.Playing)
@@ -24,7 +30,7 @@
                 </a>
             </h4>
             <div>
-                
+
                 <span class="label label-default" title="Started playing on @playing.DateCreated.ToLongDateString()">
                     @playing.DateCreated.ToLongDateString()
                 </span> &nbsp;
