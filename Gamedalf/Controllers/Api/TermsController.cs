@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using Gamedalf.Core.Models;
+using Gamedalf.Services;
+using Gamedalf.ViewModels;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Gamedalf.Core.Data;
-using Gamedalf.Core.Models;
-using Gamedalf.Services;
 
 namespace Gamedalf.Controllers.Api
 {
@@ -24,14 +16,8 @@ namespace Gamedalf.Controllers.Api
             _terms = terms;
         }
 
-        // GET: api/Terms
-        public async Task<ICollection<Terms>> GetTerms()
-        {
-            return await _terms.All();
-        }
-
         // GET: api/Terms/5
-        [ResponseType(typeof(Terms))]
+        [ResponseType(typeof(TermsJsonViewModel))]
         public async Task<IHttpActionResult> GetTerms(int id)
         {
             Terms terms = await _terms.Find(id);
@@ -40,10 +26,16 @@ namespace Gamedalf.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(terms);
+            return Ok(new TermsJsonViewModel
+            {
+                Id = terms.Id,
+                Title = terms.Title,
+                Content = terms.Content,
+                DateCreated = terms.DateCreated
+            });
         }
 
-        [ResponseType(typeof(Terms))]
+        [ResponseType(typeof(TermsJsonViewModel))]
         public async Task<IHttpActionResult> GetTerms(string title)
         {
             var terms = await _terms.Latest(title);
@@ -52,7 +44,12 @@ namespace Gamedalf.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(terms);
+            return Ok(new TermsJsonViewModel {
+                Id          = terms.Id,
+                Title       = terms.Title,
+                Content     = terms.Content,
+                DateCreated = terms.DateCreated
+            });
         }
 
         protected override void Dispose(bool disposing)
