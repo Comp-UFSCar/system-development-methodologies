@@ -7,18 +7,19 @@
     @Scripts.Render("~/Scripts/app/ajax/terms.js")
 }
 
-<h2>
-    Read the terms carefully.
-</h2>
+<div id="terms-error" class="hidden">
+    @Html.Partial("_Error", new HandleErrorInfo(new ApplicationException(), "Developers", "Terms"))
+</div>
 
-@using (Html.BeginForm())
+<div id="terms-container">
+    <h2 id="terms-title">Terms and Conditions: </h2>
+    <p id="terms-dateCreated"></p>
+    <samp id="terms-content" style="white-space: pre-line"></samp>
+</div>
+
+@using (Html.BeginForm("Become", "Developers", FormMethod.Post, new { id = "terms-form", @class = "hidden" }))
 {
     @Html.AntiForgeryToken()
-    
-    <p id="terms-content" data-resource="Developers">
-        
-    </p>
-
     <div class="checkbox">
         <label>
             @Html.CheckBoxFor(m => m.AcceptTerms, new { @class = "btn btn-default" })
