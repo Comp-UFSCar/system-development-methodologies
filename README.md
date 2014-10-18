@@ -13,5 +13,4 @@ Use the [milestones](https://github.com/lucasdavid/Gamedalf/milestones) to see a
 
 ## Test
 
-All test were kept in a single Class Library called [Gamedalf.Tests](https://github.com/lucasdavid/Gamedalf/tree/master/Gamedalf.Tests). Units being tested are the [Controllers](https://github.com/lucasdavid/Gamedalf/tree/master/Gamedalf.Tests/Controllers) and the [Services](https://github.com/lucasdavid/Gamedalf/tree/master/Gamedalf.Tests/Services).
-
+All tests were kept in a single Class Library called [Gamedalf.Tests](https://github.com/lucasdavid/Gamedalf/tree/master/Gamedalf.Tests). They all follow the <a href="http://c2.com/cgi/wiki?ArrangeActAssert">Arrange-Act-Assert</a> pattern. Units being tested are the [Controllers](https://github.com/lucasdavid/Gamedalf/tree/master/Gamedalf.Tests/Controllers) and the [Services](https://github.com/lucasdavid/Gamedalf/tree/master/Gamedalf.Tests/Services). The library <a href="https://github.com/Moq/moq4/">Moq</a> was used for mocking.
