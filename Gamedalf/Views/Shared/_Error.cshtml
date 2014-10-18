@@ -1,0 +1,34 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+<div class="row">
+    <div class="col-md-2">
+        <img src="@Url.Content("~/Images/confused.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+    </div>
+    <div class="col-md-10">
+        <h1 class="text-danger">Error</h1>
+        <h2>
+            An error has occurred while processing your request at <code>@Model.ControllerName/@Model.ActionName</code>.
+            <small>@Model.Exception.ToString()</small>
+        </h2>
+
+        <h3>What to do?</h3>
+        <h4>I'm a contributor/programmer/entusiast or I just have a good heart</h4>
+        <p>
+            Go to the <a href="https://github.com/lucasdavid/Gamedalf/issues" target="_blank">issues page</a> look up if someone has be..
+            // todo
+        </p>
+        <h4>I'm just a player/developer</h4>
+        <p>
+            Maybe you can go back to the <a href="@Url.Action("Index", "Home")">main page</a> and try to forget this happened..?
+        </p>
+        <p>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary"
+               title="Go to the main page">
+                <span class="glyphicon glyphicon-home"></span>
+                Go home, server. You're drunk.
+            </a>
+        </p>
+        
+    </div>
+</div>
+

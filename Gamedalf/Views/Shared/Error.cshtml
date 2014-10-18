@@ -1,27 +1,7 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "Error:" + Model.Exception.ToString();
 }
 
-<div class="row">
-    <div class="col-md-2">
-        <img src="@Url.Content("~/Images/confused.jpg")" alt="Profile picture" class="img-rounded img-responsive">
-    </div>
-    <div class="col-md-10">
-        <h1 class="text-danger">
-            Error
-        </h1>
-        <h2>An error occurred while processing your request.</h2>        
-        <p>
-            Maybe you can go back to the <a href="@Url.Action("Index", "Home")">main page</a> and try to forget this happened..?
-        </p>
-        <p>
-            <a href="@Url.Action("Index", "Home")" class="btn btn-primary"
-               title="Go to the main page">
-                <span class="glyphicon glyphicon-home"></span>
-                Go home, server. You're drunk.
-            </a>
-        </p>
-    </div>
-</div>
+@Html.Partial("_Error", Model)
