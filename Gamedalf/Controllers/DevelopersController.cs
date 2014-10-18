@@ -68,6 +68,7 @@ namespace Gamedalf.Controllers
 
         //
         // GET: Developers/Terms
+        [Authorize(Roles = "player")]
         public ActionResult Terms()
         {
             return View(new AcceptTermsViewModel
@@ -85,7 +86,7 @@ namespace Gamedalf.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Terms", model);
             }
 
             var developer = await _developers.Convert(User.Identity.GetUserId());
