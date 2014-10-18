@@ -1,19 +1,17 @@
-using System;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
-using System.Data.Entity;
-using Gamedalf.Core.Data;
-using Microsoft.AspNet.Identity;
-using Gamedalf.Core.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Gamedalf.Controllers;
+using Gamedalf.Core.Data;
+using Gamedalf.Core.Models;
 using Gamedalf.Services;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Practices.Unity;
+using System;
+using System.Data.Entity;
+using System.Web.Http;
+using Unity.WebApi;
 
 namespace Gamedalf.App_Start
 {
-    /// <summary>
-    /// Specifies the Unity configuration for the main container.
-    /// </summary>
     public class UnityConfig
     {
         #region Unity Container
@@ -57,6 +55,18 @@ namespace Gamedalf.App_Start
                     typeof(ApplicationUserManager),
                     typeof(DeveloperService)
                 ));
+        }
+
+        public static void RegisterComponents()
+        {
+			var container = new UnityContainer();
+            
+            // register all your components with the container here
+            // it is NOT necessary to register your controllers
+            
+            // e.g. container.RegisterType<ITestService, TestService>();
+            
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }
 }
