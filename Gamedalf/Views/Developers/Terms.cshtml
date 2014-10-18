@@ -1,4 +1,6 @@
-﻿@model AcceptTermsViewModel
+﻿@using System.IdentityModel
+
+@model AcceptTermsViewModel
 @{
     ViewBag.Title = "Become a developer";
 }
@@ -8,11 +10,15 @@
 }
 
 <div id="terms-error" class="hidden">
-    @Html.Partial("_Error", new HandleErrorInfo(new ApplicationException(), "Developers", "Terms"))
+    @Html.Partial("_Error", new HandleErrorInfo(new RequestFailedException("api/terms seems to be unavaiable."), "Developers", "Terms"))
 </div>
 
 <div id="terms-container">
-    <h2 id="terms-title">Terms and Conditions: </h2>
+    <h1>Terms and Conditions</h1>
+    <div id="terms-loading">
+        <h2>Loading&hellip;</h2>
+    </div>
+    <h2 id="terms-title"></h2>
     <p id="terms-dateCreated"></p>
     <samp id="terms-content" style="white-space: pre-line"></samp>
 </div>

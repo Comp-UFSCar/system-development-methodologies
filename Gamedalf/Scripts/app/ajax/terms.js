@@ -1,32 +1,61 @@
-﻿(function () {
+﻿(function ($) {
 
-    // hides out confirm button
-    document.getElementById('btn-confirm').style.display = 'none';
-
-    console.log(document.getElementById('btn-confirm').style.display);
-
-    var $content,
-        $confirm;
+    var $container,
+        $loading,
+        $title,
+        $dateCreated,
+        $content,
+        $form,
+        $error;
 
     function load() {
+        console.log("Loading Developers terms and conditions...");
         $.ajax({
-            url: '/api/Terms/Developers',
+            url: '/api/Terms?title=Developers',
             type: 'GET',
         })
-        .done(function (data) {
-            $content.append(data);
+        .always(function () {
+            $loading.hide();
+        })
+        .done(function (terms) {
+            console     .log("Load successful.");
+            
+            $title      .append(terms.Title);
+            $dateCreated.append(terms.DateCreated);
+            $content    .append(terms.Content);
+
+            $container
+                .hide().removeClass("hidden")
+                .fadeIn(500);
+
+            $form
+                .hide().removeClass("hidden")
+                .fadeIn(500);
         })
         .fail(function (data) {
-            $content.html(data);
-            //$confirm.fadeOut(500);
+            console.log("Load unsuccessful. Server's answer: ");
+            console.log(data);
+
+            $container.hide();
+
+            $error
+                .hide().removeClass("hidden")
+                .fadeIn(500);
         });
 
         return false;
     }
 
     $(document).ready(function () {
-        $content = $('#terms-content');
-        $confirm = $('#btn-confirm');
+        $container   = $('#terms-container');
+        $loading     = $('#terms-loading');
+        $title       = $('#terms-title');
+        $dateCreated = $('#terms-dateCreated');
+        $content     = $('#terms-content');
+
+        $form    = $('#terms-form');
+        $error   = $('#terms-error');
+
         load();
     });
-}());
+}(window.jQuery));

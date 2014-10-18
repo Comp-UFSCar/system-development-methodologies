@@ -1,25 +1,37 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 <div class="row">
-    <div class="col-md-2">
-        <img src="@Url.Content("~/Images/confused.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+    <div class="col-md-4 col-sm-2">
+        <center>
+            <img src="@Url.Content("~/Images/confused.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+        </center>
     </div>
-    <div class="col-md-10">
-        <h1 class="text-danger">Error</h1>
-        <h2>
+    <div class="col-md-8 col-sm-10">
+        <h1>
+            <span class="text-danger">Oh no!</span>
             An error has occurred while processing your request at <code>@Model.ControllerName/@Model.ActionName</code>.
+            <br />
             <small>@Model.Exception.ToString()</small>
-        </h2>
+        </h1>
 
+        <br />
         <h3>What to do?</h3>
-        <h4>I'm a contributor/programmer/entusiast or I just have a good heart</h4>
+        <h4>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            I'm a contributor/programmer/entusiast or I just have a good heart
+        </h4>
         <p>
-            Go to the <a href="https://github.com/lucasdavid/Gamedalf/issues" target="_blank">issues page</a> look up if someone has be..
-            // todo
+            Go to the <a href="https://github.com/lucasdavid/Gamedalf/issues" target="_blank">issues page</a> and search if other people
+            are having the same issue. If yes, you can contribute with the discussion in the issue description. If not,
+            <a href="https://github.com/lucasdavid/Gamedalf/issues/new" target="_blank">submit a new issue</a>
+            informing your problem (you must have a valid Github account).
         </p>
-        <h4>I'm just a player/developer</h4>
+        <h4>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            I'm just a player/developer
+        </h4>
         <p>
-            Maybe you can go back to the <a href="@Url.Action("Index", "Home")">main page</a> and try to forget this happened..?
+            Maybe you could go to the <a href="@Url.Action("Index", "Home")">main page</a> and try to forget this happened..?
         </p>
         <p>
             <a href="@Url.Action("Index", "Home")" class="btn btn-primary"
@@ -28,7 +40,6 @@
                 Go home, server. You're drunk.
             </a>
         </p>
-        
     </div>
 </div>
 
