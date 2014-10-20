@@ -2,3 +2,31 @@
 
 @Html.Partial("_Item", Model)
 
+@if (Model.Playings.Any())
+{
+    <h2>Reviews</h2>
+
+    foreach (var evaluation in Model.Playings.Where(p => p.IsEvaluated))
+    {
+        <div class="row">
+            <div class="col-sm-2">
+                <img src="@Url.Content("~/Images/player-profile-picture.min.jpg")" alt="Profile picture" class="img-rounded img-responsive">
+            </div>
+            <div class="col-sm-10">
+                <h2>
+                    <a href="@Url.Action("Details", "Players", new { id = evaluation.PlayerId })">@evaluation.Player.Email</a>
+                    <small>
+                        @evaluation.ReviewDateCreated
+                    </small>
+                </h2>
+                <p>
+                    <span class="label label-default">Score: @evaluation.Score / 5</span>
+                </p>
+                <p>
+                    <strong>Me:</strong> "@evaluation.Review"
+                </p>
+            </div>
+        </div>
+
+    }
+}

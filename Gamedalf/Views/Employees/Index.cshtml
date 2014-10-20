@@ -6,7 +6,7 @@
     @Scripts.Render("~/Scripts/app/ajax/search.js")
 }
 
-@(Html.Partial(User.IsInRole("admin") ? "_SearchWithCreate" : "_Search", "/Employees"))
+@(Html.Partial(User.IsInRole("admin") ? "_SearchCreate" : "_Search", "/Employees"))
 
 <div id="list-search">
     @Html.Partial("_List", Model)
