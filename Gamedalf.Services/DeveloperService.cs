@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using Gamedalf.Services.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace Gamedalf.Services
 {
@@ -34,7 +35,35 @@ namespace Gamedalf.Services
                 DateConverted = DateTime.Now
             };
 
-            developer = await Add(developer);
+            try {
+                var result = await Update(developer);
+            }
+            catch (DbEntityValidationException e)
+            {
+                throw e;
+            }
+
+            return developer;
+        }
+
+        public async Task<Developer> Convert(Player player)
+        {
+            var developer = new Developer
+            {
+                Id = player.Id,
+                UserName = player.UserName,
+                DateCreated   = DateTime.Now,
+                DateConverted = DateTime.Now
+            };
+
+            try
+            {
+                var result = await Update(developer);
+            }
+            catch (DbEntityValidationException e)
+            {
+                throw e;
+            }
 
             return developer;
         }

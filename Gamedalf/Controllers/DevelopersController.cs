@@ -18,13 +18,15 @@ namespace Gamedalf.Controllers
 {
     public class DevelopersController : Controller
     {
-        private readonly DeveloperService         _developers;
-        private readonly ApplicationUserManager   _userManager;
+        private readonly ApplicationUserManager _userManager;
+        private readonly DeveloperService _developers;
+        private readonly PlayerService _players;
 
-        public DevelopersController(ApplicationUserManager userManager, DeveloperService developers)
+        public DevelopersController(ApplicationUserManager userManager, DeveloperService developers, PlayerService players)
         {
             _userManager = userManager;
             _developers  = developers;
+            _players = players;
         }
 
         // GET: Developers
@@ -89,7 +91,8 @@ namespace Gamedalf.Controllers
                 return View("Terms", model);
             }
 
-            var developer = await _developers.Convert(User.Identity.GetUserId());
+            var player    = await _players.Find(User.Identity.GetUserId());
+            var developer = await _developers.Convert(player);
             var result    = await _userManager.AddToRoleAsync(developer.Id, "developer");
 
             return RedirectToAction("Details", "Developers", new { id = developer.Id });

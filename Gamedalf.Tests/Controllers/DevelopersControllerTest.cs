@@ -27,7 +27,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public void DevelopersBecome()
         {
-            var controller = new DevelopersController(null, _service.Object);
+            var controller = new DevelopersController(null, _service.Object, null);
 
             var result = controller.Become() as ViewResult;
 
@@ -37,7 +37,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public void DevelopersTerms()
         {
-            var controller = new DevelopersController(null, _service.Object);
+            var controller = new DevelopersController(null, _service.Object, null);
 
             var result = controller.Terms();
 
@@ -51,7 +51,7 @@ namespace Gamedalf.Tests.Controllers
         [TestMethod]
         public async Task DevelopersBecomeDecline()
         {
-            var controller = new DevelopersController(null, _service.Object);
+            var controller = new DevelopersController(null, _service.Object, null);
             controller.ModelState.AddModelError("error1", "error1");
             
             var result = await controller.Become(new AcceptTermsViewModel
@@ -76,7 +76,7 @@ namespace Gamedalf.Tests.Controllers
                 .Returns(identity.Object);
 
             _service
-                .Setup(s => s.Convert(null))
+                .Setup(s => s.Convert(It.IsAny<string>()))
                 .ReturnsAsync(developer);
 
             var userManager = new Mock<ApplicationUserManager>(new Mock<IUserStore<ApplicationUser>>().Object);
@@ -84,7 +84,7 @@ namespace Gamedalf.Tests.Controllers
                 .Setup(u => u.AddToRoleAsync(null, "developer"))
                 .ReturnsAsync(new IdentityResult());
 
-            var controller = new DevelopersController(userManager.Object, _service.Object);
+            var controller = new DevelopersController(userManager.Object, _service.Object, null);
             controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
 
             var result = await controller.Become(new AcceptTermsViewModel
