@@ -342,7 +342,7 @@
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_PagedListPager.cshtml" />
     <Content Include="Views\Shared\_Confirm.cshtml" />
-    <Content Include="Views\Shared\_SearchWithCreate.cshtml" />
+    <Content Include="Views\Shared\_SearchCreate.cshtml" />
     <Content Include="Views\Employees\_ExtendedProfile.cshtml" />
     <Content Include="Views\Players\_ExtendedProfile.cshtml" />
     <Content Include="Views\Players\_List.cshtml" />
@@ -381,6 +381,7 @@
     <Content Include="Views\Terms\_ExtendedItem.cshtml" />
     <Content Include="Views\Playing\Details.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
+    <Content Include="Views\Shared\_EditDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
