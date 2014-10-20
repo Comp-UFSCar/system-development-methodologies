@@ -1,6 +1,12 @@
 ﻿@model String
 
 <div class="form-group text-right">
-    <a href="@Url.Action("Index")" class="btn btn-default">Back</a>
-    <input id="btn-confirm" type="submit" value="@Model" class="btn btn-primary" />
+    <a href="@Url.Action("Index")" class="btn btn-default">
+        <span class="glyphicon glyphicon-arrow-left"></span>
+        back
+    </a>
+    <a id="btn-confirm" href="@Url.Action("Index")" class="btn btn-primary btn-submitter">
+        <span class="glyphicon glyphicon-ok"></span>
+        @Model
+    </a>
 </div>
