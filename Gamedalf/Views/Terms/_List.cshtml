@@ -1,13 +1,33 @@
 ﻿@model IEnumerable<Terms>
 
+@{
+    string title = null;
+}
+
 @Html.Partial("_PagedListPager", Model)
 
-@foreach (var game in Model)
+@foreach (var terms in Model)
 {
-    @Html.Partial("_Item", game)
+    if (terms.Title != title)
+    {
+        title = terms.Title;
+
+        <h2>
+            <span class="glyphicon glyphicon-list-alt"></span>
+            @Html.DisplayFor(m => terms.Title)
+        </h2>
+    }
     <p>
-        @Html.ActionLink("Update", "Update", new { id = game.Id }, new { @class = "btn btn-default" })
-        @Html.ActionLink("Delete", "Delete", new { id = game.Id }, new { @class = "btn btn-default" })
+        Instance <a href="@Url.Action("Details", new { id = terms.Id })">#@terms.Id</a>, proposed by
+        <a href="@Url.Action("Employees", new { id = terms.EmployeeId })">@terms.Employee.Email</a>,
+        @Html.DisplayFor(m => terms.DateCreated)
+
+        <a href="@Url.Action("Update", new { id = terms.Id })" class="btn btn-sm btn-default" title="Update instance #@terms.Id of @terms.Title">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+
+        <a href="@Url.Action("Delete", new { id = terms.Id })" class="btn btn-sm btn-primary" title="Delete instance #@terms.Id of @terms.Title">
+            <span class=" glyphicon glyphicon-remove"></span>
+        </a>
     </p>
-    <br /><br /><br />
 }
