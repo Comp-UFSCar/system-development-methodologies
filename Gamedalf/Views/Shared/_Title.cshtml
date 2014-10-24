@@ -17,13 +17,18 @@
             </button>
             <div class="navbar-brand">
                 <a href="@Url.Action("Index", "Home")">Gamedalf</a>
-                <span class="lead">Gamming plaftform</span>
+                <span class="lead">Gaming plaftform</span>
             </div>
         </div>
 
         <div class="collapse navbar-collapse" id="title-main-menu">
             <ul class="nav navbar-nav navbar-right">
-                @if (Request.IsAuthenticated)
+                @if (!Request.IsAuthenticated)
+                {
+                    <li><a href="/">Home</a></li>
+                    <li>@Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                }
+                else
                 {
                     <li><a href="/">Home</a></li>
                     <li class="dropdown">
@@ -35,15 +40,12 @@
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation">
                                 @{
-                    var controller = "Players";
-                    if (User.IsInRole("Developers"))
-                    {
-                        controller = "Developers";
-                    }
-                    else if (User.IsInRole("employee"))
-                    {
-                        controller = "Employees";
-                    }
+                    var controller = User.IsInRole("developer")
+                                   ? "Developers"
+                                   : User.IsInRole("employee")
+                                       ? "Employees"
+                                       : "Players"
+                                       ;
                                 }
                                 <a role="menuitem" tabindex="-1" href="@Url.Action("Details", controller, new { Id = User.Identity.GetUserId() })">
                                     @User.Identity.GetUserName()
@@ -65,11 +67,6 @@
                             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                         </ul>
                     </li>
-                }
-                else
-                {
-                    <li><a href="/">Home</a></li>
-                    <li>@Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 }
             </ul>
         </div>
