@@ -3,7 +3,6 @@
 @Html.Partial("_GamesList", @Model.Games)
 
 <hr />
-
 <div class="row">
     <div class="col-md-8">
         <h2>Care for some change?</h2>
@@ -17,23 +16,38 @@
                 sign up in the system.
             </p>
             <p>
-                <a href="@Url.Action("Login", "Account")" class="btn btn-primary">Sign in</a>
+                <a href="@Url.Action("Login", "Account")" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    Sign in
+                </a>
             </p>
         }
-        else
+        else if (User.IsInRole("employee"))
         {
-            if (User.IsInRole("developer"))
-            {
-                <p>
-                    <a href="@Url.Action("Create", "Games")" class="btn btn-primary">Start a successful game and dominate the world!</a>
-                </p>
-            }
-            else if (User.IsInRole("player"))
-            {
-                <p>
-                    <a href="@Url.Action("Become", "Players")" class="btn btn-primary">Become a developer right now</a>
-                </p>
-            }
+            <p>
+                <a href="#" class="btn btn-primary disabled">
+                    <span class=" glyphicon glyphicon-ban-circle"></span>
+                    Start a new game (only for developers)
+                </a>
+            </p>
+        }
+        else if (User.IsInRole("developer"))
+        {
+            <p>
+                <a href="@Url.Action("Create", "Games")" class="btn btn-primary">
+                    <span class=" glyphicon glyphicon-tower"></span>
+                    Start a successful game and dominate the world!
+                </a>
+            </p>
+        }
+        else if (User.IsInRole("player"))
+        {
+            <p>
+                <a href="@Url.Action("Become", "Players")" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-flag"></span>
+                    Become a developer right now
+                </a>
+            </p>
         }
     </div>
     <div class="col-md-4">
