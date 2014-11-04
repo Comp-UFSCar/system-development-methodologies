@@ -11,6 +11,10 @@ namespace Gamedalf.Core.Models
         [Key]
         public int Id { get; set; }
 
+        [MinLength(32)]
+        [MaxLength(48)]
+        public string Secret { get; set; }
+
         [Required]
         [MinLength(1)]
         [MaxLength(100)]
@@ -25,11 +29,14 @@ namespace Gamedalf.Core.Models
         [ForeignKey("Employee")]
         public string EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
+        public DateTime? DateValidated { get; set; }
+        
+        public bool Validated { get { return DateValidated != null; } }
 
         [ScaffoldColumn(false)]
         [ForeignKey("Developer")]
         public string DeveloperId { get; set; }
-        public virtual Developer Developer { get; set; }
+        public virtual Player Developer { get; set; }
 
         public virtual ICollection<Playing> Playings { get; set; }
 

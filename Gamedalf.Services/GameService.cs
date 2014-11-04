@@ -33,5 +33,20 @@ namespace Gamedalf.Services
                 .Take(amount)
                 .ToListAsync();
         }
+
+        public virtual async Task<ICollection<Game>> RegisteredByUser(string user, string q)
+        {
+            if (String.IsNullOrEmpty(q))
+            {
+                return await Db.Games
+                    .Where(g => g.DeveloperId == user)
+                    .ToListAsync();
+            }
+
+            return await Db.Games
+                .Where(g => g.DeveloperId == user && g.Title.Contains(q))
+                .OrderBy(g => g.Title)
+                .ToListAsync();
+        }
     }
 }
