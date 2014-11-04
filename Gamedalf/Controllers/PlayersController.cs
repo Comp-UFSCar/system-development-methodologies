@@ -145,8 +145,12 @@ namespace Gamedalf.Controllers
                 return View("Terms", model);
             }
 
-            var developer = await _players.Convert(User.Identity.GetUserId());
-            var result = _userManager.AddToRole(User.Identity.GetUserId(), "developer");
+            var developer  = await _players.Convert(User.Identity.GetUserId());
+            var result     = _userManager.AddToRole(User.Identity.GetUserId(), "developer");
+            var owinAuth   = HttpContext.GetOwinContext().Authentication;
+            var authResult = await owinAuth.AuthenticateAsync(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
+
+            authResult.Identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "developer"));
 
             return RedirectToAction("Details", "Players", new { id = User.Identity.GetUserId() });
         }
