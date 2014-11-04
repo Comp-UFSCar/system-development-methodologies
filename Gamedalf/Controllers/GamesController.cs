@@ -7,6 +7,7 @@ using System.Net;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System;
 
 namespace Gamedalf.Controllers
 {
@@ -25,6 +26,23 @@ namespace Gamedalf.Controllers
             ViewBag.q = q;
 
             var list = (await _games.Search(q))
+                .ToPagedList(page, size);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_List", list);
+            }
+
+            return View(list);
+        }
+        
+        // GET: Games/My
+        [Authorize(Roles = "player")]
+        public async Task<ActionResult> My(string q = null, int page = 1, int size = 10)
+        {
+            ViewBag.q = q;
+
+            var list = (await _games.RegisteredByUser(User.Identity.GetUserId(), q))
                 .ToPagedList(page, size);
 
             if (Request.IsAjaxRequest())
@@ -61,7 +79,7 @@ namespace Gamedalf.Controllers
         // POST: Games/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "developer,admin")]
+        [Authorize(Roles = "developer")]
         public async Task<ActionResult> Create(GameCreateViewModel model)
         {
             if (ModelState.IsValid)
@@ -71,7 +89,8 @@ namespace Gamedalf.Controllers
                      Title = model.Title,
                      Description = model.Description,
                      Price = model.Price,
-                     DeveloperId = User.Identity.GetUserId()
+                     DeveloperId = User.Identity.GetUserId(),
+                     Secret = Guid.NewGuid().ToString()
                 };
                 
                 await _games.Add(game);
