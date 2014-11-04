@@ -145,12 +145,15 @@ namespace Gamedalf.Controllers
                 return View("Terms", model);
             }
 
-            var developer  = await _players.Convert(User.Identity.GetUserId());
-            var result     = _userManager.AddToRole(User.Identity.GetUserId(), "developer");
-            var owinAuth   = HttpContext.GetOwinContext().Authentication;
-            var authResult = await owinAuth.AuthenticateAsync(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
+            var id         = User.Identity.GetUserId();
+            var developer  = await _players.Convert(id);
+            var result     = await _userManager.AddToRoleAsync(id, "developer");
 
-            authResult.Identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, "developer"));
+            var authManager = HttpContext.GetOwinContext().Authentication;
+            authManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            
+            var identity    = await _userManager.CreateIdentityAsync(developer, DefaultAuthenticationTypes.ApplicationCookie);
+            authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
 
             return RedirectToAction("Details", "Players", new { id = User.Identity.GetUserId() });
         }

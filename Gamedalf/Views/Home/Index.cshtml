@@ -28,7 +28,7 @@
                     <a href="@Url.Action("Create", "Games")" class="btn btn-primary">Start a successful game and dominate the world!</a>
                 </p>
             }
-            if (User.IsInRole("player"))
+            else if (User.IsInRole("player"))
             {
                 <p>
                     <a href="@Url.Action("Become", "Players")" class="btn btn-primary">Become a developer right now</a>
