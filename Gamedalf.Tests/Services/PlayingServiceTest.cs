@@ -162,9 +162,15 @@ namespace Gamedalf.Tests.Services
         [TestMethod]
         public async Task PlayingServiceEvaluate()
         {
+            var playing = ((List<Playing>) new PlayingTestData().Data)[1];
+
             _context
                 .Setup(c => c.SaveChangesAsync())
                 .ReturnsAsync(1);
+
+            _context
+                .Setup(c => c.Set<Playing>().FindAsync(It.IsAny<object[]>()))
+                .ReturnsAsync(playing);
 
             var service = new PlayingService(_context.Object);
 
