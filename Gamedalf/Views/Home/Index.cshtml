@@ -20,18 +20,24 @@
                 <a href="@Url.Action("Register", "Players")" class="btn btn-primary">Sign up</a>
             </p>
         }
-        else if (User.IsInRole("player"))
+        else
         {
             if (User.IsInRole("developer"))
             {
                 <p>
-                    <a href="@Url.Action("Become", "Developers")" class="btn btn-primary">Start a successful game and dominate the world!</a>
+                    <a href="@Url.Action("Create", "Games")" class="btn btn-primary">Start a successful game and dominate the world!</a>
                 </p>
             }
-            else
+            if (User.IsInRole("player"))
             {
                 <p>
-                    <a href="@Url.Action("Become", "Developers")" class="btn btn-primary">Become a developer right now</a>
+                    <a href="@Url.Action("Become", "Players")" class="btn btn-primary">Become a developer right now</a>
+                </p>
+            }
+            if (User.IsInRole("employee"))
+            {
+                <p>
+                    You're a employeeeeeeeeeeee! Good for you!
                 </p>
             }
         }
