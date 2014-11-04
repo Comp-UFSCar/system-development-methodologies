@@ -24,12 +24,19 @@
         }
         else if (User.IsInRole("employee"))
         {
-            <p>
-                <a href="#" class="btn btn-primary disabled">
-                    <span class=" glyphicon glyphicon-ban-circle"></span>
-                    Start a new game (only for developers)
-                </a>
-            </p>
+            <div class="alert alert-warning" role="alert">
+                <p>
+                    This section can only be used by regular users, such as <strong>Players</strong> and <strong>Developers</strong>.
+                </p>
+                <p>
+                    <a href="#" class="btn btn-primary disabled">
+                        <span class=" glyphicon glyphicon-ban-circle"></span>
+                        ...
+                    </a>
+                </p>
+            </div>
+
+
         }
         else if (User.IsInRole("developer"))
         {
