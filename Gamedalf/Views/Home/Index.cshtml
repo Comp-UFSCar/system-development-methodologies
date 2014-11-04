@@ -17,7 +17,7 @@
                 sign up in the system.
             </p>
             <p>
-                <a href="@Url.Action("Register", "Players")" class="btn btn-primary">Sign up</a>
+                <a href="@Url.Action("Login", "Account")" class="btn btn-primary">Sign in</a>
             </p>
         }
         else
@@ -32,12 +32,6 @@
             {
                 <p>
                     <a href="@Url.Action("Become", "Players")" class="btn btn-primary">Become a developer right now</a>
-                </p>
-            }
-            if (User.IsInRole("employee"))
-            {
-                <p>
-                    You're a employeeeeeeeeeeee! Good for you!
                 </p>
             }
         }
