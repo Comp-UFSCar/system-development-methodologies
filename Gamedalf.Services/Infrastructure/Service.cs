@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Gamedalf.Core.Data;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using Gamedalf.Core.Data;
-using System.Collections;
 
 namespace Gamedalf.Services.Infrastructure
 {
@@ -55,7 +53,6 @@ namespace Gamedalf.Services.Infrastructure
             Db.Set<TEntity>().Remove(entity);
             return await Db.SaveChangesAsync();
         }
-
         public void Dispose()
         {
             Db.Dispose();

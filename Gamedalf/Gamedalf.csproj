@@ -234,7 +234,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\TermsController.cs" />
-    <Compile Include="Controllers\DevelopersController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -350,7 +349,7 @@
     <Content Include="Views\Players\Details.cshtml" />
     <Content Include="Views\Players\Index.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
-    <Content Include="Views\Developers\Become.cshtml" />
+    <Content Include="Views\Players\Become.cshtml" />
     <Content Include="Views\Games\Create.cshtml" />
     <Content Include="Views\Games\Delete.cshtml" />
     <Content Include="Views\Games\Details.cshtml" />
@@ -359,18 +358,13 @@
     <Content Include="Views\Games\_Item.cshtml" />
     <Content Include="Views\Games\_List.cshtml" />
     <Content Include="Views\Games\_ExtendedItem.cshtml" />
-    <Content Include="Views\Developers\Index.cshtml" />
-    <Content Include="Views\Developers\_List.cshtml" />
     <Content Include="Views\Playing\Index.cshtml" />
     <Content Include="Views\Shared\_NoRecords.cshtml" />
     <Content Include="Views\Playing\_List.cshtml" />
     <Content Include="Views\Playing\_Item.cshtml" />
-    <Content Include="Views\Developers\_Profile.cshtml" />
     <Content Include="Views\Playing\Evaluate.cshtml" />
     <Content Include="Views\Home\_GamesList.cshtml" />
-    <Content Include="Views\Developers\Details.cshtml" />
-    <Content Include="Views\Developers\_ExtendedProfile.cshtml" />
-    <Content Include="Views\Developers\Terms.cshtml" />
+    <Content Include="Views\Players\Terms.cshtml" />
     <Content Include="Views\Terms\Create.cshtml" />
     <Content Include="Views\Terms\Delete.cshtml" />
     <Content Include="Views\Terms\Details.cshtml" />
@@ -382,6 +376,7 @@
     <Content Include="Views\Playing\Details.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\_EditDelete.cshtml" />
+    <Content Include="Views\Games\My.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
