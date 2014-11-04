@@ -114,6 +114,43 @@ namespace Gamedalf.Controllers
             return View(model);
         }
 
+        //
+        // GET: Developers/Register
+        [Authorize(Roles = "player")]
+        public ActionResult Become()
+        {
+            return View();
+        }
+
+        //
+        // GET: Developers/Terms
+        [Authorize(Roles = "player")]
+        public ActionResult Terms()
+        {
+            return View(new AcceptTermsViewModel
+            {
+                AcceptTerms = false,
+            });
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [Authorize(Roles = "player")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Become(AcceptTermsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Terms", model);
+            }
+
+            var developer = await _players.Convert(User.Identity.GetUserId());
+            var result = _userManager.AddToRole(User.Identity.GetUserId(), "developer");
+
+            return RedirectToAction("Details", "Players", new { id = User.Identity.GetUserId() });
+        }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

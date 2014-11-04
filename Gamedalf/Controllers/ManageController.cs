@@ -158,7 +158,10 @@ namespace Gamedalf.Controllers
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            return phoneNumber == null
+                ? View("Error", new HandleErrorInfo(new ApplicationException(), "Manage", "VerifyPhoneNumber"))
+                : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber })
+                ;
         }
 
         //

@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeveloperService.cs" />
     <Compile Include="GameService.cs" />
     <Compile Include="PlayerService.cs" />
     <Compile Include="EmployeeService.cs" />

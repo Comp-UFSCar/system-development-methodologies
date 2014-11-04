@@ -53,5 +53,21 @@ namespace Gamedalf.Tests.Services
 
             Assert.AreEqual(1, result.Count);
         }
+
+        [TestMethod]
+        public async Task PlayerServiceConverter()
+        {
+            // TODO: needs revision
+            var developer = new Player { Id = "player2" };
+            var developers = new PlayerService(_context.Object);
+            _context
+                .Setup(c => c.Players.FindAsync(It.IsAny<string>()))
+                .ReturnsAsync(developer);
+
+            var result = await developers.Convert(developer.Id);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("player2", result.Id);
+        }
     }
 }

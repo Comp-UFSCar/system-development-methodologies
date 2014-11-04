@@ -25,5 +25,13 @@ namespace Gamedalf.Services
                 .OrderBy(e => e.Email)
                 .ToListAsync();
         }
+
+        public virtual async Task<Player> Convert(string id)
+        {
+            var developer = await Db.Players.FindAsync(id);
+            developer.DateConverted = DateTime.Now;
+            await Update(developer);
+            return developer;
+        }
     }
 }

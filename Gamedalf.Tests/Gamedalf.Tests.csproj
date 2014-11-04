@@ -153,7 +153,6 @@
   <ItemGroup>
     <Compile Include="Controllers\PlayersControllerTest.cs" />
     <Compile Include="Controllers\EmployeesControllerTest.cs" />
-    <Compile Include="Controllers\DevelopersControllerTest.cs" />
     <Compile Include="Controllers\PlayingControllerTest.cs" />
     <Compile Include="Controllers\TermsControllerTest.cs" />
     <Compile Include="Infrastructure\DbAsyncQueryProvider.cs" />
@@ -161,7 +160,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Services\EmployeeServiceTest.cs" />
-    <Compile Include="Services\DeveloperServiceTest.cs" />
     <Compile Include="Services\PlayerServiceTest.cs" />
     <Compile Include="Services\PlayingServiceTest.cs" />
     <Compile Include="Testdata\DevelopersTestData.cs" />

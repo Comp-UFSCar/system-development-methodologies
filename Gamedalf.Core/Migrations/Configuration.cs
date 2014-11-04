@@ -97,7 +97,7 @@ namespace Gamedalf.Core.Migrations
             return data;
         }
 
-        private ICollection<Developer> SeedDevelopers(ApplicationDbContext context)
+        private ICollection<Player> SeedDevelopers(ApplicationDbContext context)
         {
             var store = new UserStore<ApplicationUser>(context);
             var manager = new UserManager<ApplicationUser>(store);
@@ -119,7 +119,7 @@ namespace Gamedalf.Core.Migrations
             return data;
         }
 
-        private ICollection<Game> SeedGames(ApplicationDbContext context, ICollection<Developer> developers)
+        private ICollection<Game> SeedGames(ApplicationDbContext context, ICollection<Player> developers)
         {
             var data = new GamesSeedData().Data;
 

@@ -14,7 +14,7 @@ namespace Gamedalf.Tests.Testdata
         {
             try
             {
-                var developers = (List<Developer>) new DevelopersTestData().Data;
+                var developers = (List<Player>) new DevelopersTestData().Data;
                 var employees = (List<Employee>) new EmployeesTestData().Data;
                 Data = new List<Game>
                 {
