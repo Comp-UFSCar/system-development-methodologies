@@ -1,0 +1,42 @@
+﻿@model GameImagesViewModel
+
+@{
+    ViewBag.Title = "Images";
+}
+
+<h2>
+    Upload some images for your game
+</h2>
+
+@using (Html.BeginForm("Images", "Games", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cover, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Cover" id="cover" />
+            @Html.ValidationMessageFor(m => m.Cover, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br /><br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Images, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Images" id="images" multiple="multiple" />
+            @Html.ValidationMessageFor(m => m.Images, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br /><br />
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Reset, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.Reset)
+            @Html.ValidationMessageFor(m => m.Reset, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.Partial("_Confirm", "Upload images")
+}
