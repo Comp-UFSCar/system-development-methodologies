@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\FilesSizeAttribute.cs" />
+    <Compile Include="Attributes\FileSizeAttribute.cs" />
+    <Compile Include="Attributes\FilesTypesAttribute.cs" />
+    <Compile Include="Attributes\FileTypesAttribute.cs" />
     <Compile Include="Migrations\TermsSeedData.cs" />
     <Compile Include="Models\Terms.cs" />
     <Compile Include="Attributes\EnforceTrueAttribute.cs" />

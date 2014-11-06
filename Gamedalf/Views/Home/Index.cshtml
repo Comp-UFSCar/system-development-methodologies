@@ -13,7 +13,7 @@
         {
             <p>
                 According with our infinitly smart database, we have no idea who you are! In order to registry your games, you must first
-                sign up in the system.
+                identify yourself.
             </p>
             <p>
                 <a href="@Url.Action("Login", "Account")" class="btn btn-primary">
@@ -35,8 +35,6 @@
                     </a>
                 </p>
             </div>
-
-
         }
         else if (User.IsInRole("developer"))
         {

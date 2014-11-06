@@ -23,7 +23,8 @@ namespace Gamedalf.Core.Models
 
         public string Description { get; set; }
 
-        public decimal? Price { get; set; }
+        [Range(0d, 100d)]
+        public decimal Price { get; set; }
 
         [ScaffoldColumn(false)]
         [ForeignKey("Employee")]
