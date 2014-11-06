@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System;
+using System.IO;
+using Gamedalf.Infrastructure;
 
 namespace Gamedalf.Controllers
 {
@@ -35,7 +37,7 @@ namespace Gamedalf.Controllers
 
             return View(list);
         }
-        
+
         // GET: Games/My
         [Authorize(Roles = "player")]
         public async Task<ActionResult> My(string q = null, int page = 1, int size = 10)
@@ -64,7 +66,7 @@ namespace Gamedalf.Controllers
             if (game == null)
             {
                 return HttpNotFound();
-            }            
+            }
 
             return View(game);
         }
@@ -86,15 +88,15 @@ namespace Gamedalf.Controllers
             {
                 Game game = new Game
                 {
-                     Title = model.Title,
-                     Description = model.Description,
-                     Price = model.Price,
-                     DeveloperId = User.Identity.GetUserId(),
-                     Secret = Guid.NewGuid().ToString()
+                    Title = model.Title,
+                    Description = model.Description,
+                    Price = model.Price,
+                    DeveloperId = User.Identity.GetUserId(),
+                    Secret = Guid.NewGuid().ToString()
                 };
-                
+
                 await _games.Add(game);
-                return RedirectToAction("Index");
+                return RedirectToAction("Images", new { id = game.Id });
             }
 
             return View(model);
@@ -121,8 +123,8 @@ namespace Gamedalf.Controllers
 
             return View(new GameEditViewModel
             {
-                Id          = game.Id,
-                Title       = game.Title,
+                Id = game.Id,
+                Title = game.Title,
                 Description = game.Description
             });
         }
@@ -143,18 +145,70 @@ namespace Gamedalf.Controllers
                     return new HttpUnauthorizedResult();
                 }
 
-                game.Title       = model.Title;
+                game.Title = model.Title;
                 game.Description = model.Description;
 
-                await  _games.Update(game);
+                await _games.Update(game);
                 return RedirectToAction("Index");
             }
 
             return View(model);
         }
 
+        [Authorize(Roles = "developer,employee,admin")]
+        public async Task<ActionResult> Images(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Game game = await _games.Find(id);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new GameImagesViewModel
+            {
+                Id = game.Id
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "developer,employee")]
+        public async Task<ActionResult> Images(GameImagesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // assert that game sought belongs to the developer manipulating it
+            // or that the loggedin user is an Employee
+            var game = await _games.Find(model.Id);
+            if (game.Developer.Id != User.Identity.GetUserId() && !User.IsInRole("employee"))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            // Instanciates a handler to save all files in the appropriate game's folder
+            try
+            {
+                new GameImagesHandler(model.Id, model.Cover, model.Images, model.Reset)
+                    .SaveAll();
+            }
+            catch (ArgumentException e)
+            {
+                return View("_Error", new HandleErrorInfo(e, "Games", "Images"));
+            }
+
+            // Ok
+            return RedirectToAction("Details", new { id = model.Id });
+        }
+
         // GET: Games/Delete/5
-        [Authorize(Roles="employee,admin")]
+        [Authorize(Roles = "employee,admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
