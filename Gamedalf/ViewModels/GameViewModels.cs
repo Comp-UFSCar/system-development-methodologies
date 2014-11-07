@@ -53,12 +53,12 @@ namespace Gamedalf.ViewModels
         public bool Reset { get; set; }
 
         [FileSize(2097152)]
-        [FileTypes("jpg,jpeg,png")]
+        [FileTypes("jpg")]
         [Display(Name = "Cover picture")]
         public HttpPostedFileBase Cover { get; set; }
 
         [FilesSize(2097152)]
-        [FilesTypes("jpg,jpeg,png")]
+        [FilesTypes("jpg")]
         [Display(Name = "Art gallery pictures")]
         public IEnumerable<HttpPostedFileBase> Images { get; set; }
     }
