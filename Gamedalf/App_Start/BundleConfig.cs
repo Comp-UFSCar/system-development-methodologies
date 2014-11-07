@@ -24,7 +24,8 @@ namespace Gamedalf
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/simplex.css"));
+                      "~/Content/simplex.css",
+                      "~/Content/default.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
