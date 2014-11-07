@@ -57,7 +57,7 @@ namespace Gamedalf.Infrastructure
             // if absolute path exists, returns relative path for the cover
             return File.Exists(gamePath)
                 ? Path.Combine(BasePath, id.ToString(), "cover.jpg")
-                : Path.Combine(BasePath, "game-picture.min.jpg");
+                : Path.Combine(BasePath, "cover.jpg");
         }
 
         public static ICollection<String> ArtImagesOf(int id)
