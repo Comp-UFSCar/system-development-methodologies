@@ -8,6 +8,8 @@ namespace Gamedalf.Infrastructure
 {
     public class GameImagesHandler
     {
+        private const string BasePath = "~/Images/Games";
+
         private int _id;
         private HttpPostedFileBase _cover;
         private IEnumerable<HttpPostedFileBase> _artImages;
@@ -32,8 +34,56 @@ namespace Gamedalf.Infrastructure
             _cover = cover;
             _artImages = artImages;
             _override = @override;
+
+            _directory = Path.Combine(
+                HttpContext.Current.Server.MapPath(BasePath),
+                _id.ToString()
+            );
         }
 
+        /// <summary>
+        /// Returns a game's cover path.
+        /// </summary>
+        /// <param name="id">The id of the game.</param>
+        /// <returns>
+        /// Returns a path for the game's cover image, if the cover exists.
+        /// Otherwise, returns a path for the default cover image.
+        /// </returns>
+        public static String PathForCoverOf(int id)
+        {
+            // translates relative path into absolute
+            var gamePath = Path.Combine(HttpContext.Current.Server.MapPath(BasePath), id.ToString(), "cover.jpg");
+            
+            // if absolute path exists, returns relative path for the cover
+            return File.Exists(gamePath)
+                ? Path.Combine(BasePath, id.ToString(), "cover.jpg")
+                : Path.Combine(BasePath, "game-picture.min.jpg");
+        }
+
+        public static ICollection<String> ArtImagesOf(int id)
+        {
+            var artImages = new List<String>();
+
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(BasePath), id.ToString());
+            var numberOfArtImages = Directory.GetFiles(path).Length - 1;
+
+            for (var image = 0; image < numberOfArtImages; image++)
+            {
+                artImages.Add(ArtImageOf(id, image));
+            }
+
+            return artImages;
+        }
+
+        public static String ArtImageOf(int id, int index)
+        {
+            return Path.Combine(BasePath, id.ToString(), index + ".jpg");
+        }
+
+        /// <summary>
+        /// Save game's cover image inside _directory.
+        /// </summary>
+        /// <returns>The object GameImageHandler that called this method (self).</returns>
         public GameImagesHandler SaveCover()
         {
             var fileName = "cover" + Path.GetExtension(_cover.FileName);
@@ -43,6 +93,10 @@ namespace Gamedalf.Infrastructure
             return this;
         }
 
+        /// <summary>
+        /// Save game's art images inside _directory.
+        /// </summary>
+        /// <returns>The object GameImageHandler that called this method (self).</returns>
         public virtual GameImagesHandler SaveArt()
         {
             if (_artImages != null)
@@ -62,6 +116,10 @@ namespace Gamedalf.Infrastructure
             return this;
         }
 
+        /// <summary>
+        /// Creates (or clean, when _override equals true) directory _directory and saves cover and art images.
+        /// </summary>
+        /// <returns>The object GameImageHandler that called this method (self).</returns>
         public virtual GameImagesHandler SaveAll()
         {
             return SaveDirectory().SaveCover().SaveArt();
@@ -69,8 +127,6 @@ namespace Gamedalf.Infrastructure
 
         protected virtual GameImagesHandler SaveDirectory()
         {
-            _directory = HttpContext.Current.Server.MapPath("~/App_Data/Games/" + _id + "/");
-
             if (Directory.Exists(_directory) && _override)
             {
                 Directory.Delete(_directory, true);
