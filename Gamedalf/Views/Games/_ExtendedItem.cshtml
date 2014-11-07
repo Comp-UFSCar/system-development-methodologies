@@ -1,6 +1,25 @@
-﻿@model Game
+﻿@using Gamedalf.Infrastructure
+
+@model Game
 
 @Html.Partial("_Item", Model)
+
+@{
+    var artImages = GameImagesHandler.ArtImagesOf(Model.Id);
+}
+
+@if (artImages.Any())
+{
+    <h2>Artwork</h2>
+    <div class="row">
+        @foreach (var image in artImages)
+        {
+            <div class="col-md-6 game-artwork">
+                <img src="@Url.Content(image)" alt="Artwork image" class="img-rounded img-responsive">
+            </div>
+        }
+    </div>
+}
 
 @if (Model.Playings.Any())
 {

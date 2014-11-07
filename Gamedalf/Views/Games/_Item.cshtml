@@ -1,5 +1,7 @@
 ﻿@using Microsoft.Ajax.Utilities
 @using Microsoft.AspNet.Identity
+@using Gamedalf.Infrastructure
+
 @model Game
 
 @{
@@ -10,7 +12,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <img src="@Url.Content("~/Images/game-picture.min.jpg")" alt="Game picture" class="img-rounded img-responsive">
+        <img src="@Url.Content(GameImagesHandler.PathForCoverOf(Model.Id))" alt="Game picture" class="img-rounded img-responsive">
     </div>
     <div class="col-sm-10">
         <h2>
