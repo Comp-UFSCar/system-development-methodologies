@@ -47,15 +47,14 @@ namespace Gamedalf
                 RequireUniqueEmail             = true
             };
 
-            // TODO: define correct policy for passwords
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength          = 6,
                 RequireNonLetterOrDigit = false,
-                RequireDigit            = false,
-                RequireLowercase        = false,
-                RequireUppercase        = false,
+                RequireDigit            = true,
+                RequireLowercase        = true,
+                RequireUppercase        = true,
             };
 
             // Configure user lockout defaults
