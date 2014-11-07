@@ -155,7 +155,7 @@ namespace Gamedalf.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "developer,employee,admin")]
+        [Authorize(Roles = "developer,employee")]
         public async Task<ActionResult> Images(int? id)
         {
             if (id == null)
