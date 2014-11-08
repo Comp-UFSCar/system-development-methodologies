@@ -5,6 +5,7 @@ namespace Gamedalf.ViewModels
 {
     public class HomeViewModel
     {
-        public virtual ICollection<Game> Games { get; set; }
+        public virtual ICollection<Game> MostRecent     { get; set; }
+        public virtual ICollection<Game> MostDownloaded { get; set; }
     }
 }

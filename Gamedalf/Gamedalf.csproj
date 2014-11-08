@@ -278,6 +278,7 @@
     <Content Include="Scripts\app\ajax\terms.js" />
     <Content Include="Scripts\app\elements\BtnSubmitter.js" />
     <Content Include="Scripts\app\elements\BtnSkipFalse.js" />
+    <Content Include="Scripts\app\elements\Carousel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -365,7 +366,7 @@
     <Content Include="Views\Playing\_List.cshtml" />
     <Content Include="Views\Playing\_Item.cshtml" />
     <Content Include="Views\Playing\Evaluate.cshtml" />
-    <Content Include="Views\Home\_GamesList.cshtml" />
+    <Content Include="Views\Home\_RecentGamesList.cshtml" />
     <Content Include="Views\Players\Terms.cshtml" />
     <Content Include="Views\Terms\Create.cshtml" />
     <Content Include="Views\Terms\Delete.cshtml" />

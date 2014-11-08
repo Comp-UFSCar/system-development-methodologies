@@ -18,7 +18,8 @@ namespace Gamedalf.Controllers
         {
             return View(new HomeViewModel
             {
-                Games = await _games.Recent(games)
+                MostRecent     = await _games.Recent(games),
+                MostDownloaded = await _games.MostDownloaded(games)
             });
         }
 

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Gamedalf.Core.Data;
+using Gamedalf.Core.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Owin;
-using Gamedalf.Core.Models;
-using Gamedalf.Core.Data;
+using System;
 
 namespace Gamedalf
 {
@@ -34,7 +35,7 @@ namespace Gamedalf
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -54,15 +55,15 @@ namespace Gamedalf
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "283015458562578",
+               appSecret: "33154dbc386266c7cc3aff940738a550");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "369323796302-4supu1lqnscqbavqr27a650kb9gr4e79.apps.googleusercontent.com",
+                ClientSecret = "3Staq3hxuEDHhi4qPqESw1uu"
+            });
         }
     }
 }

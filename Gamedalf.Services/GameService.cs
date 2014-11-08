@@ -34,6 +34,18 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
+        public virtual async Task<ICollection<Game>> MostDownloaded(int amount)
+        {
+            var days = DateTime.Today.AddDays(-7);
+
+            return await Db.Games
+                .OrderByDescending(g =>
+                    g.Playings.Where(p =>
+                        p.DateCreated > days).Count())
+                .Take(amount)
+                .ToListAsync();
+        }
+
         public virtual async Task<ICollection<Game>> RegisteredByUser(string user, string q)
         {
             if (String.IsNullOrEmpty(q))

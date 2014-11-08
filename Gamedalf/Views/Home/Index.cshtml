@@ -1,8 +1,80 @@
-﻿@model HomeViewModel
+﻿@using Gamedalf.Infrastructure
 
-@Html.Partial("_GamesList", @Model.Games)
+@model HomeViewModel
 
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/elements/Carousel.js")
+}
+
+<h2>
+    Most downloaded games
+</h2>
+
+<div id="carousel-most-downloaded" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @for (int i = 0; i < Model.MostDownloaded.Count; i++)
+        {
+            <li data-target="#carousel-most-downloaded" data-slide-to="@i"></li>
+        }
+    </ol>
+
+    <div class="carousel-inner" role="listbox">
+        @foreach (var game in Model.MostDownloaded)
+        {
+            <div class="item">
+                <a href="@Url.Action("Details", "Games", new { id = game.Id })">
+                    <img src="@Url.Content(GameImagesHandler.PathForCoverOf(game.Id))" alt="Artwork image">
+                </a>
+                <div class="carousel-caption">
+                    <h3 class="text-info">@game.Title</h3>
+                    <p>
+                        @{
+            var average = game.Playings.Average(p => p.Score);
+                        }
+
+                        @if (average != null)
+                        {
+                            <span class="label label-info" title="@average is the average score given by the players.">
+                                @for (var score = 0; score < average; score++)
+                                {
+                                    <span class="glyphicon glyphicon-star"></span>
+                                }
+                            </span>
+                            @:&nbsp;
+                    }
+
+                        @if (game.Playings.Count > 0)
+                        {
+                            if (game.Playings.Count == 1)
+                            {
+                                <span class="label label-default">
+                                    A person is playing!
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="label label-default">
+                                    @game.Playings.Count people are playing!
+                                </span>
+                            }
+                        }
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <a class="left carousel-control" href="#carousel-most-downloaded" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-most-downloaded" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 <hr />
+
 <div class="row">
     <div class="col-md-8">
         <h2>Care for some change?</h2>
@@ -59,3 +131,6 @@
         <img src="@Url.Content("~/Images/change.jpg")" alt="Game picture" class="img-rounded img-responsive">
     </div>
 </div>
+<hr />
+
+@Html.Partial("_RecentGamesList", @Model.MostRecent)
