@@ -53,7 +53,7 @@ namespace Gamedalf.Infrastructure
         {
             // translates relative path into absolute
             var gamePath = Path.Combine(HttpContext.Current.Server.MapPath(BasePath), id.ToString(), "cover.jpg");
-            
+
             // if absolute path exists, returns relative path for the cover
             return File.Exists(gamePath)
                 ? Path.Combine(BasePath, id.ToString(), "cover.jpg")
@@ -65,11 +65,15 @@ namespace Gamedalf.Infrastructure
             var artImages = new List<String>();
 
             var path = Path.Combine(HttpContext.Current.Server.MapPath(BasePath), id.ToString());
-            var numberOfArtImages = Directory.GetFiles(path).Length - 1;
-
-            for (var image = 0; image < numberOfArtImages; image++)
+            
+            if (Directory.Exists(path))
             {
-                artImages.Add(ArtImageOf(id, image));
+                var numberOfArtImages = Directory.GetFiles(path).Length - 1;
+
+                for (var image = 0; image < numberOfArtImages; image++)
+                {
+                    artImages.Add(ArtImageOf(id, image));
+                }
             }
 
             return artImages;
