@@ -10,3 +10,4 @@
 /// <reference path="app/ajax/terms.js" />
 /// <reference path="app/elements/btnskipfalse.js" />
 /// <reference path="app/elements/btnsubmitter.js" />
+/// <reference path="app/elements/carousel.js" />

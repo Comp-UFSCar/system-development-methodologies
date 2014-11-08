@@ -1,5 +1,9 @@
 ﻿@model Game
 
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/elements/Carousel.js")
+}
+
 @Html.Partial("_ExtendedItem", Model)
 
 <div class="text-right">
