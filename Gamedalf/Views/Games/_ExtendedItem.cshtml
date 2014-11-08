@@ -21,7 +21,7 @@
     </div>
 }
 
-@if (Model.Playings.Any())
+@if (Model.Playings.Any(p => p.IsEvaluated))
 {
     <h2>Reviews</h2>
 

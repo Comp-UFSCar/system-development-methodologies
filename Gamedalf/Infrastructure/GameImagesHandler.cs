@@ -105,7 +105,7 @@ namespace Gamedalf.Infrastructure
         {
             if (_artImages != null)
             {
-                int index = 0;
+                int index = Directory.GetFiles(_directory).Length - 1;
 
                 foreach (var art in _artImages)
                 {
