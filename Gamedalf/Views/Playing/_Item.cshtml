@@ -25,7 +25,7 @@
                 <span class="label label-default">My score: @Model.Score / 5</span>
                 
                 @{ var average = Model.Game.Playings.Average(p => p.Score); }
-                <span class="label label-default">Average: @average / 5</span>
+                <span class="label label-default">Average: @Math.Round((double)average, 1) / 5</span>
             </p>
             <p><strong>Me:</strong> "@Model.Review"
             </p>
@@ -33,8 +33,8 @@
         else
         {
             <a href="@Url.Action("Evaluate", new { Id = Model.Id })" class="btn btn-default">
-                <span class="glyphicon glyphicon-certificate"></span>
-                Tell us about the game!
+                <span class="glyphicon glyphicon-comment"></span>
+                Tell us about this game!
             </a>
         }
     </div>

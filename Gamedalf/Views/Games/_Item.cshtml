@@ -7,7 +7,7 @@
 @{
     var id = User.Identity.GetUserId();
     var doIPlayIt = Model.Playings.Any(p => p.PlayerId == id);
-    var average = Model.Playings.Average(p => p.Score);
+    var average = (int?)Model.Playings.Average(p => p.Score);
 }
 
 <div class="row">
@@ -32,7 +32,12 @@
         @if (average != null)
         {
             <p>
-                <span class="label label-default">Average: @average / 5</span>
+                @Html.Partial("_GameScore", new GameScoreViewModel
+                {
+                    Title       = "Average score",
+                    Description = "is the average score given by players.",
+                    Score       = (int)average
+                })
             </p>
         }
 

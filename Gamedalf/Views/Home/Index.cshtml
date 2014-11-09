@@ -21,6 +21,8 @@
     <div class="carousel-inner" role="listbox">
         @foreach (var game in Model.MostDownloaded)
         {
+            int? average = (int?)game.Playings.Average(p => p.Score);
+
             <div class="item">
                 <a href="@Url.Action("Details", "Games", new { id = game.Id })">
                     <img src="@Url.Content(GameImagesHandler.PathForCoverOf(game.Id))" alt="Artwork image">
@@ -28,20 +30,16 @@
                 <div class="carousel-caption">
                     <h3 class="text-info">@game.Title</h3>
                     <p>
-                        @{
-            var average = game.Playings.Average(p => p.Score);
-                        }
-
                         @if (average != null)
                         {
-                            <span class="label label-info" title="@average is the average score given by the players.">
-                                @for (var score = 0; score < average; score++)
-                                {
-                                    <span class="glyphicon glyphicon-star"></span>
-                                }
-                            </span>
+                            @Html.Partial("_GameScore", new GameScoreViewModel
+                            {
+                                Title = "Average score",
+                                Description = "is the average score given by players.",
+                                Score = (int)average
+                            })
                             @:&nbsp;
-                    }
+                        }
 
                         @if (game.Playings.Count > 0)
                         {

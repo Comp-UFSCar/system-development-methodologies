@@ -62,4 +62,11 @@ namespace Gamedalf.ViewModels
         [Display(Name = "Art gallery pictures")]
         public IEnumerable<HttpPostedFileBase> Images { get; set; }
     }
+
+    public class GameScoreViewModel
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int    Score { get; set; }
+    }
 }

@@ -168,6 +168,13 @@ namespace Gamedalf.Controllers
                 return HttpNotFound();
             }
 
+            // assert that game sought belongs to the developer manipulating it
+            // or that the loggedin user is an Employee
+            if (game.Developer.Id != User.Identity.GetUserId() && !User.IsInRole("employee"))
+            {
+                return new HttpUnauthorizedResult();
+            }
+
             return View(new GameImagesViewModel
             {
                 Id = game.Id

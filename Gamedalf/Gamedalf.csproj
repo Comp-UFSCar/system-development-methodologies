@@ -381,6 +381,7 @@
     <Content Include="Views\Shared\_EditDelete.cshtml" />
     <Content Include="Views\Games\My.cshtml" />
     <Content Include="Views\Games\Images.cshtml" />
+    <Content Include="Views\Shared\_GameScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
