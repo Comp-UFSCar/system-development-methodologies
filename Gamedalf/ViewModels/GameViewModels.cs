@@ -46,7 +46,8 @@ namespace Gamedalf.ViewModels
 
     public class GameImagesViewModel
     {
-        public int Id { get; set; }
+        public int Id       { get; set; }
+        public string Title { get; set; }
 
         [Required]
         [Display(Name = "Override all previous pictures")]

@@ -5,14 +5,14 @@
 @model Game
 
 @{
-    var id = User.Identity.GetUserId();
+    var id        = User.Identity.GetUserId();
     var doIPlayIt = Model.Playings.Any(p => p.PlayerId == id);
-    var average = (int?)Model.Playings.Average(p => p.Score);
+    var average   = (int?)Model.Playings.Average(p => p.Score);
 }
 
 <div class="row">
     <div class="col-sm-2">
-        <img src="@Url.Content(GameImagesHandler.PathForCoverOf(Model.Id))" alt="Game picture" class="img-rounded img-responsive">
+        <img src="@Url.Content(GameImagesHandler.CoverOf(Model.Id))" alt="Game picture" class="img-rounded img-responsive">
     </div>
     <div class="col-sm-10">
         <h2>

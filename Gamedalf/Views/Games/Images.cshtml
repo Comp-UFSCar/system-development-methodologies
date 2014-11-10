@@ -1,41 +1,69 @@
-﻿@model GameImagesViewModel
+﻿@using Gamedalf.Infrastructure
+
+@model GameImagesViewModel
 
 @{
     ViewBag.Title = "Images";
+    var artImages = GameImagesHandler.ArtImagesOf(Model.Id);
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/elements/BtnFileDialog.js")
 }
 
 <h2>
-    Upload some images for your game
+    Upload some images for @Model.Title
 </h2>
 
-@using (Html.BeginForm("Images", "Games", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Images", "Games", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Cover, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="file" name="Cover" id="cover" />
-            @Html.ValidationMessageFor(m => m.Cover, "", new { @class = "text-danger" })
-        </div>
+    <h3>
+        @Html.DisplayNameFor(m => m.Cover)
+    </h3>
+    <img src="@Url.Content(GameImagesHandler.CoverOf(Model.Id))" alt="Game picture" class="img-rounded img-responsive">
+    <br />
+    <div class="btn-file-dialog">
+        <a href="#" class="btn btn-default">
+            <span class="glyphicon glyphicon-upload"></span>
+            Upload new cover picture
+        </a>
+        <input type="file" name="Cover" id="cover" />
     </div>
-    <br /><br />
-    <div class="form-group">
-        @Html.LabelFor(m => m.Images, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <input type="file" name="Images" id="images" multiple="multiple" />
-            @Html.ValidationMessageFor(m => m.Images, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <br /><br />
+
+    @Html.ValidationMessageFor(m => m.Cover, "", new { @class = "text-danger" })
+
+    <h3>
+        @Html.DisplayNameFor(m => m.Images)
+    </h3>
+    <div class="row">
+        @foreach (var artImage in artImages)
+        {
+            <div class="col-sm-3">
+                <img src="@Url.Content(artImage)" alt="Game picture" class="img-rounded img-responsive">
+            </div>
+        }
+    </div><br />
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Reset, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.CheckBoxFor(m => m.Reset)
-            @Html.ValidationMessageFor(m => m.Reset, "", new { @class = "text-danger" })
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-danger" title="Override all artwork. If not set, uploaded images are added to old ones.">
+                @Html.CheckBoxFor(m => m.Reset)
+                <span class="glyphicon glyphicon-fire"></span>
+                Override
+                @Html.ValidationMessageFor(m => m.Reset, "", new { @class = "text-danger" })
+            </label>
         </div>
+        <span class="btn-file-dialog">
+            <a href="#" class="btn btn-default">
+                <span class="glyphicon glyphicon-upload"></span>
+                Upload more artwork
+            </a>
+            <input type="file" name="Images" id="images" multiple="multiple" />
+        </span>
+        @Html.ValidationMessageFor(m => m.Images, "", new { @class = "text-danger" })
     </div>
 
     @Html.Partial("_Confirm", "Upload images")

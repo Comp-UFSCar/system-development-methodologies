@@ -177,7 +177,8 @@ namespace Gamedalf.Controllers
 
             return View(new GameImagesViewModel
             {
-                Id = game.Id
+                Id    = game.Id,
+                Title = game.Title,
             });
         }
 

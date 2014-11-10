@@ -57,17 +57,22 @@ namespace Gamedalf.Tests.Services
         [TestMethod]
         public async Task PlayerServiceConverter()
         {
-            // TODO: needs revision
             var developer = new Player { Id = "player2" };
             var developers = new PlayerService(_context.Object);
             _context
                 .Setup(c => c.Players.FindAsync(It.IsAny<string>()))
                 .ReturnsAsync(developer);
+            _context
+                .SetupSet(c => c.Entry(developer).State = EntityState.Modified);
+            _context
+                .Setup(c => c.SaveChangesAsync())
+                .ReturnsAsync(1);
 
             var result = await developers.Convert(developer.Id);
 
             Assert.IsNotNull(result);
             Assert.AreEqual("player2", result.Id);
+            Assert.IsNotNull(result.DateConverted);
         }
     }
 }

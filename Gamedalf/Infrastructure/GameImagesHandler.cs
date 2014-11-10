@@ -49,7 +49,7 @@ namespace Gamedalf.Infrastructure
         /// Returns a path for the game's cover image, if the cover exists.
         /// Otherwise, returns a path for the default cover image.
         /// </returns>
-        public static String PathForCoverOf(int id)
+        public static String CoverOf(int id)
         {
             // translates relative path into absolute
             var gamePath = Path.Combine(HttpContext.Current.Server.MapPath(BasePath), id.ToString(), "cover.jpg");

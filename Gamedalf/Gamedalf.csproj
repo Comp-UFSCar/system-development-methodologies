@@ -276,6 +276,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\app\ajax\terms.js" />
+    <Content Include="Scripts\app\elements\BtnFileDialog.js" />
     <Content Include="Scripts\app\elements\BtnSubmitter.js" />
     <Content Include="Scripts\app\elements\BtnSkipFalse.js" />
     <Content Include="Scripts\app\elements\Carousel.js" />
@@ -295,7 +296,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -385,6 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Games\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
@@ -399,6 +403,9 @@
       <Project>{2b34338a-015a-4482-ac63-ee66ecb0ab16}</Project>
       <Name>Gamedalf.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
