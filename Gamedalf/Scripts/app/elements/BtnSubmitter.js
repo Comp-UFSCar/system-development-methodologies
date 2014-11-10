@@ -1,8 +1,7 @@
-﻿//
-//
-$(document).ready(function () {
+﻿
+(function ($) {
     $('.btn-submitter').click(function () {
         $(this).parents('form:first').submit();
         return false;
     });
-});
+})(jQuery)
