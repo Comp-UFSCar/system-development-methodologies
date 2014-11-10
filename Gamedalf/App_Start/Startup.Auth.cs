@@ -56,13 +56,13 @@ namespace Gamedalf
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "283015458562578",
-               appSecret: "33154dbc386266c7cc3aff940738a550");
+               appId: "",
+               appSecret: "");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "369323796302-4supu1lqnscqbavqr27a650kb9gr4e79.apps.googleusercontent.com",
-                ClientSecret = "3Staq3hxuEDHhi4qPqESw1uu"
+                ClientId = "",
+                ClientSecret = ""
             });
         }
     }
