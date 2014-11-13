@@ -6,3 +6,8 @@
     margin-bottom:1em;
 }
 
+hr {
+    border:0;
+    background:#efefef;
+    height:3px;
+}

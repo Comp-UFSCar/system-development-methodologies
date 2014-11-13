@@ -9,12 +9,11 @@
 <h2>
     Most downloaded games
 </h2>
-
 <div id="carousel-most-downloaded" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         @for (int i = 0; i < Model.MostDownloaded.Count; i++)
         {
-            <li data-target="#carousel-most-downloaded" data-slide-to="@i"></li>
+        <li data-target="#carousel-most-downloaded" data-slide-to="@i"></li>
         }
     </ol>
 
@@ -23,42 +22,42 @@
         {
             int? average = (int?)game.Playings.Average(p => p.Score);
 
-            <div class="item">
-                <a href="@Url.Action("Details", "Games", new { id = game.Id })">
-                    <img src="@Url.Content(GameImagesHandler.CoverOf(game.Id))" alt="Artwork image">
-                </a>
-                <div class="carousel-caption">
-                    <h3 class="text-info">@game.Title</h3>
-                    <p>
-                        @if (average != null)
+        <div class="item">
+            <a href="@Url.Action("Details", "Games", new { id = game.Id })">
+                <img src="@Url.Content(GameImagesHandler.CoverOf(game.Id))" alt="Artwork image">
+            </a>
+            <div class="carousel-caption">
+                <h3 class="text-info">@game.Title</h3>
+                <p>
+                    @if (average != null)
                         {
-                            @Html.Partial("_GameScore", new GameScoreViewModel
+                    @Html.Partial("_GameScore", new GameScoreViewModel
                             {
                                 Title = "Average score",
                                 Description = "is the average score given by players.",
                                 Score = (int)average
                             })
-                            @:&nbsp;
+                    @:&nbsp;
                         }
 
-                        @if (game.Playings.Count > 0)
+                    @if (game.Playings.Count > 0)
                         {
                             if (game.Playings.Count == 1)
                             {
-                                <span class="label label-default">
-                                    A person is playing!
-                                </span>
+                    <span class="label label-default">
+                        A person is playing!
+                    </span>
                             }
                             else
                             {
-                                <span class="label label-default">
-                                    @game.Playings.Count people are playing!
-                                </span>
+                    <span class="label label-default">
+                        @game.Playings.Count people are playing!
+                    </span>
                             }
                         }
-                    </p>
-                </div>
+                </p>
             </div>
+        </div>
         }
     </div>
 
@@ -71,7 +70,57 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<hr />
+<br /><hr /><br />
+
+<h2>
+    Most recent games
+</h2>
+<div class="row">
+    @foreach (var game in Model.MostRecent)
+    {
+        int? average = (int?)game.Playings.Average(p => p.Score);
+
+    <div class="col-xs-6 col-sm-4">
+        <div class="col-sm-4">
+            <img src="@Url.Content(GameImagesHandler.CoverOf(game.Id))" alt="Game picture" class="img-rounded img-responsive">
+        </div>
+        <div class="col-sm-8">
+            <h2>
+                <a href="@Url.Action("Details", "Games", new { Id = game.Id })">
+                    @game.Title
+                </a>
+            </h2>
+            <p>
+                @if (average != null)
+                    {
+                    @Html.Partial("_GameScore", new GameScoreViewModel
+                            {
+                                Description = "is the average score given by players.",
+                                Score = (int)average
+                            })
+                    }
+
+                @if (game.Playings.Count > 0)
+                    {
+                        if (game.Playings.Count == 1)
+                        {
+                    <span class="label label-default">
+                        A person is playing!
+                    </span>
+                        }
+                        else
+                        {
+                    <span class="label label-default">
+                        @game.Playings.Count people are playing!
+                    </span>
+                        }
+                    }
+            </p>
+        </div>
+    </div>
+    }
+</div>
+<br /><hr /><br />
 
 <div class="row">
     <div class="col-md-8">
@@ -81,54 +130,99 @@
         </p>
         @if (!User.Identity.IsAuthenticated)
         {
-            <p>
-                According with our infinitly smart database, we have no idea who you are! In order to registry your games, you must first
-                identify yourself.
-            </p>
-            <p>
-                <a href="@Url.Action("Login", "Account")" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    Sign in
-                </a>
-            </p>
+        <p>
+            According with our infinitly smart database, we have no idea who you are! In order to registry your games, you must first
+            identify yourself.
+        </p>
+        <p>
+            <a href="@Url.Action("Login", "Account")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Sign in
+            </a>
+        </p>
         }
         else if (User.IsInRole("employee"))
         {
-            <div class="alert alert-warning" role="alert">
-                <p>
-                    This section can only be used by regular users, such as <strong>Players</strong> and <strong>Developers</strong>.
-                </p>
-                <p>
-                    <a href="#" class="btn btn-primary disabled">
-                        <span class=" glyphicon glyphicon-ban-circle"></span>
-                        ...
-                    </a>
-                </p>
-            </div>
+        <div class="alert alert-warning" role="alert">
+            <p>
+                This section can only be used by regular users, such as <strong>Players</strong> and <strong>Developers</strong>.
+            </p>
+            <p>
+                <a href="#" class="btn btn-primary disabled">
+                    <span class=" glyphicon glyphicon-ban-circle"></span>
+                    ...
+                </a>
+            </p>
+        </div>
         }
         else if (User.IsInRole("developer"))
         {
-            <p>
-                <a href="@Url.Action("Create", "Games")" class="btn btn-primary">
-                    <span class=" glyphicon glyphicon-tower"></span>
-                    Start a successful game and dominate the world!
-                </a>
-            </p>
+        <p>
+            <a href="@Url.Action("Create", "Games")" class="btn btn-primary">
+                <span class=" glyphicon glyphicon-tower"></span>
+                Start a successful game and dominate the world!
+            </a>
+        </p>
         }
         else if (User.IsInRole("player"))
         {
-            <p>
-                <a href="@Url.Action("Become", "Players")" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-flag"></span>
-                    Become a developer right now
-                </a>
-            </p>
+        <p>
+            <a href="@Url.Action("Become", "Players")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-flag"></span>
+                Become a developer right now
+            </a>
+        </p>
         }
     </div>
     <div class="col-md-4">
         <img src="@Url.Content("~/Images/change.jpg")" alt="Game picture" class="img-rounded img-responsive">
     </div>
 </div>
-<hr />
+<br /><hr /><br />
 
-@Html.Partial("_RecentGamesList", @Model.MostRecent)
+<div class="row">
+    <div class="col-md-2">
+        <center>
+            <img src="@Url.Content("~/Images/player-profile-picture.min.jpg")" alt="Player's picture" class="img-rounded img-responsive">
+        </center>
+    </div>
+    <div class="col-md-10">
+        <h2>
+            Wanna make some friends?
+        </h2>
+        <p>
+            Take a look at the <a href="@Url.Action("Index", "Employees")">list of players</a> in gamedalf.
+        </p>
+        <p>
+            <a href="@Url.Action("Index", "Players")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-list"></span>
+                Go to the players' list
+            </a>
+        </p>
+    </div>
+</div>
+<br /><hr /><br />
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>
+            Gamedalf's people
+        </h2>
+        <p>
+            Do you want to know Gamedalf's <a href="@Url.Action("Index", "Employees")">staff</a> better?
+            Check out the list of <strong>employees</strong> in Gamedalf. There are the people who keep Gamedalf
+            running by validating games, moderating topics and stuff.
+        </p>
+        <p>
+            <a href="@Url.Action("Index", "Employees")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-list"></span>
+                Go to the employees' list
+            </a>
+        </p>
+    </div>
+    <div class="col-md-2">
+        <center>
+            <img src="@Url.Content("~/Images/employee-profile-picture.min.jpg")" alt="Employee's picture" class="img-rounded img-responsive">
+        </center>
+    </div>
+</div>

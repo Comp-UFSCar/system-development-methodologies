@@ -372,7 +372,6 @@
     <Content Include="Views\Playing\_List.cshtml" />
     <Content Include="Views\Playing\_Item.cshtml" />
     <Content Include="Views\Playing\Evaluate.cshtml" />
-    <Content Include="Views\Home\_RecentGamesList.cshtml" />
     <Content Include="Views\Players\Terms.cshtml" />
     <Content Include="Views\Terms\Create.cshtml" />
     <Content Include="Views\Terms\Delete.cshtml" />
