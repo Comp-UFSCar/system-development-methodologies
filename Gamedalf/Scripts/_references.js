@@ -8,6 +8,7 @@
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="app/ajax/search.js" />
 /// <reference path="app/ajax/terms.js" />
+/// <reference path="app/elements/btnfiledialog.js" />
 /// <reference path="app/elements/btnskipfalse.js" />
 /// <reference path="app/elements/btnsubmitter.js" />
 /// <reference path="app/elements/carousel.js" />

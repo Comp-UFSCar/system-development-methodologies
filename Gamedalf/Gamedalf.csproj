@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -244,7 +245,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\GameImagesHandler.cs" />
+    <Compile Include="Infrastructure\Games\GameBinariesHandler.cs" />
+    <Compile Include="Infrastructure\Games\GameFilesHandler.cs" />
+    <Compile Include="Infrastructure\Games\GameImagesHandler.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -385,10 +388,11 @@
     <Content Include="Views\Games\My.cshtml" />
     <Content Include="Views\Games\Images.cshtml" />
     <Content Include="Views\Shared\_GameScore.cshtml" />
+    <Content Include="Views\Games\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Games\" />
+    <Folder Include="GamesBinaries\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
