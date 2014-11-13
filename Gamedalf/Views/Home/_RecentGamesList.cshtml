@@ -1,4 +1,4 @@
-﻿@using Gamedalf.Infrastructure
+﻿@using Gamedalf.Infrastructure.Games
 
 @model IEnumerable<Game>
 
@@ -11,47 +11,42 @@
     {
         int? average = (int?)game.Playings.Average(p => p.Score);
 
-        <div class="col-md-4 col-sm-6">
-            <div class="row">
-                <div class="col-sm-4">
-                    <img src="@Url.Content(GameImagesHandler.CoverOf(game.Id))" alt="Game picture" class="img-rounded img-responsive">
-                </div>
-                <div class="col-sm-8">
-                    <h2>
-                        <a href="@Url.Action("Details", "Games", new { Id = game.Id })">
-                            @game.Title
-                        </a>
-                    </h2>
-                    <p>
-                        @if (average != null)
-                        {
-                            @Html.Partial("_GameScore", new GameScoreViewModel
+        <div class="col-xs-6 col-sm-4">
+            <div class="col-sm-4">
+                <img src="@Url.Content(GameImagesHandler.CoverOf(game.Id))" alt="Game picture" class="img-rounded img-responsive">
+            </div>
+            <div class="col-sm-8">
+                <h2>
+                    <a href="@Url.Action("Details", "Games", new { Id = game.Id })">
+                        @game.Title
+                    </a>
+                </h2>
+                <p>
+                    @if (average != null)
+                    {
+                        @Html.Partial("_GameScore", new GameScoreViewModel
                             {
                                 Description = "is the average score given by players.",
                                 Score = (int)average
                             })
-                        }
-                        
-                        @if (game.Playings.Count > 0)
+                    }
+
+                    @if (game.Playings.Count > 0)
+                    {
+                        if (game.Playings.Count == 1)
                         {
-                            if (game.Playings.Count == 1)
-                            {
-                                <span class="label label-default">
-                                    A person is playing!
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="label label-default">
-                                    @game.Playings.Count people are playing!
-                                </span>
-                            }
+                            <span class="label label-default">
+                                A person is playing!
+                            </span>
                         }
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <br />
+                        else
+                        {
+                            <span class="label label-default">
+                                @game.Playings.Count people are playing!
+                            </span>
+                        }
+                    }
+                </p>
             </div>
         </div>
     }

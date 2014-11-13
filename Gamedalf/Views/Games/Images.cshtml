@@ -1,9 +1,8 @@
-﻿@using Gamedalf.Infrastructure
-
+﻿@using Gamedalf.Infrastructure.Games
 @model GameImagesViewModel
 
 @{
-    ViewBag.Title = "Images";
+    ViewBag.Title = "Upload images for " + Model.Title;
     var artImages = GameImagesHandler.ArtImagesOf(Model.Id);
 }
 
@@ -50,10 +49,10 @@
     <div class="form-group">
         <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-danger" title="Override all artwork. If not set, uploaded images are added to old ones.">
-                @Html.CheckBoxFor(m => m.Reset)
+                @Html.CheckBoxFor(m => m.Override)
                 <span class="glyphicon glyphicon-fire"></span>
                 Override
-                @Html.ValidationMessageFor(m => m.Reset, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(m => m.Override, "", new { @class = "text-danger" })
             </label>
         </div>
         <span class="btn-file-dialog">

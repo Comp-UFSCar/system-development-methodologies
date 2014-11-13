@@ -1,12 +1,12 @@
 ﻿@using Microsoft.Ajax.Utilities
 @using Microsoft.AspNet.Identity
-@using Gamedalf.Infrastructure
+@using Gamedalf.Infrastructure.Games
 
 @model Game
 
 @{
     var id        = User.Identity.GetUserId();
-    var doIPlayIt = Model.Playings.Any(p => p.PlayerId == id);
+    var doIPlayIt = Model.Playings.FirstOrDefault(p => p.PlayerId == id);
     var average   = (int?)Model.Playings.Average(p => p.Score);
 }
 
@@ -22,7 +22,7 @@
             <small>Game</small>
         </h2>
         <p>
-            @if (doIPlayIt)
+            @if (doIPlayIt != null)
             {
                 <span class="label label-info">@Model.Playings.First(p => p.PlayerId == id).TimePlayed h</span>
             }
@@ -61,9 +61,9 @@
                         @Html.Partial("_EditDelete", Model.Id.ToString())
                     }
 
-                    @if (doIPlayIt)
+                    @if (doIPlayIt != null)
                     {
-                        <a href="#" class="btn btn-primary">
+                        <a href="@Url.Action("Details", "Playing", new { id = doIPlayIt.Id })" class="btn btn-primary">
                             <span class="glyphicon glyphicon-send"></span>
                             Play
                         </a>

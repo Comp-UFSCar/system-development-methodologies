@@ -51,7 +51,7 @@ namespace Gamedalf.ViewModels
 
         [Required]
         [Display(Name = "Override all previous pictures")]
-        public bool Reset { get; set; }
+        public bool Override { get; set; }
 
         [FileSize(2097152)]
         [FileTypes("jpg")]
@@ -62,6 +62,21 @@ namespace Gamedalf.ViewModels
         [FilesTypes("jpg")]
         [Display(Name = "Art gallery pictures")]
         public IEnumerable<HttpPostedFileBase> Images { get; set; }
+    }
+
+    public class GameBinaryViewModel
+    {
+        public int    Id             { get; set; }
+        public string Title          { get; set; }
+
+        [Required]
+        [Display(Name = "Override previous installation file")]
+        public bool Override { get; set; }
+
+        [Required]
+        [FilesTypes("exe,msi")]
+        [Display(Name = "Select binary file")]
+        public HttpPostedFile Binary { get; set; }
     }
 
     public class GameScoreViewModel

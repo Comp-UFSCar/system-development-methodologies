@@ -1,15 +1,13 @@
 ﻿using Gamedalf.Core.Models;
+using Gamedalf.Infrastructure.Games;
 using Gamedalf.Services;
 using Gamedalf.ViewModels;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using System;
 using System.Net;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System;
-using System.IO;
-using Gamedalf.Infrastructure;
 
 namespace Gamedalf.Controllers
 {
@@ -189,7 +187,7 @@ namespace Gamedalf.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Images", model);
             }
 
             // assert that game sought belongs to the developer manipulating it
@@ -203,10 +201,68 @@ namespace Gamedalf.Controllers
             // Instanciates a handler to save all files in the appropriate game's folder
             try
             {
-                new GameImagesHandler(model.Id, model.Cover, model.Images, model.Reset)
+                new GameImagesHandler(model.Id, model.Cover, model.Images, model.Override)
                     .SaveAll();
             }
-            catch (ArgumentException e)
+            catch (Exception e)
+            {
+                return View("_Error", new HandleErrorInfo(e, "Games", "Images"));
+            }
+
+            // Ok
+            return RedirectToAction("Details", new { id = model.Id });
+        }
+
+        [Authorize(Roles = "developer")]
+        public async Task<ActionResult> Upload(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Game game = await _games.Find(id);
+            if (game == null)
+            {
+                return HttpNotFound();
+            }
+
+            // assert that game sought belongs to the developer manipulating it
+            if (game.Developer.Id != User.Identity.GetUserId())
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            return View(new GameBinaryViewModel
+            {
+                Id    = game.Id,
+                Title = game.Title,
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "developer")]
+        public async Task<ActionResult> Upload(GameBinaryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // assert that game sought belongs to the developer manipulating it
+            var game = await _games.Find(model.Id);
+            if (game.Developer.Id != User.Identity.GetUserId())
+            {
+                return new HttpUnauthorizedResult();
+            }
+
+            // Instanciates a handler to save the installer in the appropriate game's folder
+            try
+            {
+                new GameBinariesHandler(model.Id, model.Binary, model.Override)
+                    .SaveAll();
+            }
+            catch (Exception e)
             {
                 return View("_Error", new HandleErrorInfo(e, "Games", "Images"));
             }
