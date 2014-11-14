@@ -45,7 +45,7 @@ namespace Gamedalf.Tests.Controllers
             var data = new PlayingTestData().Data;
 
             _service
-                .Setup(s => s.PlayingDoneByUser(null, null))
+                .Setup(s => s.PlayingByUser(null, null))
                 .ReturnsAsync(data);
 
             var controller = new PlayingController(_service.Object);

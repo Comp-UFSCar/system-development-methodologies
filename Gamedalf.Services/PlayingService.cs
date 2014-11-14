@@ -55,7 +55,7 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
-        public virtual async Task<ICollection<Playing>> PlayingDoneByUser(string id, string q)
+        public virtual async Task<ICollection<Playing>> PlayingByUser(string id, string q)
         {
             if (String.IsNullOrEmpty(q))
             {

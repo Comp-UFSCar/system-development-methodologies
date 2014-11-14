@@ -94,7 +94,7 @@ namespace Gamedalf.Tests.Services
         {
             var service = new PlayingService(_context.Object);
 
-            var result = await service.PlayingDoneByUser("player1", null);
+            var result = await service.PlayingByUser("player1", null);
 
             Assert.AreEqual(1, result.Count);
         }
@@ -124,7 +124,7 @@ namespace Gamedalf.Tests.Services
         {
             var playings = new PlayingService(_context.Object);
 
-            var result = await playings.PlayingDoneByUser("player1", "game1");
+            var result = await playings.PlayingByUser("player1", "game1");
 
             Assert.AreEqual(1, result.Count);
         }
@@ -134,7 +134,7 @@ namespace Gamedalf.Tests.Services
         {
             var playings = new PlayingService(_context.Object);
 
-            var result = await playings.PlayingDoneByUser("player1", "player1");
+            var result = await playings.PlayingByUser("player1", "player1");
 
             Assert.AreEqual(1, result.Count);
         }
@@ -144,7 +144,7 @@ namespace Gamedalf.Tests.Services
         {
             var playings = new PlayingService(_context.Object);
 
-            var result = await playings.PlayingDoneByUser("player1", "developer1");
+            var result = await playings.PlayingByUser("player1", "developer1");
 
             Assert.AreEqual(1, result.Count);
         }
@@ -154,7 +154,7 @@ namespace Gamedalf.Tests.Services
         {
             var playings = new PlayingService(_context.Object);
 
-            var result = await playings.PlayingDoneByUser("player1", "employee1");
+            var result = await playings.PlayingByUser("player1", "employee1");
 
             Assert.AreEqual(1, result.Count);
         }
