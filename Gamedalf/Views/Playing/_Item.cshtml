@@ -23,12 +23,21 @@
         {
             <p>
                 <span class="label label-default">My score: @Model.Score / 5</span>
-                
+
                 @{ var average = Model.Game.Playings.Average(p => p.Score); }
                 <span class="label label-default">Average: @Math.Round((double)average, 1) / 5</span>
             </p>
-            <p><strong>Me:</strong> "@Model.Review"
-            </p>
+            <samp id="terms-content" style="white-space: pre-line">
+                @if (Model.Review.Length <= 20)
+                {
+                    @Model.Review
+                }
+                else
+                {
+                    @Model.Review.Substring(0, 20)
+                    @:[...]
+                }
+            </samp>
         }
         else
         {
