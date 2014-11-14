@@ -20,6 +20,8 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Terms
+        [OverrideAuthorization]
+        [AllowAnonymous]
         public async Task<ActionResult> Index(string q = null, int page = 1, int size = 10)
         {
             ViewBag.q = q;
@@ -37,6 +39,8 @@ namespace Gamedalf.Controllers
 
 
         // GET: Terms/Details/5
+        [OverrideAuthorization]
+        [AllowAnonymous]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)

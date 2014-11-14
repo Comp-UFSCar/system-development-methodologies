@@ -7,12 +7,15 @@
 </samp>
 <br />
 
-<p>
-    <a href="@Url.Action("Update", new { id = Model.Id })" class="btn btn-sm btn-default" title="Update instance #@Model.Id of @Model.Title">
-        <span class="glyphicon glyphicon-pencil"></span> Update
-    </a>
+@if (User.IsInRole("admin"))
+{
+    <p>
+        <a href="@Url.Action("Update", new { id = Model.Id })" class="btn btn-sm btn-default" title="Update instance #@Model.Id of @Model.Title">
+            <span class="glyphicon glyphicon-pencil"></span> Update
+        </a>
 
-    <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-sm btn-primary" title="Delete instance #@Model.Id of @Model.Title">
-        <span class=" glyphicon glyphicon-remove"></span> Delete
-    </a>
-</p>
+        <a href="@Url.Action("Delete", new { id = Model.Id })" class="btn btn-sm btn-primary" title="Delete instance #@Model.Id of @Model.Title">
+            <span class=" glyphicon glyphicon-remove"></span> Delete
+        </a>
+    </p>
+}

@@ -14,20 +14,24 @@
 
         <h2>
             <span class="glyphicon glyphicon-list-alt"></span>
+            Terms and conditions for
             @Html.DisplayFor(m => terms.Title)
         </h2>
     }
     <p>
-        Instance <a href="@Url.Action("Details", new { id = terms.Id })">#@terms.Id</a>, proposed by
-        <a href="@Url.Action("Employees", new { id = terms.EmployeeId })">@terms.Employee.Email</a>,
+        <a href="@Url.Action("Details", new { id = terms.Id })">Instance #@terms.Id</a>, proposed by
+        <a href="@Url.Action("Details", "Employees", new { id = terms.EmployeeId })">@terms.Employee.Email</a>,
         @Html.DisplayFor(m => terms.DateCreated)
 
-        <a href="@Url.Action("Update", new { id = terms.Id })" class="btn btn-sm btn-default" title="Update instance #@terms.Id of @terms.Title">
-            <span class="glyphicon glyphicon-pencil"></span>
-        </a>
+        @if (User.IsInRole("admin"))
+        {
+            <a href="@Url.Action("Update", new { id = terms.Id })" class="btn btn-sm btn-default" title="Update instance #@terms.Id of @terms.Title">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
 
-        <a href="@Url.Action("Delete", new { id = terms.Id })" class="btn btn-sm btn-primary" title="Delete instance #@terms.Id of @terms.Title">
-            <span class=" glyphicon glyphicon-remove"></span>
-        </a>
+            <a href="@Url.Action("Delete", new { id = terms.Id })" class="btn btn-sm btn-primary" title="Delete instance #@terms.Id of @terms.Title">
+                <span class=" glyphicon glyphicon-remove"></span>
+            </a>
+        }
     </p>
 }

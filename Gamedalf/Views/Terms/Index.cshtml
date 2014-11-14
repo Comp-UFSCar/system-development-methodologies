@@ -8,7 +8,7 @@
     ViewBag.Title = "Terms and Conditions";
 }
 
-@Html.Partial("_SearchCreate", "/Terms")
+@(Html.Partial(User.IsInRole("admin") ? "_SearchCreate" : "_Search", "/Terms"))
 
 <div id="list-search">
     @Html.Partial("_List", Model)
