@@ -13,6 +13,7 @@ namespace Gamedalf.Core.Models
         public DateTime? DateBirth { get; set; }
 
         public virtual ICollection<Playing> Playing { get; set; }
+        public virtual ICollection<Payment> Playments {get;set;}
 
         /// <summary>
         /// Date this player accepted the power and responsabilities of a developer
