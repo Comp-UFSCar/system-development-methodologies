@@ -45,8 +45,7 @@ namespace Gamedalf.Controllers
         [Authorize(Roles = "player")]
         public async Task<ActionResult> My(int page = 1, int size = 10)
         {
-            ViewBag.q = q;
-
+            
             var list = (await _payments.ByUser(User.Identity.GetUserId()))
                 .ToPagedList(page, size);
 
