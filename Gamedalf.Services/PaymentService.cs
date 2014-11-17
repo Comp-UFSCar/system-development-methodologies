@@ -3,8 +3,8 @@ using Gamedalf.Core.Models;
 using Gamedalf.Services.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Gamedalf.Services
