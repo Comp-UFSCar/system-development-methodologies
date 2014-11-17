@@ -19,11 +19,12 @@ namespace Gamedalf.Controllers
     public class PaymentsController : Controller
     {
         private readonly PaymentService _payments;
-
+        private readonly SubscriptionService _subscriptions;
         
-        public PaymentsController(PaymentService payments)
+        public PaymentsController(PaymentService payments, SubscriptionService subscriptions)
         {
             _payments = payments;
+            _subscriptions = subscriptions;
         }
 
         // GET: Payments
@@ -61,7 +62,10 @@ namespace Gamedalf.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new PaymentCreateViewModel
+            {
+                LastSubscriptionCost = _subscriptions.Last().Cost
+            });
         }
 
         // GET: Developers/Terms
