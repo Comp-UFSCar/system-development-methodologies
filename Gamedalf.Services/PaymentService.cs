@@ -26,5 +26,18 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
+        public virtual async Task<ICollection<Payment>> ByUser(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                return await All();
+            }
+
+            return await Db.Payments
+                .Where(e => e.Player.Id == id)
+                .OrderBy(e => e.Player)
+                .ToListAsync();
+        }
+
     }
 }
