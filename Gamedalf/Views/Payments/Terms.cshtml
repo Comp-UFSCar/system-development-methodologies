@@ -1,0 +1,27 @@
+﻿@using System.IdentityModel
+
+@model AcceptTermsViewModel
+@{
+    ViewBag.Title = "Gibe moni plox";
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/ajax/terms.js")
+}
+
+<div id="terms-error" class="hidden">
+    @Html.Partial("_Error", new HandleErrorInfo(new RequestFailedException("api/terms seems to be unavaiable."), "Payment", "Terms"))
+</div>
+
+<div id="terms-container">
+    <h1>Terms and Conditions</h1>
+    <div id="terms-loading">
+        <h2>Loading&hellip;</h2>
+    </div>
+    <h2 id="terms-title"></h2>
+    <p id="terms-dateCreated"></p>
+    <samp id="terms-content" style="white-space: pre-line"></samp>
+</div>
+
+@Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
+
