@@ -247,6 +247,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Exceptions\FileOverrideException.cs" />
     <Compile Include="Infrastructure\Games\GameBinariesHandler.cs" />
     <Compile Include="Infrastructure\Games\GameFilesHandler.cs" />
     <Compile Include="Infrastructure\Games\GameImagesHandler.cs" />
