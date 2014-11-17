@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameService.cs" />
+    <Compile Include="PaymentService.cs" />
     <Compile Include="PlayerService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="Infrastructure\Service.cs" />
