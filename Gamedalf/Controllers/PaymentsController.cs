@@ -26,6 +26,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Payments
+        [Authorize(Roles = "employee")]
         public async Task<ActionResult> Index(string q = null, int page = 1, int size = 10)
         {
             ViewBag.q = q;
