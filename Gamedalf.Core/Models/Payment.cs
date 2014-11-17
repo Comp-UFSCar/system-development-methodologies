@@ -18,9 +18,6 @@ namespace Gamedalf.Core.Models
         
         public DateTime DateCreated { get; set;}
         public virtual Player Player { get; set; }
-        
-        public Payment(){
-            DateCreated = DateTime.Now;
-        }
+        public float value { get; set; }
     }
 }
