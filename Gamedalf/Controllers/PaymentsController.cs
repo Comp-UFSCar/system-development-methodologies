@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Gamedalf.Services;
 using PagedList;
 using Microsoft.AspNet.Identity;
+using Gamedalf.ViewModels;
 
 namespace Gamedalf.Controllers
 {
@@ -56,6 +57,21 @@ namespace Gamedalf.Controllers
             }
 
             return View(list);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // GET: Developers/Terms
+        [Authorize(Roles = "player")]
+        public ActionResult Terms()
+        {
+            return View(new AcceptTermsViewModel
+            {
+                AcceptTerms = false,
+            });
         }
 
     }
