@@ -11,6 +11,7 @@ using Gamedalf.Core.Models;
 using System.Threading.Tasks;
 using Gamedalf.Services;
 using PagedList;
+using Microsoft.AspNet.Identity;
 
 namespace Gamedalf.Controllers
 {
@@ -40,6 +41,22 @@ namespace Gamedalf.Controllers
             return View(list);
         }
 
+        // GET: Games/My
+        [Authorize(Roles = "player")]
+        public async Task<ActionResult> My(string q = null, int page = 1, int size = 10)
+        {
+            ViewBag.q = q;
+
+            var list = (await _payments.ByUser(User.Identity.GetUserId()))
+                .ToPagedList(page, size);
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_List", list);
+            }
+
+            return View(list);
+        }
 
     }
 }
