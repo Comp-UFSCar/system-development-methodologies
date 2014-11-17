@@ -21,8 +21,9 @@ namespace Gamedalf.Services
             }
 
             return await Db.Payments
-                .Where(e => e.Player.UserName.Contains(q))
-                .OrderBy(e => e.Player)
+                .Where(p => p.Player.Email.Contains(q))
+                .Include(p => p.Player)
+                .OrderBy(p => p.PlayerId)
                 .ToListAsync();
         }
 
@@ -34,8 +35,9 @@ namespace Gamedalf.Services
             }
 
             return await Db.Payments
-                .Where(e => e.Player.Id == id)
-                .OrderBy(e => e.Player)
+                .Where(p => p.Player.Id == id)
+                .Include(p => p.Player)
+                .OrderBy(p => p.PlayerId)
                 .ToListAsync();
         }
 
