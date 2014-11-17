@@ -10,6 +10,7 @@ using Gamedalf.Core.Data;
 using Gamedalf.Core.Models;
 using System.Threading.Tasks;
 using Gamedalf.Services;
+using PagedList;
 
 namespace Gamedalf.Controllers
 {
@@ -17,11 +18,11 @@ namespace Gamedalf.Controllers
     {
         private readonly PaymentService _payments;
 
-        /*
-        public PaymentsController(GameService games)
+        
+        public PaymentsController(PaymentService payments)
         {
-            _games = games;
-        }*/
+            _payments = payments;
+        }
 
         // GET: Payments
         public async Task<ActionResult> Index(string q = null, int page = 1, int size = 10)
