@@ -1,7 +1,7 @@
-﻿
-using Gamedalf.Core.Models;
+﻿using Gamedalf.Core.Models;
 using System;
 using System.Collections.Generic;
+
 namespace Gamedalf.Core.Migrations
 {
     class GamesSeedData

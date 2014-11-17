@@ -19,12 +19,13 @@ namespace Gamedalf.Core.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            var roles = SeedRoles(context);
-            var employees = SeedEmployees(context);
-            var players = SeedPlayers(context);
-            var developers = SeedDevelopers(context);
-            var games = SeedGames(context, developers);
+            //var roles = SeedRoles(context);
+            //var employees = SeedEmployees(context);
+            //var players = SeedPlayers(context);
+            //var developers = SeedDevelopers(context);
+            //var games = SeedGames(context, developers);
             //var playings = SeedPlayings(context, players, games);
+            var payments = SeedPayments(context, context.Players.ToList());
         }
 
         private ICollection<IdentityRole> SeedRoles(ApplicationDbContext context)
@@ -136,7 +137,7 @@ namespace Gamedalf.Core.Migrations
             return data;
         }
 
-        private object SeedPlayings(ApplicationDbContext context, ICollection<Player> players, ICollection<Game> games)
+        private ICollection<Playing> SeedPlayings(ApplicationDbContext context, ICollection<Player> players, ICollection<Game> games)
         {
             var random = new Random();
             var playings = new List<Playing>();
@@ -164,6 +165,23 @@ namespace Gamedalf.Core.Migrations
             }
 
             return playings;
+        }
+
+        private ICollection<Payment> SeedPayments(ApplicationDbContext context, ICollection<Player> players)
+        {
+            var payments = new PaymentSeedData().Data;
+
+            try
+            {
+                context.Payments.RemoveRange(context.Payments.ToList());
+                context.Payments.AddRange(payments);
+            }
+            catch (Exception e)
+            {
+                Console.Error.Write(e);
+            }
+
+            return payments;
         }
     }
 }
