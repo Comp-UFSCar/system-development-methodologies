@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+
 namespace Gamedalf.Infrastructure.Games
 {
     public abstract class GameFilesHandler
@@ -35,7 +36,6 @@ namespace Gamedalf.Infrastructure.Games
             }
 
             Directory.CreateDirectory(_directory);
-
             return this;
         }
 

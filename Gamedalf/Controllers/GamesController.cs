@@ -1,4 +1,5 @@
 ﻿using Gamedalf.Core.Models;
+using Gamedalf.Infrastructure.Exceptions;
 using Gamedalf.Infrastructure.Games;
 using Gamedalf.Services;
 using Gamedalf.ViewModels;
@@ -69,8 +70,8 @@ namespace Gamedalf.Controllers
             return View(game);
         }
 
-        [Authorize(Roles = "developer,admin")]
         // GET: Games/Create
+        [Authorize(Roles = "developer")]
         public ActionResult Create()
         {
             return View();
@@ -101,7 +102,7 @@ namespace Gamedalf.Controllers
         }
 
         // GET: Games/Edit/5
-        [Authorize(Roles = "developer,employee,admin")]
+        [Authorize(Roles = "developer,employee")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,7 +131,7 @@ namespace Gamedalf.Controllers
         // POST: Games/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "developer,employee,admin")]
+        [Authorize(Roles = "developer,employee")]
         public async Task<ActionResult> Edit(GameEditViewModel model)
         {
             if (ModelState.IsValid)
@@ -256,17 +257,23 @@ namespace Gamedalf.Controllers
                 return new HttpUnauthorizedResult();
             }
 
-            // Instanciates a handler to save the installer in the appropriate game's folder
             try
             {
+                // Instanciates a handler to save the installer in the appropriate game's folder
                 new GameBinariesHandler(model.Id, model.Binary, model.Override)
                     .SaveAll();
+            }
+            catch (FileOverrideException)
+            {
+                ModelState.AddModelError("Override",
+                    "An installer was already uploaded to our system. In order to continue this action, you must confirm the overriding.");
+                return View(model);
             }
             catch (Exception e)
             {
                 return View("_Error", new HandleErrorInfo(e, "Games", "Images"));
             }
-
+            
             // Ok
             return RedirectToAction("Details", new { id = model.Id });
         }
