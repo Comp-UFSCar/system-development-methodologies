@@ -152,6 +152,7 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Complementary\GameImagesHandlerTest.cs" />
     <Compile Include="Controllers\PlayersControllerTest.cs" />
     <Compile Include="Controllers\EmployeesControllerTest.cs" />
     <Compile Include="Controllers\PlayingControllerTest.cs" />
@@ -208,6 +209,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
