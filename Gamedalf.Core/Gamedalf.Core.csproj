@@ -58,7 +58,9 @@
     <Compile Include="Attributes\FileSizeAttribute.cs" />
     <Compile Include="Attributes\FilesTypesAttribute.cs" />
     <Compile Include="Attributes\FileTypesAttribute.cs" />
+    <Compile Include="Migrations\PaymentSeedData.cs" />
     <Compile Include="Migrations\TermsSeedData.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Terms.cs" />
     <Compile Include="Attributes\EnforceTrueAttribute.cs" />
     <Compile Include="Infrastructure\IDateCreatedTrackable.cs" />
