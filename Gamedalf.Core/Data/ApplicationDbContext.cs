@@ -53,6 +53,7 @@ namespace Gamedalf.Core.Data
         public virtual DbSet<Playing>   Playings   { get; set; }
         public virtual DbSet<Terms>     Terms      { get; set; }
         public virtual DbSet<Payment>   Payments    { get; set; }
+        public virtual DbSet<Subscription>  Subscriptions { get; set; }
 
         //public System.Data.Entity.DbSet<Gamedalf.Core.Models.Payment> Payments { get; set; }
     }

@@ -61,6 +61,7 @@
     <Compile Include="Migrations\PaymentSeedData.cs" />
     <Compile Include="Migrations\TermsSeedData.cs" />
     <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Terms.cs" />
     <Compile Include="Attributes\EnforceTrueAttribute.cs" />
     <Compile Include="Infrastructure\IDateCreatedTrackable.cs" />

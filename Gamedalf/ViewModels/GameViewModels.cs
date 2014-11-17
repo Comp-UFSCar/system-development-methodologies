@@ -1,5 +1,4 @@
 ﻿using Gamedalf.Core.Attributes;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
@@ -85,23 +84,5 @@ namespace Gamedalf.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public int    Score { get; set; }
-    }
-
-    public class GameJsonViewModel
-    {
-        public int Id { get; set; }
-        
-        public string Title { get; set; }
-        
-        public string Description { get; set; }
-        
-        public string EmployeeId { get; set; }
-
-        public DateTime? DateValidated { get; set; }
-
-        public string DeveloperId { get; set; }
-
-        public DateTime DateCreated { get; set; }
-        public DateTime? DateUpdated { get; set; }
     }
 }
