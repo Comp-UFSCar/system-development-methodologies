@@ -60,6 +60,7 @@
     <Compile Include="Infrastructure\Service.cs" />
     <Compile Include="PlayingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscriptionService.cs" />
     <Compile Include="TermsService.cs" />
   </ItemGroup>
   <ItemGroup>
