@@ -1,31 +1,36 @@
 ﻿@model GameBinaryViewModel
 
 @{
-    ViewBag.Title = "Upload " + Model.Title + " installation files";
+    ViewBag.Title = "Upload " + Model.Title + " installation file";
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/elements/BtnSubmitter.js")
 }
 
 <h2>
     @ViewBag.Title
 </h2>
 
-@using (Html.BeginForm("Upload", "Games", FormMethod.Post, new { role = "form" }))
+@using (Html.BeginForm("Upload", "Games", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
+    
+    <div class="form-group">
+        <input type="file" name="Binary" id="binary" />
+        @Html.ValidationMessageFor(m => m.Binary, "", new { @class = "text-danger" })
+    </div>
 
     <div class="form-group">
-        <input type="file" name="Binary" id="cover" />
-        @Html.ValidationMessageFor(m => m.Binary, "", new { @class = "text-danger" })
-        <br />
-        
         <span class="btn-group" data-toggle="buttons">
             <label class="btn btn-danger" title="Override all artwork. If not set, uploaded images are added to old ones.">
                 @Html.CheckBoxFor(m => m.Override)
                 <span class="glyphicon glyphicon-fire"></span>
                 @Html.DisplayNameFor(m => m.Override)
-                @Html.ValidationMessageFor(m => m.Override, "", new { @class = "text-danger" })
             </label>
         </span>
+        @Html.ValidationMessageFor(m => m.Override, "", new { @class = "text-danger" })
     </div>
 
     @Html.Partial("_Confirm", "Upload images")

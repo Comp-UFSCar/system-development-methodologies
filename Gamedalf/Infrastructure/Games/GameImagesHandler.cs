@@ -18,14 +18,7 @@ namespace Gamedalf.Infrastructure.Games
         public GameImagesHandler(int id, HttpPostedFileBase cover, IEnumerable<HttpPostedFileBase> artImages, bool @override)
             : base(id, BasePath, @override)
         {
-            // assert that id represents an valid game id
-            // and the cover is a valid file
-            if (cover == null || cover.ContentLength == 0)
-            {
-                throw new ArgumentException("Cannot construct GameImagesHandler with given arguments: cover = " + cover);
-            }
-
-            _cover = cover;
+            _cover     = cover;
             _artImages = artImages;
         }
 
@@ -35,9 +28,12 @@ namespace Gamedalf.Infrastructure.Games
         /// <returns>The object GameImageHandler that called this method (self).</returns>
         public GameImagesHandler SaveCover()
         {
-            var file = "cover" + Path.GetExtension(_cover.FileName);
-            var path = Path.Combine(_directory, file);
-            _cover.SaveAs(path);
+            if (_cover != null)
+            {
+                var file = "cover" + Path.GetExtension(_cover.FileName);
+                var path = Path.Combine(_directory, file);
+                _cover.SaveAs(path);
+            }
 
             return this;
         }
@@ -56,7 +52,7 @@ namespace Gamedalf.Infrastructure.Games
                 {
                     if (art == null) continue;
 
-                    var file = index++ + Path.GetExtension(_cover.FileName);
+                    var file = index++ + Path.GetExtension(art.FileName);
                     var path = Path.Combine(_directory, file);
                     art.SaveAs(path);
                 }

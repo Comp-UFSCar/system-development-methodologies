@@ -74,9 +74,9 @@ namespace Gamedalf.ViewModels
         public bool Override { get; set; }
 
         [Required]
-        [FilesTypes("exe,msi")]
+        [FileTypes("exe,msi")]
         [Display(Name = "Select binary file")]
-        public HttpPostedFile Binary { get; set; }
+        public HttpPostedFileBase Binary { get; set; }
     }
 
     public class GameScoreViewModel
