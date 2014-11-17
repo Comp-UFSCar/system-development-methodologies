@@ -84,7 +84,7 @@ namespace Gamedalf.Controllers
         {
             if (ModelState.IsValid)
             {
-                Game game = new Game
+                var game = new Game
                 {
                     Title = model.Title,
                     Description = model.Description,
