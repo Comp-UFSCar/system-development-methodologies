@@ -398,12 +398,11 @@
     <Content Include="Views\Payments\Create.cshtml" />
     <Content Include="Views\Payments\Terms.cshtml" />
     <Content Include="Views\Subscriptions\Create.cshtml" />
-    <Content Include="Views\Subscriptions\Delete.cshtml" />
-    <Content Include="Views\Subscriptions\Details.cshtml" />
-    <Content Include="Views\Subscriptions\Edit.cshtml" />
     <Content Include="Views\Subscriptions\Index.cshtml" />
     <Content Include="Views\Payments\_Item.cshtml" />
     <Content Include="Views\Payments\_List.cshtml" />
+    <Content Include="Views\Subscriptions\_Item.cshtml" />
+    <Content Include="Views\Subscriptions\_List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
