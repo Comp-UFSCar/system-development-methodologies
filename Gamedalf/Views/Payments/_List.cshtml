@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Payment>
+
+@Html.Partial("_PagedListPager", Model)
+
+@foreach (var payment in Model)
+{
+    @Html.Partial("_Item", payment)
+    <br /><br /><br />
+}
