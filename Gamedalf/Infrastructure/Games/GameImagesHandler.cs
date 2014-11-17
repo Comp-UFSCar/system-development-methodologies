@@ -13,7 +13,7 @@ namespace Gamedalf.Infrastructure.Games
         private HttpPostedFileBase _cover;
         private IEnumerable<HttpPostedFileBase> _artImages;
 
-        public GameImagesHandler(int id, HttpPostedFileBase cover) : this(id, cover, null, false) { }
+        public GameImagesHandler(int id, HttpPostedFileBase cover) : this(id, cover, null) { }
         public GameImagesHandler(int id, HttpPostedFileBase cover, IEnumerable<HttpPostedFileBase> artImages) : this(id, cover, artImages, false) { }
         public GameImagesHandler(int id, HttpPostedFileBase cover, IEnumerable<HttpPostedFileBase> artImages, bool @override)
             : base(id, BasePath, @override)
@@ -95,6 +95,14 @@ namespace Gamedalf.Infrastructure.Games
                 : Path.Combine(BasePath, "cover.jpg");
         }
 
+        /// <summary>
+        /// Returns a game's art images.
+        /// </summary>
+        /// <param name="id">The id of the game.</param>
+        /// <returns>
+        /// Returns a list paths, where which path leads to a artwork of a given game.
+        /// If the game has no artwork images, the list is empty.
+        /// </returns>
         public static ICollection<String> ArtImagesOf(int id)
         {
             var artImages = new List<String>();
@@ -113,6 +121,15 @@ namespace Gamedalf.Infrastructure.Games
             return artImages;
         }
 
+        /// <summary>
+        /// Returns a game's art image.
+        /// </summary>
+        /// <param name="id">The id of the game.</param>
+        /// <param name="index">The index of the artwork.</param>
+        /// <returns>
+        /// Returns a path to the artwork #index of a given
+        /// game with id equals <paramref name="id"/>.
+        /// </returns>
         public static String ArtImageOf(int id, int index)
         {
             return Path.Combine(BasePath, id.ToString(), index + ".jpg");
