@@ -54,11 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameService.cs" />
+    <Compile Include="PaymentService.cs" />
     <Compile Include="PlayerService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="Infrastructure\Service.cs" />
     <Compile Include="PlayingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscriptionService.cs" />
     <Compile Include="TermsService.cs" />
   </ItemGroup>
   <ItemGroup>
