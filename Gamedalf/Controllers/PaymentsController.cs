@@ -41,9 +41,9 @@ namespace Gamedalf.Controllers
             return View(list);
         }
 
-        // GET: Games/My
+        // GET: Payments/My
         [Authorize(Roles = "player")]
-        public async Task<ActionResult> My(string q = null, int page = 1, int size = 10)
+        public async Task<ActionResult> My(int page = 1, int size = 10)
         {
             ViewBag.q = q;
 
