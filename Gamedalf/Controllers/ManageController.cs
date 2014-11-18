@@ -14,9 +14,7 @@ namespace Gamedalf.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        public ManageController()
-        {
-        }
+        public ManageController() { }
 
         public ManageController(ApplicationUserManager userManager)
         {
