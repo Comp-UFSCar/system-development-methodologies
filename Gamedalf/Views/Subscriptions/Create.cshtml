@@ -1,19 +1,26 @@
 ﻿@model Gamedalf.Core.Models.Subscription
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Define new price for monthly subscription";
 }
 
-<h2>Create</h2>
+@section Scripts {
+    @Scripts.Render("~/Scripts/app/elements/BtnSubmitter.js")
+}
+
+<h2>
+    Define new price for monthly subscription,
+    <small>
+        being nice with the users.
+    </small>
+</h2>
+<br />
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Subscription</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Cost, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -21,15 +28,7 @@
                 @Html.ValidationMessageFor(model => model.Cost, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
+    
+    @Html.Partial("_Confirm", "Save")
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

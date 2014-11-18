@@ -1,5 +1,24 @@
 ﻿@model IEnumerable<Subscription>
+@{
+    ViewBag.Title = "Subscriptions";
+}
 
+@if (User.IsInRole("admin"))
+{
+    <div class="row">
+        <div class="col-xs-6 text-right col-xs-offset-6">
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>
+                Create
+            </a>
+        </div>
+    </div>
+}
+
+@section scripts {
+    @Scripts.Render("~/Scripts/app/ajax/search.js")
+    @Scripts.Render("~/Scripts/app/elements/BtnSubmitter.js")
+}
 
 <div id="list-search">
     @Html.Partial("_List", Model)

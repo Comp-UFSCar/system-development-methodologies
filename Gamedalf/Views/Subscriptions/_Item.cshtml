@@ -1,4 +1,7 @@
 ﻿@model Subscription
 
-<p>@Model.Id</p>
-<p>@Model.Cost</p>
+<p>
+    <span class="label label-default">#@Model.Id</span>
+    $@Html.DisplayFor(m => m.Cost),
+    @Html.DisplayFor(m => m.DateCreated)
+</p>
