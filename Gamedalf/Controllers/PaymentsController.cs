@@ -18,13 +18,15 @@ namespace Gamedalf.Controllers
 {
     public class PaymentsController : Controller
     {
-        private readonly PaymentService _payments;
+        private readonly PaymentService      _payments;
         private readonly SubscriptionService _subscriptions;
+        private readonly TermsService        _terms;
         
-        public PaymentsController(PaymentService payments, SubscriptionService subscriptions)
+        public PaymentsController(PaymentService payments, SubscriptionService subscriptions, TermsService terms)
         {
-            _payments = payments;
+            _payments      = payments;
             _subscriptions = subscriptions;
+            _terms         = terms;
         }
 
         // GET: Payments
@@ -60,23 +62,43 @@ namespace Gamedalf.Controllers
             return View(list);
         }
 
-        public ActionResult Create()
-        {
-            return View(new PaymentCreateViewModel
-            {
-                LastSubscriptionCost = _subscriptions.Last().Cost
-            });
-        }
-
-        // GET: Developers/Terms
+        // GET: Payments/Terms
         [Authorize(Roles = "player")]
-        public ActionResult Terms()
+        public async Task<ActionResult> Terms()
         {
             return View(new AcceptTermsViewModel
             {
                 AcceptTerms = false,
+                Terms       = await _terms.Latest("Subscription")
             });
         }
 
+        // POST: Payments/Make
+        [HttpPost]
+        [Authorize(Roles = "player")]
+        public async Task<ActionResult> Make(AcceptTermsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Terms = await _terms.Latest("Subscription");
+                return View("Terms", model);
+            }
+
+            var latest = _subscriptions.Latest();
+
+            // no subscripts were registered in the database
+            if (latest == null)
+            {
+                return View("_error", new HandleErrorInfo(
+                        new NullReferenceException("_subscriptions.Latest() has returned an null value."),
+                        "payments",
+                        "create"));
+            }
+
+            return View(new PaymentCreateViewModel
+            {
+                LatestSubscription = latest
+            });
+        }
     }
 }
