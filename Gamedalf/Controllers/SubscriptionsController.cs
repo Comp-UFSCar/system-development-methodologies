@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Gamedalf.Core.Data;
-using Gamedalf.Core.Models;
+﻿using Gamedalf.Core.Models;
 using Gamedalf.Services;
-using PagedList;
 using Gamedalf.ViewModels;
+using PagedList;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Gamedalf.Controllers
 {
@@ -23,10 +15,11 @@ namespace Gamedalf.Controllers
         {
             _subscriptions = subscriptions;
         }
+
         // GET: Subscriptions
         public async Task<ActionResult> Index(int page = 1, int size = 10)
         {
-            var list = (await _subscriptions.All())
+            var list = (await _subscriptions.ReverseAll())
                 .ToPagedList(page, size);
 
             if (Request.IsAjaxRequest())
@@ -37,7 +30,6 @@ namespace Gamedalf.Controllers
             return View(list);
         }
 
-
         // GET: Subscriptions/Create
         [Authorize(Roles = "admin")]
         public ActionResult Create()
@@ -46,9 +38,9 @@ namespace Gamedalf.Controllers
         }
 
         // POST: Subscriptions/Create
-        [Authorize(Roles = "admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Create(SubscriptionCreateViewModel model)
         {
             if (ModelState.IsValid)
