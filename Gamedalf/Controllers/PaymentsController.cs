@@ -95,7 +95,7 @@ namespace Gamedalf.Controllers
                         "create"));
             }
 
-            return View(new PaymentCreateViewModel
+            return View(new PaymentMakeViewModel
             {
                 LatestSubscription = latest
             });

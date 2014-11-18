@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
+using Gamedalf.Core.Models;
 namespace Gamedalf.ViewModels
 {
-    public class PaymentCreateViewModel
+    public class PaymentMakeViewModel
     {
-        public decimal LastSubscriptionCost { get; set; }
+        public Subscription LatestSubscription { get; set; }
     }
 }
