@@ -1,0 +1,24 @@
+﻿@model PaymentMakeViewModel
+
+<h2>
+    Okey-dokey!
+    <small>
+        Finish your subscription using your PayPal account.
+    </small>
+</h2>
+
+<p>
+    Gamedalf uses PayPal payment system to manage money. It's fast, clean and, best of all, safe!
+    Click on the <strong>subscribe button</strong> and we'll see each other in a couple of seconds!
+</p>
+
+<script async="async" src="https://www.paypalobjects.com/js/external/paypal-button.min.js?merchant=jvbrandaom-facilitator@gmail.com"
+        data-button="subscribe"
+        data-name="Subscription"
+        data-amount="@Model.LatestSubscription.Cost"
+        data-currency="BRL"
+        data-recurrence="1"
+        data-period="M"
+        data-callback="https://localhost:44300/Payments/My"
+        data-env="sandbox">
+</script>
