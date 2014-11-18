@@ -2,26 +2,35 @@
 
 @model AcceptTermsViewModel
 @{
-    ViewBag.Title = "Gibe moni plox";
+    ViewBag.Title = "Subscribe to Gamedalf!";
 }
 
 @section scripts {
-    @Scripts.Render("~/Scripts/app/ajax/terms.js")
+    @Scripts.Render("~/Scripts/app/elements/BtnSubmitter.js")
 }
-
-<div id="terms-error" class="hidden">
-    @Html.Partial("_Error", new HandleErrorInfo(new RequestFailedException("api/terms seems to be unavaiable."), "Payment", "Terms"))
-</div>
 
 <div id="terms-container">
     <h1>Terms and Conditions</h1>
-    <div id="terms-loading">
-        <h2>Loading&hellip;</h2>
-    </div>
-    <h2 id="terms-title"></h2>
-    <p id="terms-dateCreated"></p>
-    <samp id="terms-content" style="white-space: pre-line"></samp>
+    <h2 id="terms-title">
+        @Model.Terms.Title
+    </h2>
+    <p id="terms-dateCreated">
+        @Model.Terms.DateCreated
+    </p>
+    <samp id="terms-content" style="white-space: pre-line">
+        @Model.Terms.Content
+    </samp>
 </div>
 
-@Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
-
+@using (Html.BeginForm("Make", "Payments", FormMethod.Post, new { id = "terms-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.AcceptTerms, new { @class = "btn btn-default" })
+            @Html.DisplayNameFor(m => m.AcceptTerms)
+        </label>
+    </div>
+    @Html.ValidationMessageFor(m => m.AcceptTerms, "", new { @class = "text-danger" })
+    @Html.Partial("_Confirm", "Accept")
+}
