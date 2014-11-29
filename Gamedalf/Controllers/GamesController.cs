@@ -6,6 +6,7 @@ using Gamedalf.ViewModels;
 using Microsoft.AspNet.Identity;
 using PagedList;
 using System;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -276,6 +277,24 @@ namespace Gamedalf.Controllers
             
             // Ok
             return RedirectToAction("Details", new { id = model.Id });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "player")]
+        public ActionResult Download(int Id)
+        {
+            try
+            {
+                var installer = new GameBinariesHandler(Id)
+                    .Retrieve();
+
+                return File(installer, System.Net.Mime.MediaTypeNames.Application.Octet, Path.GetFileName(installer));
+            }
+            catch (Exception e)
+            {
+                return View("Error", new HandleErrorInfo(e, "Games", "Download"));
+            }
         }
 
         // GET: Games/Delete/5
