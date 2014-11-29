@@ -35,23 +35,6 @@ namespace Gamedalf.Controllers
             return View(list);
         }
 
-        // GET: Playing/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var playing = await _playings.Find(id);
-            if (playing == null)
-            {
-                return HttpNotFound();
-            }
-            
-            return View(playing);
-        }
-
         // POST: Playing/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,7 +45,7 @@ namespace Gamedalf.Controllers
                 PlayerId = User.Identity.GetUserId()
             });
 
-            return RedirectToAction("Details", new { id = playing.Id });
+            return RedirectToAction("Details", "Games", new { id = id });
         }
 
         // GET: Playing/Evalute
@@ -106,12 +89,10 @@ namespace Gamedalf.Controllers
                 };
 
                 playing = await _playings.Evaluate(playing);
-                return RedirectToAction("Details", new { id = playing.Id });
+                return RedirectToAction("Details", "Games", new { id = playing.GameId });
             }
 
             return View(model);
         }
-
-        
     }
 }
