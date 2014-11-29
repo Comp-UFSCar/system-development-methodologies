@@ -234,7 +234,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\GamesController.cs" />
+    <Compile Include="Controllers\Api\PlaygroundController.cs" />
     <Compile Include="Controllers\Api\TermsController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
@@ -262,6 +262,7 @@
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\PaymentViewModels.cs" />
     <Compile Include="ViewModels\PlayerViewModels.cs" />
+    <Compile Include="ViewModels\PlaygroundViewModels.cs" />
     <Compile Include="ViewModels\PlayingViewModels.cs" />
     <Compile Include="ViewModels\SubscriptionViewModels.cs" />
     <Compile Include="ViewModels\TermsViewModels.cs" />
@@ -387,7 +388,6 @@
     <Content Include="Views\Terms\_List.cshtml" />
     <Content Include="Views\Terms\_Item.cshtml" />
     <Content Include="Views\Terms\_ExtendedItem.cshtml" />
-    <Content Include="Views\Playing\Details.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\_EditDelete.cshtml" />
     <Content Include="Views\Games\My.cshtml" />
