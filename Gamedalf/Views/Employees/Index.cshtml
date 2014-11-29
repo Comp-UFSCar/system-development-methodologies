@@ -4,7 +4,6 @@
 }
 @section scripts {
     @Scripts.Render("~/Scripts/app/ajax/search.js")
-    @Scripts.Render("~/Scripts/app/elements/BtnSubmitter.js")
 }
 
 @(Html.Partial(User.IsInRole("admin") ? "_SearchCreate" : "_Search", "/Employees"))

@@ -5,9 +5,9 @@
 @model Game
 
 @{
-    var id        = User.Identity.GetUserId();
+    var id = User.Identity.GetUserId();
     var doIPlayIt = Model.Playings.FirstOrDefault(p => p.PlayerId == id);
-    var average   = (int?)Model.Playings.Average(p => p.Score);
+    var average = (int?)Model.Playings.Average(p => p.Score);
 }
 
 <div class="row">
@@ -34,9 +34,9 @@
             <p>
                 @Html.Partial("_GameScore", new GameScoreViewModel
                 {
-                    Title       = "Average score",
+                    Title = "Average score",
                     Description = "is the average score given by players.",
-                    Score       = (int)average
+                    Score = (int)average
                 })
             </p>
         }
@@ -49,34 +49,43 @@
         }
         else
         {
-            using (Html.BeginForm("Create", "Playing"))
+            <p>
+                @if (User.IsInRole("employee") || Model.DeveloperId == User.Identity.GetUserId())
+                {
+                    @Html.Partial("_EditDelete", Model.Id.ToString())
+                }
+            </p>
+
+            if (doIPlayIt != null)
             {
-                @Html.AntiForgeryToken()
+                using (Html.BeginForm("Download", "Games"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
 
-                @Html.HiddenFor(m => m.Id)
-
-                <p>
-                    @if (User.IsInRole("employee") || Model.DeveloperId == User.Identity.GetUserId())
-                    {
-                        @Html.Partial("_EditDelete", Model.Id.ToString())
-                    }
-
-                    @if (doIPlayIt != null)
-                    {
-                        <a href="@Url.Action("Details", "Playing", new { id = doIPlayIt.Id })" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-send"></span>
-                            Play
-                        </a>
-                    }
-                    else
-                    {
-                        <a class="btn btn-primary btn-submitter" tabindex="0">
-                            <span class="glyphicon glyphicon-cloud-download"></span>
-                            Download
-                        </a>
-                    }
-                </p>
+                    <a class="btn btn-primary btn-submitter" tabindex="0">
+                        <span class="glyphicon glyphicon-cloud-download"></span>
+                        Download
+                    </a>
+                }
             }
+            else
+            {
+                using (Html.BeginForm("Create", "Playing"))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+
+                    <a class="btn btn-primary btn-submitter" tabindex="0">
+                        <span class="glyphicon glyphicon-send"></span>
+                        Play
+                    </a>
+                }
+            }
+
+
+
+
         }
     </div>
 </div>
