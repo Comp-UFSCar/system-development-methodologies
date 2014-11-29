@@ -47,12 +47,12 @@ namespace Gamedalf.Core.Data
             return base.SaveChangesAsync();
         }
 
-        public virtual DbSet<Employee>  Employees  { get; set; }
-        public virtual DbSet<Player>    Players    { get; set; }
-        public virtual DbSet<Game>      Games      { get; set; }
-        public virtual DbSet<Playing>   Playings   { get; set; }
-        public virtual DbSet<Terms>     Terms      { get; set; }
-        public virtual DbSet<Payment>   Payments   { get; set; }
-        public virtual DbSet<Subscription>  Subscriptions { get; set; }
+        public virtual DbSet<Employee>     Employees     { get; set; }
+        public virtual DbSet<Player>       Players       { get; set; }
+        public virtual DbSet<Game>         Games         { get; set; }
+        public virtual DbSet<Playing>      Playings      { get; set; }
+        public virtual DbSet<Terms>        Terms         { get; set; }
+        public virtual DbSet<Payment>      Payments      { get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
     }
 }
