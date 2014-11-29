@@ -10,21 +10,23 @@ namespace Gamedalf.Infrastructure.Games
         private const string BasePath = "~/GamesBinaries";
         
         private HttpPostedFileBase _binary;
+
+        public GameBinariesHandler(int id) : this(id, null) { }
         
         public GameBinariesHandler(int id, HttpPostedFileBase binary) : this(id, binary, false) { }
 
         public GameBinariesHandler(int id, HttpPostedFileBase binary, bool @override) : base(id, BasePath, @override)
         {
-            if (binary == null || binary.ContentLength == 0)
-            {
-                throw new ArgumentException("Cannot construct GameBinariesHandler with given arguments: binary = " + binary);
-            }
-
             _binary = binary;
         }
         
         public virtual GameBinariesHandler Save()
         {
+            if (_binary == null || _binary.ContentLength == 0)
+            {
+                throw new ApplicationException("Cannot save invalid game binaries = " + _binary);
+            }
+            
             var file = Path.Combine(_directory, "installer" + Path.GetExtension(_binary.FileName));
 
             if (File.Exists(file) && !_override)
@@ -46,6 +48,11 @@ namespace Gamedalf.Infrastructure.Games
         {
             SaveDirectory();
             return Save();
+        }
+
+        public virtual string Retrieve()
+        {
+            return Directory.GetFiles(_directory)[0];
         }
     }
 }
