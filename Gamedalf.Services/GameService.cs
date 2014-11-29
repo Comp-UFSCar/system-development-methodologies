@@ -46,6 +46,13 @@ namespace Gamedalf.Services
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Returns a collection of games that were registered by the developer <paramref name="user"/> and 
+        /// have their Title property containing the query <paramref name="q"/>.
+        /// </summary>
+        /// <param name="user">Identifier of the user which registered the games.</param>
+        /// <param name="q">Query </param>
+        /// <returns></returns>
         public virtual async Task<ICollection<Game>> RegisteredByUser(string user, string q)
         {
             if (String.IsNullOrEmpty(q))
@@ -59,6 +66,16 @@ namespace Gamedalf.Services
                 .Where(g => g.DeveloperId == user && g.Title.Contains(q))
                 .OrderBy(g => g.Title)
                 .ToListAsync();
+        }
+
+        /// <summary>
+        /// Verifies if game exists in the database.
+        /// </summary>
+        /// <param name="id">Identifier of the game</param>
+        /// <returns>True, if game exists. False otherwise.</returns>
+        public virtual async Task<bool> Exists(int id)
+        {
+            return (await Db.Games.CountAsync(g => g.Id == id)) > 0;
         }
     }
 }
