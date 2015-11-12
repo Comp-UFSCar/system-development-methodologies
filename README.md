@@ -1,7 +1,13 @@
-Gamedalf
-========
+# Gamedalf
 
 Project for Systems Development Methodologies class at UFSCar.
+
+Group members:
+
+ * Fabio Gunkel.
+ * Daniel Nobusada.
+ * Joao Vitor Brandao Moreira.
+ * Lucas Oliveira David.
 
 ## License
 
